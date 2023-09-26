@@ -9,6 +9,6 @@ Prosedur pemesanan undangan digital pada website ini yaitu dengan login atau sig
 Proses pengiriman undangan digital kepada para tamu undangan yaitu dengan terlebih dahulu mengirimkan daftar email atau nomor whatsapp pada halaman website. Lalu undangan tersebut akan dikirim melalui fitur broadcast pada client area. Tamu dapat mengakses undangan dengan mengakses url yang dikirimkan oleh klien.
 
 ## Anggota Kelompok
-- Alfadli Maulana Siddik    - 140810200005
-- Wafi Fahruzzaman          - 140810200009
-- Adnan Rafiyansyah Majid   - 140810200029
+- [FE] Alfadli Maulana Siddik    - 140810200005
+- [BE] Wafi Fahruzzaman          - 140810200009
+- [QA] Adnan Rafiyansyah Majid   - 140810200029
