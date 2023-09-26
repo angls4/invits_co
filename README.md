@@ -1,4 +1,4 @@
-# Proyek Perangkat Lunak II - Boilerplate
+# Proyek Perangkat Lunak II - invits.co
 
 ## Deskripsi Aplikasi
 Invits.co merupakan undangan digital yang memiliki layanan pembuatan undangan pernikahan berbasis website yang dapat diakses secara online. Struktur dari undangan digital tidak jauh berbeda dari undangan berbentuk fisik. Selain itu, terdapat pula foto dan video pre-wedding. Layanan ini memiliki beberapa keunggulan dibanding dengan undangan fisik, seperti biaya produksi yang lebih terjangkau, terdapat fitur countdown dan sinkronisasi dengan google calendar sebagai reminder acara pernikahan, fitur lokasi pernikahan, dan fitur konfirmasi kehadiran tamu.
