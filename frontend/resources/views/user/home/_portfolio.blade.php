@@ -21,7 +21,7 @@
                         <li class="glide__slide py-2.5">
                             <div class="flex flex-col h-full bg-white rounded-lg shadow-lg">
                                 <a href="#!">
-                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-bronze.png')}}" alt=""/>
+                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-gold.png')}}" alt=""/>
                                 </a>
                                 <div class="flex flex-col items-start h-full p-6">
                                     <h5 class="mb-2 text-xl font-medium text-gray-900">Rudi & Ani</h5>
@@ -35,7 +35,7 @@
                         <li class="glide__slide py-2.5">
                             <div class="flex flex-col h-full bg-white rounded-lg shadow-lg">
                                 <a href="#!">
-                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-silver.png')}}" alt=""/>
+                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-gold.png')}}" alt=""/>
                                 </a>
                                 <div class="flex flex-col items-start h-full p-6">
                                     <h5 class="mb-2 text-xl font-medium text-gray-900">Rina & Dika</h5>
@@ -49,7 +49,7 @@
                         <li class="glide__slide py-2.5">
                             <div class="flex flex-col h-full bg-white rounded-lg shadow-lg">
                                 <a href="#!">
-                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-bronze.png')}}" alt=""/>
+                                    <img class="rounded-t-lg" src="{{asset('img/themes/theme-gold.png')}}" alt=""/>
                                 </a>
                                 <div class="flex flex-col items-start h-full p-6">
                                     <h5 class="mb-2 text-xl font-medium text-gray-900">Calvin & Nanda</h5>
