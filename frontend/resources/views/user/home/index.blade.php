@@ -50,5 +50,199 @@
             </div>
         </div>
     </section>
+    <section class="py-10">
+        <div class="container">
+            <div class="mx-auto w-fit">
+                <h2 class="mt-0 mb-2 text-4xl font-medium leading-tight text-center">Pelayanan Terbaik Kami</h2>
+                <div class="w-1/2 h-2 mx-auto rounded-md bg-brand-purple-500"></div>
+            </div>
+            <div class="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="p-6 rounded-lg shadow-lg bg-brand-purple-100">
+                    <a href="#!">
+                        <img class="rounded-t-lg w-full max-h-[200px] mx-auto" src="{{asset('img/illustration/desain-menawan.svg')}}" alt=""/>
+                    </a>
+                    <div class="mt-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Desain Menawan</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Setiap desain kami dirancang dengan penuh perhatian, sehingga Anda dapat menemukan undangan yang mencerminkan kepribadian dan gaya pernikahan Anda.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 rounded-lg shadow-lg bg-brand-purple-100">
+                    <a href="#!">
+                        <img class="rounded-t-lg w-full max-h-[200px] mx-auto" src="{{asset('img/illustration/kemudahan-penggunaan.svg')}}" alt=""/>
+                    </a>
+                    <div class="mt-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Kemudahan Penggunaan</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Menggunakan undangan pernikahan digital kami sangatlah mudah. Anda dapat dengan cepat membuat, mengedit, dan mengirim undangan Anda dengan beberapa klik saja.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 rounded-lg shadow-lg bg-brand-purple-100">
+                    <a href="#!">
+                        <img class="rounded-t-lg w-full max-h-[200px] mx-auto" src="{{asset('img/illustration/hemat-biaya.svg')}}" alt=""/>
+                    </a>
+                    <div class="mt-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Hemat Biaya</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Kami percaya bahwa semua pasangan pantas mendapatkan undangan pernikahan yang indah tanpa harus membayar harga yang mahal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @include('user.home._pricing')
+    <section id="tema" class="py-10" x-data="{ 'showModal': false }" @keydown.escape="showModal = false">
+        <div class="container" >
+            <div class="mb-8">
+                <h2 class="mt-0 mb-2 text-4xl font-medium leading-tight">Preset Memudahkan Kita</h2>
+                <p class="flex items-center">Tersedia berbagai preset yang membantu anda memilih undangan sesuai keinginan.</p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                @for ($i = 0; $i < 3; $i++)
+                <div class="bg-white rounded-lg shadow-lg">
+                    <a href="" class="relative">
+                        <img class="rounded-t-lg" src="{{asset('img/themes/theme-gold.png')}}" alt=""/>
+                        <div class="absolute bottom-0 left-0 w-full p-2 text-center bg-black opacity-60 text-brand-yellow-500">
+                            Nama Tema
+                        </div>
+                    </a>
+                    <div class="text-center">
+                        <div class="flex gap-1.5 justify-center py-5">
+                            {{-- <div class="bg-gray-200 rounded-full w-9 h-9"></div>
+                            <div class="bg-gray-200 rounded-full w-9 h-9"></div>
+                            <div class="bg-gray-200 rounded-full w-9 h-9"></div> --}}
+                            <div class="font-semibold">Rp100.000</div>
+                        </div>
+                        {{-- <x-button class="w-full py-3 text-base font-bold border-t rounded-b-lg text-brand-purple-500 border-t-neutral-200 hover:bg-brand-purple-500 hover:text-white hover:rounded-t-none"
+                            @click="showModal = true">
+                            {{ $theme->name }}
+                        </x-button> --}}
+                        <x-button-a href="" class="w-full py-3 text-base font-bold border-t rounded-b-lg text-brand-purple-500 border-t-neutral-200 hover:bg-brand-purple-500 hover:text-white hover:rounded-t-none">
+                            Preview
+                        </x-button-a>
+                    </div>
+                </div>
+                @endfor
+            </div>
+            <div class="grid mt-10 place-items-center">
+                <x-button-a href="" class="w-full py-3 text-base tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-48 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+                    Lihat Selengkapnya
+                </x-button-a>
+            </div>
+        </div>
+        <div class="overflow-auto bg-[rgba(0,0,0,0.5)]" x-show="showModal" :class="{ 'fixed inset-0 z-50 flex items-center justify-center': showModal }">
+            <!--Dialog-->
+            <div class="w-11/12 px-6 py-4 mx-auto text-left bg-white rounded shadow-lg md:max-w-md" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+    
+                <!--Title-->
+                <div class="flex items-center justify-between pb-2 border-b">
+                    <div class="flex items-center gap-2">
+                        <p class="m-0 text-2xl font-bold">Nama Tema</p>
+                        <span class="px-3 my-auto text-sm rounded-full bg-brand-yellow-500">Luxury</span>
+                    </div>
+                    <div class="cursor-pointer" @click="showModal = false">
+                        <svg class="text-black fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg>
+                    </div>
+                </div>
+    
+                <!-- content -->
+                <p class="py-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non aliquam porro assumenda error, architecto quis vitae nemo obcaecati repellendus ducimus.</p>
+    
+                <!--Footer-->
+                <div class="flex justify-end gap-2 pt-3 border-t">
+                    <x-button-a class="px-4 py-2 text-base bg-white ring-1 ring-brand-purple-500 hover:ring-0 text-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">Preview</x-button-a>
+                    <x-button-a class="px-4 py-2 text-base text-white bg-brand-purple-500 modal-close hover:bg-brand-yellow-500 hover:text-black">Pesan</x-button-a>
+                </div>
+    
+    
+            </div>
+            <!--/Dialog -->
+        </div>
+        <!-- /Overlay -->
+    </section>
+    @include('user.home._testimoni')
+    <section id="fitur" class="py-10 bg-brand-purple-100">
+        <div class="container">
+            <div class="mb-8">
+                <span class="flex items-center"><hr class="h-[1px] w-6 bg-black border-0 inline-block mr-1">Fitur</span>
+                <h2 class="mt-0 mb-2 text-4xl font-medium leading-tight">Fitur Kami dalam Membuat Undangan Elegan dan Luar Biasa</h2>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-center w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/rsvp.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">RSVP Interaktif</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Fitur ini memungkinkan tamu undangan untuk dengan mudah mengonfirmasi kehadiran mereka.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-left w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/tamu.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Pengelolaan Tamu</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Fitur ini memungkinkan Anda untuk mengatur daftar tamu, mengirim undangan secara individu atau grup, serta melacak konfirmasi kehadiran.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-left w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/responsive.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Tampilan Responsif</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Undangan dapat diakses dengan lancar melalui ponsel, tablet, atau komputer, sehingga tamu mendapatkan pengalaman yang optimal.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-left w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/wishes-gifts.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Wishes & Gifts</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Tamu undangan dapat meninggalkan komentar, ucapan selamat, doa, atau amplop digital untuk Anda dan pasangan.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-left w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/live-edit.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Live Edit</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Ubah konten undangan Anda kapanpun melalui form yang kami sediakan. Simpan dan lihat langsung perubahannya.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-white rounded-lg shadow-lg lg:flex-row">
+                    <img class="object-cover object-left w-full rounded-t-lg h-96 lg:h-auto lg:w-48 lg:rounded-none lg:rounded-l-lg" src="{{ asset('img/fitur/love-stories.png')}}" alt="" />
+                    <div class="flex flex-col justify-start p-6">
+                        <h5 class="mb-2 text-xl font-medium text-gray-900">Love Stories</h5>
+                        <p class="mb-4 text-base text-gray-700">
+                            Ceritakan rangkaian kisah cintamu langsung di undangan. Sertakan juga foto-foto terbaikmu!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @include('user.home._portfolio')
+    <section class="py-10">
+        <div class="container text-center">
+            <h2 class="max-w-4xl mx-auto my-0 mb-5 text-4xl font-medium leading-tight ">Jadikan pernikahan Anda berharga dan semakin berkesan dengan layanan kami</h2>
+            <div class="flex flex-col justify-center gap-2 sm:flex-row">
+                <x-button-a href="#" class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:max-w-[180px] ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+                    <span class="mx-1">Hubungi Tim Kami</span>
+                </x-button-a>
+                <x-button-a href="" class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:max-w-[180px] bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+                    <span class="mx-1">Pesan Sekarang</span>
+                </x-button-a>
+            </div>
+        </div>
+    </section>
 @endsection
 
