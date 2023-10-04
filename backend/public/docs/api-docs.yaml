@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Nama Proyek Anda
+  title: API invits.co
   version: 1.0.0
-  description: Deskripsi singkat tentang proyek Anda
+  description: Merupakan API pembuatan undangan digital
 paths:
   /api/login:
     post:
@@ -37,7 +37,7 @@ paths:
                     type: boolean
                     example: true
                   data:
-                    # $ref: '#/components/schemas/User' # Ganti dengan referensi yang sesuai
+                    $ref: '#/components/schemas/User'
                   message:
                     type: string
                     example: Login successful.
@@ -104,7 +104,7 @@ paths:
                     type: boolean
                     example: true
                   data:
-                    # $ref: '#/components/schemas/User' # Ganti dengan referensi yang sesuai
+                    $ref: '#/components/schemas/User'
                   message:
                     type: string
                     example: Registration successful.
@@ -122,7 +122,7 @@ paths:
                     type: string
                     example: The given data was invalid.
                   errors:
-                    # $ref: '#/components/schemas/ValidationErrors' # Ganti dengan referensi yang sesuai
+                    $ref: '#/components/schemas/ValidationErrors'
         '500':
           description: Error server
           content:
@@ -145,6 +145,8 @@ paths:
         - Authentication
       summary: Logout User
       description: Logout pengguna saat ini.
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Logout berhasil
@@ -171,10 +173,59 @@ components:
         name:
           type: string
           example: John Doe
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        username:
+          type: string
+          nullable: true
+          example: johndoe123
         email:
           type: string
           format: email
           example: john@example.com
+        mobile:
+          type: string
+          nullable: true
+          example: +1234567890
+        gender:
+          type: string
+          nullable: true
+          example: Male
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          example: 1990-01-01
+        email_verified_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: 2023-10-04T12:00:00Z
+        password:
+          type: string
+          nullable: true
+          example: secret_password
+        avatar:
+          type: string
+          nullable: true
+          example: img/default-avatar.jpg
+        status:
+          type: integer
+          example: 1
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+          example: user
     ValidationErrors:
       type: object
       example: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
