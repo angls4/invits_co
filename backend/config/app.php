@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -54,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost-starter.local'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -69,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Dhaka',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -112,37 +113,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Available Locales
-    |--------------------------------------------------------------------------
-    |
-    | Available locales will be used any location in code , that need to show
-    | all available languages
-    |
-    */
-
-    'available_locales' => [
-        'ar' => 'العربی (AR)',
-        'bn' => 'বাংলা (BN)',
-        'en' => 'English (EN)',
-        'vi' => 'Vietnamese (VI)',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Initial Username
-    |--------------------------------------------------------------------------
-    |
-    | Usernames is an unique number, generated automatically,
-    | and assigned to the user.
-    | It is needed to have an initial number and will be increased as
-    | a new user registered.
-    |
-    */
-
-    'initial_username' => env('INITIAL_USERNAME', 100000),
-
-    /*
-    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
@@ -156,7 +126,23 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'salt' => 'zXfMPtcERG7XVFF4yUsSaRgOg',
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance Mode Driver
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the driver used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
+    |
+    */
+
+    'maintenance' => [
+        'driver' => 'file',
+        // 'store'  => 'redis',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -169,34 +155,7 @@ return [
     |
     */
 
-    'providers' => [
-
-        /*
-         * Laravel Framework Service Providers...
-         */
-        Illuminate\Auth\AuthServiceProvider::class,
-        Illuminate\Broadcasting\BroadcastServiceProvider::class,
-        Illuminate\Bus\BusServiceProvider::class,
-        Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Cookie\CookieServiceProvider::class,
-        Illuminate\Database\DatabaseServiceProvider::class,
-        Illuminate\Encryption\EncryptionServiceProvider::class,
-        Illuminate\Filesystem\FilesystemServiceProvider::class,
-        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-        Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
-        Illuminate\Notifications\NotificationServiceProvider::class,
-        Illuminate\Pagination\PaginationServiceProvider::class,
-        Illuminate\Pipeline\PipelineServiceProvider::class,
-        Illuminate\Queue\QueueServiceProvider::class,
-        Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-        Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
-        Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,
-
+    'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
          */
@@ -209,8 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-    ],
+    ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
@@ -224,8 +182,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Menu' => Lavary\Menu\Facade::class,
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
 ];
