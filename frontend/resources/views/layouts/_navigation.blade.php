@@ -20,10 +20,10 @@
             </div>
             <div class="flex items-center content-center justify-center flex-1 sm:items-stretch sm:justify-between">
                 <div class="flex items-center flex-shrink-0">
-                    <a href="" class="block nav-logo lg:hidden">
+                    <a href="{{ route('home') }}" class="block nav-logo lg:hidden">
                         <img class="w-auto h-10 " :src="navTheme == 'nav-light' ? '{{ asset('img/logo/logo-dark.svg') }}':'{{ asset('img/logo/logo-light.svg') }}'" alt="Invits.co">
                     </a>
-                    <a href="" class="hidden nav-text-logo lg:block">
+                    <a href="{{ route('home') }}" class="hidden nav-text-logo lg:block">
                         <img class="w-auto h-8 " :src="navTheme == 'nav-light' ? '{{ asset('img/logo/logo-with-text-dark.svg') }}':'{{ asset('img/logo/logo-with-text-light.svg') }}'"
                             alt="Invits.co">
                     </a>
@@ -57,7 +57,7 @@
                             <span class="mx-1">Pesan Sekarang</span>
                         </x-button-a>
                         @guest
-                        <x-button-a href=""
+                        <x-button-a href="{{ route('login') }}"
                             class="invisible px-6 tracking-normal capitalize transition-colors duration-200 transform bg-white !rounded-full ring-1 ring-black hover:ring-0 text-brand-purple-500 hover:text-black hover:bg-brand-yellow-500 md:visible">
                             <span class="mx-1">{{ __('Login') }}</span>
                         </x-button-a>
@@ -148,7 +148,7 @@
     
             @guest
                 <hr>
-                <a href=""
+                <a href="{{ route('login') }}"
                     class="block px-3 py-2 mt-2 text-base font-medium rounded-md text-brand-purple-500 bg-brand-purple-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

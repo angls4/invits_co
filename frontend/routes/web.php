@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home.index', ['title' => 'Home']);
-});
+})->name('home');
+Route::view('/login', 'auth.login', ['title' => 'Login'])->name('login');
+Route::view('/register', 'auth.register', ['title' => 'register'])->name('register');

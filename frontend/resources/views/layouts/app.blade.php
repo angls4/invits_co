@@ -28,7 +28,7 @@
             @include('layouts._navigation')
 
             <!-- Page Content -->
-            <main class="flex-grow pt-[80px]">
+            <main class="flex-grow">
                 @yield('content')
             </main>
 
