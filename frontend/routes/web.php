@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dump(session('api_token'));
     return view('user.home.index', ['title' => 'Home']);
 })->name('home');
 
