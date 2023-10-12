@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +16,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    dump(session('api_token'));
     return view('user.home.index', ['title' => 'Home']);
 })->name('home');
-Route::view('/login', 'auth.login', ['title' => 'Login'])->name('login');
-Route::view('/register', 'auth.register', ['title' => 'register'])->name('register');
+
+Route::middleware('guest')->group(function () {
+    Route::get('login', [LoginController::class, 'create'])
+                ->name('login');
+    Route::post('login', [LoginController::class, 'store']);
+
+    Route::get('register', [RegisterController::class, 'create'])
+                    ->name('register');
+    Route::post('register', [RegisterController::class, 'store']);
+});
+
+Route::post('logout', [LoginController::class, 'destroy'])
+                ->name('logout');
+
+Route::middleware('auth:api')->group(function () {
+    Route::view('/test', 'test')->name('test');
+});

@@ -39,7 +39,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-forms.input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation" placeholder="Konfirmasi Password" required autocomplete="new-password" />
+            <x-forms.input id="c_password" class="block w-full mt-1" type="password" name="c_password" placeholder="Konfirmasi Password" required autocomplete="new-password" />
         </div>
 
         <div class="mt-4">

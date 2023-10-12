@@ -4,6 +4,7 @@ import Alpine from "alpinejs";
 Alpine.data("navState", () => ({
     navTheme: "",
     showMobileNav: false,
+    isUserMenuOpen: false,
 
     initState() {
         if (window.pageYOffset > 0) {
