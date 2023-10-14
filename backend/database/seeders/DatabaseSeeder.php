@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call('Database\Seeders\UserSeeder');
         $this->call('Database\Seeders\PackageSeeder');
+        $this->call('Database\Seeders\ThemeSeeder');
     }
 }
