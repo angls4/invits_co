@@ -102,6 +102,6 @@ class UserSeeder extends Seeder
             $user = User::create($user_data);
         }
 
-        echo " Insert: packages \n\n";
+        echo " Insert: users \n\n";
     }
 }
