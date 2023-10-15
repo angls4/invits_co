@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call('Database\Seeders\PackageSeeder');
         $this->call('Database\Seeders\ThemeSeeder');
         $this->call('Database\Seeders\OrderSeeder');
+        $this->call('Database\Seeders\PaymentSeeder');
     }
 }
