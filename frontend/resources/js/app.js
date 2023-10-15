@@ -15,8 +15,10 @@ Alpine.data("navState", () => ({
     },
 
     toggleMobileNav() {
-        this.showMobileNav = !this.showMobileNav
-    }
+        this.showMobileNav = !this.showMobileNav;
+    },
 }));
+
+window.Alpine = Alpine;
 
 Alpine.start();

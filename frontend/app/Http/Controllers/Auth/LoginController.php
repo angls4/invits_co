@@ -40,12 +40,14 @@ class LoginController extends Controller
         ]);
 
         if($response->failed()) {
+            $errors = $response->json()["errors"];
             return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'email' => $errors["login"] ?? null ,
             ])->onlyInput('email');
         }else {
-            $data = $response->json()['data'];
-            session(['api_token' => $data['token']]);
+            $data = $response->json()["data"];
+
+            session(['api_token' => $data['token'], 'user' => $data['user']]);
             
             return redirect()->route('home');
         }
@@ -61,7 +63,7 @@ class LoginController extends Controller
     public function destroy(Request $request)
     {
         $response = Http::withToken(session('api_token'))->post(env('API_URL').'logout');
-        session()->forget('api_token');
+        session()->forget(['api_token', 'user']);
 
         if($response->successful()){
             return back();

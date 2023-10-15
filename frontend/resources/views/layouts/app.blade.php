@@ -35,9 +35,7 @@
             @include('layouts._footer')
         </div>
         <!-- Scripts -->
-        <script src="{{ mix('js/frontend.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/glide.js"></script>
-        
         <!-- font awesome -->
         <script src="https://kit.fontawesome.com/b249d00227.js" crossorigin="anonymous"></script>
         @stack('after-javascript')
