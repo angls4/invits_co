@@ -52,4 +52,59 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+
+            $userprofile = new Userprofile();
+            $userprofile->user_id = $user->id;
+            $userprofile->name = $user->name;
+            $userprofile->first_name = $user->first_name;
+            $userprofile->last_name = $user->last_name;
+            $userprofile->username = $user->username;
+            $userprofile->email = $user->email;
+            $userprofile->mobile = $user->mobile;
+            $userprofile->gender = $user->gender;
+            $userprofile->date_of_birth = $user->date_of_birth;
+            $userprofile->avatar = $user->avatar;
+            $userprofile->status = ($user->status > 0) ? $user->status : 0;
+            $userprofile->save();
+
+        });
+    }
+
+    /**
+    *
+    *  RELATION
+    *
+    * ---------------------------------------------------------------------
+    */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providers()
+    {
+        return $this->hasMany('App\Models\UserProvider');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Userprofile');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userprofile()
+    {
+        return $this->hasOne('App\Models\Userprofile');
+    }
+
 }
