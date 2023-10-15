@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call('Database\Seeders\GiftSeeder');
         $this->call('Database\Seeders\WeddingEventSeeder');
         $this->call('Database\Seeders\WeddingLoveStorySeeder');
+        $this->call('Database\Seeders\WeddingGallerySeeder');
     }
 }
