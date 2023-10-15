@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call('Database\Seeders\WeddingSeeder');
         $this->call('Database\Seeders\GroomSeeder');
         $this->call('Database\Seeders\BrideSeeder');
+        $this->call('Database\Seeders\WishSeeder');
     }
 }
