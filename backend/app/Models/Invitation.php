@@ -39,31 +39,31 @@ class Invitation extends Model
     // Order
     public function order()
     {
-        return $this->belongsTo('Modules\Order\Entities\Order');
+        return $this->belongsTo('App\Models\Order');
     }
 
     // Invitaion Type
     public function type()
     {
-        return $this->belongsTo('Modules\Invitation\Entities\InvitationType', 'invitation_type_id');
+        return $this->belongsTo('App\Models\InvitationType', 'invitation_type_id');
     }
 
     // Wedding
     public function wedding()
     {
-        return $this->hasOne('Modules\Wedding\Entities\Wedding');
+        return $this->hasOne('App\Models\Wedding');
     }
 
     // Guest
     public function guest()
     {
-        return $this->hasMany('Modules\Invitation\Entities\Guest');
+        return $this->hasMany('App\Models\Guest');
     }
 
     // RSVP
     public function rsvp()
     {
-        return $this->hasMany('Modules\Invitation\Entities\Rsvp');
+        return $this->hasMany('App\Models\Rsvp');
     }
 
     /**
