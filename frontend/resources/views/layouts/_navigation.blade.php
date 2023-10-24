@@ -52,7 +52,7 @@
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="relative ml-3" x-data="{ isUserMenuOpen: false }">
                     <div class="flex flex-row gap-2">
-                        <x-button-a href=""
+                        <x-button-a href="{{ route('order.index') }}"
                             class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-brand-purple-500 group-[.nav-dark]:border border-white hover:bg-brand-yellow-500 hover:text-black md:visible">
                             <span class="mx-1">Pesan Sekarang</span>
                         </x-button-a>
