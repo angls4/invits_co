@@ -161,6 +161,111 @@ paths:
                   message:
                     type: string
                     example: Logout successful.
+  /api/packages:
+    get:
+      tags:
+        - Package
+      summary: Get all packages
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                packages:
+                  - id: 1
+                    name: Package 1
+                    price: 100.00
+                  - id: 2
+                    name: Package 2
+                    price: 200.00
+    post:
+      tags:
+        - Package
+      summary: Create a new package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: Package 3
+              price: 150.00
+              description: A new package
+              features: Feature 1, Feature 2
+      responses:
+        '201':
+          description: Package created successfully
+          content:
+            application/json:
+              example:
+                package:
+                  id: 3
+                  name: Package 3
+                  price: 150.00
+
+  /api/packages/{id}:
+    get:
+      tags:
+        - Package
+      summary: Get a package by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                package:
+                  id: 1
+                  name: Package 1
+                  price: 100.00
+        '404':
+          description: Package not found
+    put:
+      tags:
+        - Package
+      summary: Update a package by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: Updated Package 1
+              price: 120.00
+              description: Updated package
+              features: Updated feature 1, Updated feature 2
+      responses:
+        '200':
+          description: Package updated successfully
+        '404':
+          description: Package not found
+    delete:
+      tags:
+        - Package
+      summary: Delete a package by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Package deleted successfully
+        '404':
+          description: Package not found
+
 components:
   schemas:
     User:
@@ -222,6 +327,19 @@ components:
             - user
             - admin
           example: user
+    Package:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        features:
+          type: string
     ValidationErrors:
       type: object
       example: {}

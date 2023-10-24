@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiControllers\AuthController; // Import AuthController
+
+// Controllers
+use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +18,38 @@ use App\Http\Controllers\ApiControllers\AuthController; // Import AuthController
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Authentication
+|--------------------------------------------------------------------------
+*/
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
+/*
+|--------------------------------------------------------------------------
+| Package
+|--------------------------------------------------------------------------
+*/
+Route::prefix('packages')->group(function () {
+    Route::get('/', [PackageController::class, 'index']);
+    Route::get('/{id}', [PackageController::class, 'show']);
+    Route::post('/', [PackageController::class, 'store']);
+    Route::put('/{id}', [PackageController::class, 'update']);
+    Route::delete('/{id}', [PackageController::class, 'destroy']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Example
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
-    // Rute yang hanya dapat diakses oleh Admin
     Route::get('admin/dashboard', 'AdminController@dashboard');
 });
 
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
