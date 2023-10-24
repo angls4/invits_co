@@ -25,8 +25,8 @@
                                         </div>
                                         {{-- <div>{{ $package->description }}</div> --}}
                                         <ul class="my-4 text-center">
-                                            @for ($i = 0; $i < 3; $i++)
-                                            <li>Fitur {{ $i }}</li>
+                                            @for ($j = 0; $j < 3; $j++)
+                                            <li>Fitur {{ $j }}</li>
                                             @endfor
                                         </ul>
                                     </div>
