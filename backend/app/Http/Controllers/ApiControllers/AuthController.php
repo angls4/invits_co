@@ -22,7 +22,9 @@ class AuthController extends Controller
                 $data = ['user' => $user, 'token' => $token];
                 $message = 'Login successful.';
 
-                return $this->jsonResponse($data, $message);
+                return $this->jsonResponse($data, $message)->cookie(
+                    'data', json_encode($data), 180
+                );
             }
 
             $errors = ['login' => 'Invalid email and password combination.'];
@@ -40,7 +42,7 @@ class AuthController extends Controller
             $request->user()->tokens()->delete();
             $message = 'Logout successful.';
 
-            return $this->jsonResponse(null, $message);
+            return $this->jsonResponse(null, $message)->withoutCookie('data');
         } catch (Exception $e) {
             return $this->jsonResponse(null, $e->getMessage(), [], false, 500);
         }
