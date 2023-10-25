@@ -71,6 +71,8 @@ Packages:
     tags:
       - Package
     summary: Create a new package
+    security:
+      - BearerAuth: []
     requestBody:
       required: true
       content:
@@ -137,6 +139,8 @@ Package_id:
     tags:
       - Package
     summary: Update a package by ID
+    security:
+      - BearerAuth: []
     parameters:
       - name: id
         in: path
@@ -180,6 +184,8 @@ Package_id:
     tags:
       - Package
     summary: Delete a package by ID
+    security:
+      - BearerAuth: []
     parameters:
       - name: id
         in: path

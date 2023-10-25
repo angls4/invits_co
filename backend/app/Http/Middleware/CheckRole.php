@@ -21,6 +21,11 @@ class CheckRole
         }
 
         // Jika pengguna tidak memiliki peran yang sesuai, kembalikan respon larangan (403)
-        return response()->json(['error' => 'Unauthorized'], 403);
+        return response()->json([
+            'success' => false,
+            'errors' => ['Role not allowed'],
+            'message' => 'Unauthorized',
+            'data' => null,
+        ], 403);
     }
 }
