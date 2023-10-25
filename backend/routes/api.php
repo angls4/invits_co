@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // Controllers
 use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\PackageController;
+use App\Http\Controllers\ApiControllers\ThemeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,22 @@ Route::prefix('packages')->group(function () {
     });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Theme
+|--------------------------------------------------------------------------
+*/
+Route::prefix('themes')->group(function () {
+    Route::get('/', [ThemeController::class, 'index']);
+    Route::get('/{id}', [ThemeController::class, 'show']);
+    
+    // Auth : Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::post('/', [ThemeController::class, 'store']);
+        Route::post('/{id}', [ThemeController::class, 'update']);
+        Route::delete('/{id}', [ThemeController::class, 'destroy']);
+    });
+});
 
 /*
 |--------------------------------------------------------------------------

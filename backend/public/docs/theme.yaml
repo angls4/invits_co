@@ -1,0 +1,251 @@
+components:
+  schemas:
+    Theme:
+      type: object
+      properties:
+        id:
+          type: integer
+        package_id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        slug:
+          type: string
+        img_preview:
+          type: string
+      required:
+        - package_id
+        - name
+        - price
+    ValidationErrors:
+      type: object
+      example: {}
+
+Themes:
+  get:
+    tags:
+      - Theme
+    summary: Get all themes
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Themes retrieved successfully
+              data:
+                themes:
+                  - id: 1
+                    name: "Basic White"
+                    slug: "basic-white"
+                    img_preview: "themes/theme-bronze.png"
+                    description: "Tema ini didominasi oleh warna basic putih yang simpel."
+                    price: 150000
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    package_id: 1
+                    created_at: "2023-10-25T01:28:04.000000Z"
+                    updated_at: "2023-10-25T01:28:04.000000Z"
+                    deleted_at: null
+                  - id: 2
+                    name: "Lego"
+                    slug: "lego"
+                    img_preview: "themes/theme-silver.png"
+                    description: "Tema ini didasarkan pada lego yang membuat suasana menjadi fun."
+                    price: 300000
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    package_id: 2
+                    created_at: "2023-10-25T01:28:04.000000Z"
+                    updated_at: "2023-10-25T01:28:04.000000Z"
+                    deleted_at: null
+  post:
+    tags:
+      - Theme
+    summary: Create a new theme
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              package_id:
+                type: integer
+                example: 1
+                required: true
+              name:
+                type: string
+                example: New Theme
+                required: true
+              price:
+                type: number
+                example: 500000
+                required: true
+              description:
+                type: string
+                example: Desc New Theme
+              slug:
+                type: string
+                example: new-theme
+                required: true
+              img_preview:
+                type: string
+                format: binary
+                required: true
+    responses:
+      '201':
+        description: Theme created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Theme created successfully
+              data:
+                theme:
+                  id: 3
+                  package_id: 1
+                  name: Theme 3
+                  price: 150.00
+                  description: "Description for Theme 3"
+                  slug: "theme-3"
+Theme_id:
+  get:
+    tags:
+      - Theme
+    summary: Get a theme by ID
+    parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+    responses:
+      '200':
+        description: Theme retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Theme retrieved successfully
+              data:
+                theme:
+                  id: 1
+                  name: Basic White
+                  slug: basic-white
+                  img_preview: themes/theme-bronze.png
+                  description: Tema ini didominasi oleh warna basic putih yang simpel.
+                  price: 150000
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  package_id: 1
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-25T03:36:24.000000Z"
+                  deleted_at: null
+      '404':
+        description: Theme not found
+  post:
+    tags:
+      - Theme
+    summary: Update a theme by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              package_id:
+                type: integer
+                example: 1
+                required: true
+              name:
+                type: string
+                example: Update Theme
+                required: true
+              price:
+                type: number
+                example: 300000
+                required: true
+              description:
+                type: string
+                example: Desc Update Theme
+              slug:
+                type: string
+                example: update-theme
+                required: true
+              img_preview:
+                type: string
+                format: binary
+                required: true
+    responses:
+      '200':
+        description: Theme updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Theme updated successfully
+              data:
+                theme:
+                  id: 6
+                  name: "Update Theme"
+                  slug: "update-theme"
+                  img_preview: null
+                  description: "Desc Update Theme"
+                  price: "300000"
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  package_id: "1"
+                  created_at: "2023-10-25T03:55:11.000000Z"
+                  updated_at: "2023-10-25T04:36:33.000000Z"
+                  deleted_at: null
+    '404':
+      description: Theme not found
+  delete:
+    tags:
+      - Theme
+    summary: Delete a theme by ID
+    security:
+      - BearerAuth: []
+    parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+    responses:
+      '200':
+        description: Theme deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Theme deleted successfully
+              data: null
+      '404':
+        description: Theme not found

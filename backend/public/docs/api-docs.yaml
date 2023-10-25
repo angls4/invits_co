@@ -25,3 +25,9 @@ paths:
 
   /api/packages/{id}:
     $ref: './package.yaml#/Package_id'
+  
+  /api/themes:
+    $ref: './theme.yaml#/Themes'
+
+  /api/themes/{id}:
+    $ref: './theme.yaml#/Theme_id'
