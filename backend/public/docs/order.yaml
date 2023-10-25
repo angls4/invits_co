@@ -115,27 +115,30 @@ Order_id:
         schema:
           type: integer
     responses:
-      '200':
-        description: Order retrieved successfully
+      '201':
+        description: Order created successfully
         content:
           application/json:
             example:
               success: true
               errors: []
-              message: Order retrieved successfully
+              message: Order created successfully
               data:
-                order:
+                theme:
                   id: 1
-                  status: "PAID"
-                  user_id: 1
-                  package_id: 1
-                  theme_id: 1
+                  name: Basic White
+                  slug: basic-white
+                  img_preview: themes/theme-bronze.png
+                  description: Tema ini didominasi oleh warna basic putih yang simpel.
+                  price: 150000
                   created_by: null
                   updated_by: null
                   deleted_by: null
-                  created_at: "2023-10-25T00:00:00.000000Z"
-                  updated_at: "2023-10-25T00:00:00.000000Z"
+                  package_id: 1
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-25T03:36:24.000000Z"
                   deleted_at: null
+                payment_midtrans: bf26f202-0927-4a0b-be8d-5d091630aabd  
       '404':
         description: Order not found
   put:

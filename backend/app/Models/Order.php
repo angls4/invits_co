@@ -14,6 +14,7 @@ class Order extends Model
     use HasUuids;
 
     protected $table = 'orders';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
