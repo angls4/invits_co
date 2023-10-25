@@ -41,7 +41,8 @@ class RegisterController extends Controller
         ]);
 
         if($response->failed()){
-            return back()->withInput();
+            $errors = $response->json()["errors"];
+            return back()->withErrors($errors ?? null)->withInput();
         }
 
         return redirect()->route('home');

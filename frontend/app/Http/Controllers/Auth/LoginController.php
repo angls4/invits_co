@@ -41,9 +41,7 @@ class LoginController extends Controller
 
         if($response->failed()) {
             $errors = $response->json()["errors"];
-            return back()->withErrors([
-                'email' => $errors["login"] ?? null ,
-            ])->onlyInput('email');
+            return back()->withErrors($errors ?? null)->onlyInput('email');
         }else {
             $data = $response->json()["data"];
 
