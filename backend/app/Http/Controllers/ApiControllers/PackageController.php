@@ -47,9 +47,9 @@ class PackageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'price' => 'numeric',
-            'description' => 'string',
-            'features' => 'string',
+            'price' => 'required|string',
+            'description' => 'required|string',
+            'features' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -79,9 +79,9 @@ class PackageController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'price' => 'numeric',
-            'description' => 'string',
-            'features' => 'string',
+            'price' => 'required|string',
+            'description' => 'required|string',
+            'features' => 'required|string',
         ]);
 
         if ($validator->fails()) {
