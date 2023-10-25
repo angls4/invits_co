@@ -12,7 +12,12 @@ class WeddingGallery extends Model
     use SoftDeletes;
 
     protected $table = 'wedding_galleries';
-    protected $fillable = [];
+    protected $fillable = [
+        'file',
+        'type',
+        'wedding_id',
+    ];
+    
     
     protected static function newFactory()
     {

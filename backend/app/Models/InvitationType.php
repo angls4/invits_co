@@ -12,6 +12,15 @@ class InvitationType extends Model
     use SoftDeletes;
 
     protected $table = 'invitation_types';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'type',
+    ];
     
     /**
     *

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
+use App\Http\Controllers\ApiControllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,32 @@ Route::prefix('themes')->group(function () {
         Route::delete('/{id}', [ThemeController::class, 'destroy']);
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Order
+|--------------------------------------------------------------------------
+*/
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index']);
+    Route::get('/{id}', [OrderController::class, 'show']);
+    Route::post('/', [OrderController::class, 'store']);
+    
+    // Auth: Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::put('/{id}', [OrderController::class, 'update']);
+        Route::delete('/{id}', [OrderController::class, 'destroy']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Midtrans
+|--------------------------------------------------------------------------
+*/
+Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCallback'])->name('midtransCallback');
+
+
 
 /*
 |--------------------------------------------------------------------------

@@ -14,6 +14,19 @@ class Wedding extends Model
     protected $table = 'weddings';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'location',
+        'location_gmap',
+        'rekening_gift',
+        'invitation_id',
+    ];
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory

@@ -16,6 +16,18 @@ class Order extends Model
     protected $table = 'orders';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'status',
+        'user_id',
+        'package_id',
+        'theme_id'
+    ];
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory

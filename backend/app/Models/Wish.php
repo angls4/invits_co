@@ -12,7 +12,12 @@ class Wish extends Model
     use SoftDeletes;
 
     protected $table = 'wishes';
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'from',
+        'wish',
+        'wedding_id',
+    ];
     
     protected static function newFactory()
     {

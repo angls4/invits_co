@@ -12,7 +12,14 @@ class WeddingEvent extends Model
     use SoftDeletes;
 
     protected $table = 'wedding_events';
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'date',
+        'start_time',
+        'end_time',
+        'place',
+        'wedding_id',
+    ];
     
     protected static function newFactory()
     {
