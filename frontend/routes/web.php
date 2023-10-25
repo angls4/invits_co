@@ -37,3 +37,8 @@ Route::middleware('guest')->group(function () {
                     ->name('register');
     Route::post('register', [RegisterController::class, 'store']);
 });
+
+Route::middleware('check.token')->group(function (){
+    Route::post('logout', [LoginController::class, 'destroy'])
+                    ->name('logout');
+});

@@ -4,6 +4,7 @@ import Alpine from "alpinejs";
 Alpine.data("navState", () => ({
     navTheme: "",
     showMobileNav: false,
+    isUserMenuOpen: false,
 
     initState() {
         if (window.pageYOffset > 0) {
@@ -14,8 +15,10 @@ Alpine.data("navState", () => ({
     },
 
     toggleMobileNav() {
-        this.showMobileNav = !this.showMobileNav
-    }
+        this.showMobileNav = !this.showMobileNav;
+    },
 }));
+
+window.Alpine = Alpine;
 
 Alpine.start();

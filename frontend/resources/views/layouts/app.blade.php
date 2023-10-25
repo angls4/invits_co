@@ -28,16 +28,14 @@
             @include('layouts._navigation')
 
             <!-- Page Content -->
-            <main class="flex-grow pt-[80px]">
+            <main class="flex-grow">
                 @yield('content')
             </main>
 
             @include('layouts._footer')
         </div>
         <!-- Scripts -->
-        <script src="{{ mix('js/frontend.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/glide.js"></script>
-        
         <!-- font awesome -->
         <script src="https://kit.fontawesome.com/b249d00227.js" crossorigin="anonymous"></script>
         @stack('after-javascript')
