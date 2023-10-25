@@ -29,9 +29,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisterController::class, 'store']);
 });
 
-Route::post('logout', [LoginController::class, 'destroy'])
-                ->name('logout');
-
-Route::middleware('auth:api')->group(function () {
-    Route::view('/test', 'test')->name('test');
+Route::middleware('check.token')->group(function (){
+    Route::post('logout', [LoginController::class, 'destroy'])
+                    ->name('logout');
 });

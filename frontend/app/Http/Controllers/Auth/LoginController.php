@@ -44,9 +44,7 @@ class LoginController extends Controller
             return back()->withErrors($errors ?? null)->onlyInput('email');
         }else {
             $data = $response->json()["data"];
-
-            session(['api_token' => $data['token'], 'user' => $data['user']]);
-            
+            session(['api_token' => $data['token'], 'user' => $data['user']]);     
             return redirect()->route('home');
         }
         
