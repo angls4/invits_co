@@ -20,10 +20,10 @@
             </div>
             <div class="flex items-center content-center justify-center flex-1 sm:items-stretch sm:justify-between">
                 <div class="flex items-center flex-shrink-0">
-                    <a href="" class="block nav-logo lg:hidden">
+                    <a href="{{ route('home') }}" class="block nav-logo lg:hidden">
                         <img class="w-auto h-10 " :src="navTheme == 'nav-light' ? '{{ asset('img/logo/logo-dark.svg') }}':'{{ asset('img/logo/logo-light.svg') }}'" alt="Invits.co">
                     </a>
-                    <a href="" class="hidden nav-text-logo lg:block">
+                    <a href="{{ route('home') }}" class="hidden nav-text-logo lg:block">
                         <img class="w-auto h-8 " :src="navTheme == 'nav-light' ? '{{ asset('img/logo/logo-with-text-dark.svg') }}':'{{ asset('img/logo/logo-with-text-light.svg') }}'"
                             alt="Invits.co">
                     </a>
@@ -56,24 +56,24 @@
                             class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-brand-purple-500 group-[.nav-dark]:border border-white hover:bg-brand-yellow-500 hover:text-black md:visible">
                             <span class="mx-1">Pesan Sekarang</span>
                         </x-button-a>
-                        @guest
-                        <x-button-a href=""
-                            class="invisible px-6 tracking-normal capitalize transition-colors duration-200 transform bg-white !rounded-full ring-1 ring-black hover:ring-0 text-brand-purple-500 hover:text-black hover:bg-brand-yellow-500 md:visible">
-                            <span class="mx-1">{{ __('Login') }}</span>
-                        </x-button-a>
-                        @else
+                        @if(session()->has('api_token'))
                         <button @click="isUserMenuOpen = !isUserMenuOpen" @keydown.escape="isUserMenuOpen = false"
                             type="button"
                             class="flex text-sm transition duration-300 ease-out bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-cyan-800 focus:ring-white"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">{{ __('Open main menu') }}</span>
                             <img class="w-10 h-10 border border-transparent rounded-full hover:border-cyan-600"
-                                src="{{ asset(auth()->user()->avatar) }}" alt="{{ asset(auth()->user()->name) }}">
+                                src="{{ asset(session('user.avatar')) }}" alt="User">
                         </button>
-                        @endguest
+                        @else
+                        <x-button-a href="{{ route('login') }}"
+                            class="invisible px-6 tracking-normal capitalize transition-colors duration-200 transform bg-white !rounded-full ring-1 ring-black hover:ring-0 text-brand-purple-500 hover:text-black hover:bg-brand-yellow-500 md:visible">
+                            <span class="mx-1">{{ __('Login') }}</span>
+                        </x-button-a>
+                        @endif
                     </div>
 
-                    @auth
+                    @if(session()->has('api_token'))
                     <div x-show="isUserMenuOpen" @click.away="isUserMenuOpen = false"
                         x-transition:enter="transition ease-out duration-100 transform"
                         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
@@ -81,13 +81,6 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                         class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                        @can('view_backend')
-                            <a href=''
-                                class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
-                                role="menuitem">
-                                <i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;{{ __('Admin Dashboard') }}
-                            </a>
-                            @endif
                             <a href=""
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
                                 role="menuitem">
@@ -106,12 +99,12 @@
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;{{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="" method="POST"
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 style="display: none;">
                                 {{ csrf_field() }}
                             </form>
                     </div>
-                    @endauth
+                    @endif
                 </div>
             </div>
         </div>
@@ -148,7 +141,7 @@
     
             @guest
                 <hr>
-                <a href=""
+                <a href="{{ route('login') }}"
                     class="block px-3 py-2 mt-2 text-base font-medium rounded-md text-brand-purple-500 bg-brand-purple-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

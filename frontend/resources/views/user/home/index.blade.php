@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content') 
-    <section class="flex items-center h-screen -mt-[80px]">
+<section class="flex items-center h-screen -mt-[80px]">
         <div class="container flex items-center gap-4">
             <div class="w-full">
                 <div>

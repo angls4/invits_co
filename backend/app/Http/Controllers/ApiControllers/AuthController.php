@@ -80,7 +80,14 @@ class AuthController extends Controller
 
             return $this->jsonResponse($data, $message, null, true, 201);
         } catch (Exception $e) {
-            return $this->jsonResponse(null, $e->getMessage(), [], false, 500);
+            $errorMessages = $e->getMessage();
+
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                $validator = $e->validator;
+                $errorMessages = $validator->errors()->all();
+            }
+
+            return $this->jsonResponse(null, $e->getMessage(), $errorMessages, false, 500);
         }
     }
 
