@@ -126,6 +126,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'salt' => 'zXfMPtcERG7XVFF4yUsSaRgOg',
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -91,6 +92,18 @@ class OrderController extends Controller
      */
     public function makeOrder()
     {
-        return view('user.order.checkout', ['title' => 'Checkout']);
+        $response = Http::post(env('API_URL').'orders', [
+            'user_id' => 6,
+            'theme_id'  => 1,
+        ]);
+        
+        if($response->failed()) {
+            dd($response->json());
+            return back();
+        }
+
+        
+        $data = $response->json()["data"];
+        return view('user.order.checkout', ['title' => 'Checkout', 'data' => $data]);
     }
 }

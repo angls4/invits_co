@@ -93,7 +93,7 @@
             </div>
         </div>
     </section>
-    @include('user.home._pricing')
+    @include('user.home._package', $data)
     <section id="tema" class="py-10" x-data="{ 'showModal': false }" @keydown.escape="showModal = false">
         <div class="container" >
             <div class="mb-8">
@@ -101,12 +101,12 @@
                 <p class="flex items-center">Tersedia berbagai preset yang membantu anda memilih undangan sesuai keinginan.</p>
             </div>
             <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                @for ($i = 0; $i < 3; $i++)
+                @foreach ($data["themes"] as $theme)
                 <div class="bg-white rounded-lg shadow-lg">
                     <a href="" class="relative">
-                        <img class="rounded-t-lg" src="{{asset('img/themes/theme-gold.png')}}" alt=""/>
+                        <img class="rounded-t-lg" src="{{asset('img/'.$theme["img_preview"])}}" alt=""/>
                         <div class="absolute bottom-0 left-0 w-full p-2 text-center bg-black opacity-60 text-brand-yellow-500">
-                            Nama Tema
+                            {{ $theme["name"] }}
                         </div>
                     </a>
                     <div class="text-center">
@@ -114,18 +114,18 @@
                             {{-- <div class="bg-gray-200 rounded-full w-9 h-9"></div>
                             <div class="bg-gray-200 rounded-full w-9 h-9"></div>
                             <div class="bg-gray-200 rounded-full w-9 h-9"></div> --}}
-                            <div class="font-semibold">Rp100.000</div>
+                            <div class="font-semibold">@rupiah($theme["price"])</div>
                         </div>
                         {{-- <x-button class="w-full py-3 text-base font-bold border-t rounded-b-lg text-brand-purple-500 border-t-neutral-200 hover:bg-brand-purple-500 hover:text-white hover:rounded-t-none"
                             @click="showModal = true">
                             {{ $theme->name }}
                         </x-button> --}}
-                        <x-button-a href="" class="w-full py-3 text-base font-bold border-t rounded-b-lg text-brand-purple-500 border-t-neutral-200 hover:bg-brand-purple-500 hover:text-white hover:rounded-t-none">
+                        <x-button-a href="{{ route('order.summary', encode_id($theme['id'])) }}" class="w-full py-3 text-base font-bold border-t rounded-b-lg text-brand-purple-500 border-t-neutral-200 hover:bg-brand-purple-500 hover:text-white hover:rounded-t-none">
                             Preview
                         </x-button-a>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
             <div class="grid mt-10 place-items-center">
                 <x-button-a href="" class="w-full py-3 text-base tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-48 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">

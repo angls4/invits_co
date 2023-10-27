@@ -41,9 +41,9 @@
                 <span class="mx-1">Buat Undangan</span>
             </x-button-a> --}}
 
-            <button id="pay-button" type="submit" class="w-full py-3 tracking-wide text-white transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            <x-button id="pay-button" type="submit" class="text-white transition-colors duration-200 transform bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                 <span class="mx-1">Bayar Sekarang</span>
-            </button>
+            </x-button>
         </div>
     </div>
     
@@ -56,7 +56,7 @@
             onSuccess: function(result){
                 /* You may add your own implementation here */
                 alert("payment success!"); console.log(result);
-                window.location.href = "{{ route('client.orders')}}";
+                window.location.href = "{{ route('home')}}";
             },
             onPending: function(result){
                 /* You may add your own implementation here */

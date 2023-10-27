@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home.index', ['title' => 'Home']);
-})->name('home');
+Route::get('/', [PageController::class, 'home'])->name('home');
 
 Route::prefix('order')->name('order.')->group(function () {
     // Route::view('/', 'user/order/index')->name('index');
