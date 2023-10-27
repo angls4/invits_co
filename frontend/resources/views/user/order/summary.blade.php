@@ -11,13 +11,13 @@
             <div>
                 <strong>Pilihan Paket</strong>
                 <div>
-                    <p class="mb-1">Nama Paket</p>
+                    <p class="mb-1">{{ $package["name"] }}</p>
                 </div>
             </div>
             <div>
                 <strong>Pilihan Tema</strong>
                 <div>
-                    <p class="mb-1">Nama Tema</p>
+                    <p class="mb-1">{{ $theme["name"] }}</p>
                 </div>
             </div>
         </div>
@@ -52,14 +52,14 @@
         </div> --}}
         <div class="flex flex-col justify-between py-4 mt-5 font-bold rounded-md px-7 sm:flex-row bg-brand-purple-100">
             <span>Total</span>
-            <span>Rp100.000</span>
+            <span>@rupiah($theme["price"])</span>
             {{-- <span>@rupiah(10000)</span> --}}
         </div>
         <div class="flex justify-end gap-2 mt-8">
             {{-- <x-button-a href="{{ route('order.theme') }}" class="w-full py-3 tracking-wide transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                 <span class="mx-1">Prev</span>
             </x-button-a> --}}
-            <x-button-a href="{{ route('order.checkout', 1) }}" class="w-full py-3 tracking-wide text-white transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            <x-button-a href="{{ route('order.checkout', encode_id($theme['id'])) }}" class="w-full py-3 tracking-wide text-white transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                 <span class="mx-1">Buat Undangan</span>
             </x-button-a>
 

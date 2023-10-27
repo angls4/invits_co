@@ -10,28 +10,28 @@
         <div class="py-5 mt-8 rounded-md px-7 bg-brand-purple-100">
             <div>
                 <strong>Nama</strong>
-                <p>Alfadli</p>
+                <p class="capitalize">{{ session('user.name') }}</p>
             </div>
             <div>
                 <strong>Email</strong>
-                <p>Alfadli@gmail.com</p>
+                <p>{{ session('user.name') }}</p>
             </div>
             <div>
                 <strong>Pilihan Paket</strong>
                 <div>
-                    <p class="mb-1">Nama Paket</p>
+                    <p class="mb-1">{{ $data["package"]["name"] }}</p>
                 </div>
             </div>
             <div>
                 <strong>Pilihan Tema</strong>
                 <div>
-                    <p class="mb-1">Nama Tema</p>
+                    <p class="mb-1">{{ $data["theme"]["name"] }}</p>
                 </div>
             </div>
         </div>
         <div class="flex flex-col justify-between py-4 mt-5 font-bold rounded-md px-7 sm:flex-row bg-brand-purple-100">
             <span>Total</span>
-            <span>Rp100.000</span>
+            <span>@rupiah($data["theme"]["price"])</span>
         </div>
         <div class="flex justify-end gap-2 mt-8">
             {{-- <x-button-a href="{{ route('order.theme') }}" class="w-full py-3 tracking-wide transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
@@ -52,7 +52,7 @@
     var payButton = document.getElementById('pay-button');
     payButton.addEventListener('click', function () {
         // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-        window.snap.pay('{{ $data["payment_midtrans"] }}', {
+        window.snap.pay('{{ $data["order"]["payment_midtrans"] }}', {
             onSuccess: function(result){
                 /* You may add your own implementation here */
                 alert("payment success!"); console.log(result);

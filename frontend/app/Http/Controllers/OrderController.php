@@ -68,42 +68,103 @@ class OrderController extends Controller
      */
     public function makeOrderSelectPackage()
     {
-        return view('user.order.index', ['title' => 'Select Package']);
+        $packages_response = Http::get(env('API_URL').'packages');
+
+        if($packages_response->failed()) {
+            return back()->withErrors("Couldn't load packages");
+        }
+
+        $title = "Select Package";
+        $data = $packages_response["data"]["packages"];
+
+        return view('user.order.index', compact('title', 'data'));
     }
 
     /**
      * Show a page to select theme.
      */
-    public function makeOrderSelectTheme()
+    public function makeOrderSelectTheme($package_id)
     {
-        return view('user.order.theme', ['title' => 'Select Theme']);
+        $response = Http::get(env('API_URL').'themes');
+
+        if($response->failed()) {
+            return back()->withErrors("Couldn't load themes");
+        }
+
+        $json = $response->json();
+        $data = collect($json["data"]["themes"])->where('package_id', decode_id($package_id));
+
+        $title = "Select Theme";
+        
+
+        return view('user.order.theme', compact('title', 'data'));
     }
 
     /**
      * Show a page that have the order summary
      */
-    public function makeOrderSummary()
+    public function makeOrderSummary($theme_id)
     {
-        return view('user.order.summary', ['title' => 'Order Summary']);
+        $theme_response = Http::get(env('API_URL').'themes/'.decode_id($theme_id));
+        if ($theme_response->failed()) {
+            return back()->withErrors("Couldn't load theme");
+        }
+
+        $theme_json = $theme_response->json();
+        $theme = collect($theme_json['data']['theme']);
+
+        $package_response = Http::get(env('API_URL').'packages/'.$theme["package_id"]);
+        if ($theme_response->failed()) {
+            return back()->withErrors("Couldn't load theme");
+        }
+
+        $package_json = $package_response->json();
+        $package = collect($package_json['data']['package']);
+
+        $title = 'Order Summary';
+
+        return view('user.order.summary', compact('title', 'theme', 'package'));
     }
 
     /**
      * Create the order.
      */
-    public function makeOrder()
+    public function makeOrder($theme_id)
     {
-        $response = Http::post(env('API_URL').'orders', [
-            'user_id' => 6,
-            'theme_id'  => 1,
-        ]);
-        
-        if($response->failed()) {
-            dd($response->json());
-            return back();
+        $theme_response = Http::get(env('API_URL').'themes/'.decode_id($theme_id));
+        if ($theme_response->failed()) {
+            return back()->withErrors("Couldn't load theme");
         }
 
+        $theme_json = $theme_response->json();
+        $theme = collect($theme_json['data']['theme']);
+
+        $package_response = Http::get(env('API_URL').'packages/'.$theme["package_id"]);
+        if ($theme_response->failed()) {
+            return back()->withErrors("Couldn't load theme");
+        }
+
+        $package_json = $package_response->json();
+        $package = collect($package_json['data']['package']);
+
         
-        $data = $response->json()["data"];
-        return view('user.order.checkout', ['title' => 'Checkout', 'data' => $data]);
+        $order_response = Http::post(env('API_URL').'orders', [
+            'user_id' => session('user.id'),
+            'theme_id'  => $theme['id'],
+        ]);
+        if($order_response->failed()) {
+            return back();
+        }
+        $order_json = $order_response->json();
+        $order = collect($order_json['data']);
+
+        $data = [
+            'theme' => $theme,
+            'package' => $package,
+            'order' => $order
+        ];
+
+        $title = 'Checkout';
+        return view('user.order.checkout', compact('title', 'data'));
     }
 }
