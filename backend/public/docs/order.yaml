@@ -34,6 +34,8 @@ Orders:
     tags:
       - Order
     summary: Get all orders
+    security:
+      - BearerAuth: []
     responses:
       '200':
         description: Successful response
@@ -210,3 +212,50 @@ Order_id:
               data: null
       '404':
         description: Order not found
+
+Order_user_id:
+  get:
+    tags:
+      - Order
+    summary: Get all orders by user id
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Orders retrieved successfully
+              data:
+                orders:
+                  - id: 1
+                    status: "PAID"
+                    user_id: 1
+                    package_id: 1
+                    theme_id: 1
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null
+                  - id: 2
+                    status: "UNPAID"
+                    user_id: 2
+                    package_id: 2
+                    theme_id: 2
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null

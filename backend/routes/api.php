@@ -70,6 +70,7 @@ Route::prefix('themes')->group(function () {
 */
 Route::prefix('orders')->group(function () {
     Route::get('/', [OrderController::class, 'index']);
+    Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
     Route::get('/{id}', [OrderController::class, 'show']);
     Route::post('/', [OrderController::class, 'store']);
     

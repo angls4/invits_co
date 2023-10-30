@@ -31,6 +31,21 @@ class OrderController extends Controller
         }
     }
 
+    public function getByuserID($user_id)
+    {
+        try {
+            $orders = Order::where('user_id', $user_id)->with('invitation')->get();
+
+            $data = [
+                'orders' => $orders,
+            ];
+
+            return $this->jsonResponse($data, 'Orders retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->jsonResponse(null, 'Failed to retrieve orders', [$e->getMessage()], false, 500);
+        }
+    }
+
     public function show($id)
     {
         try {
