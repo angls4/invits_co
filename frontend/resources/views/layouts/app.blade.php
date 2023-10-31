@@ -9,10 +9,11 @@
         <meta name="keyword" content="undangan pernikahan, undangan digital, pernikahan modern, desain elegan, personalisasi mudah, pengiriman instan, hemat biaya">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} | {{ $title }}</title>
+        <title>Invits.co | {{ $title }}</title>
 
-        <!-- Fonts -->
+        <!-- Fonts & icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         <!-- Styles -->
         @stack('before-styles')
@@ -36,8 +37,6 @@
         </div>
         <!-- Scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/glide.js"></script>
-        <!-- font awesome -->
-        <script src="https://kit.fontawesome.com/b249d00227.js" crossorigin="anonymous"></script>
         @stack('after-javascript')
     </body>
 </html>
