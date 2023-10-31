@@ -70,15 +70,15 @@ Route::prefix('themes')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::prefix('orders')->group(function () {
-    Route::get('/', [OrderController::class, 'index']);
+    // Route::get('/', [OrderController::class, 'index']);
     Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
-    Route::get('/{id}', [OrderController::class, 'show']);
-    Route::post('/', [OrderController::class, 'store']);
+    // Route::get('/{id}', [OrderController::class, 'show']);
+    // Route::post('/', [OrderController::class, 'store']);
     
     // Auth: Admin
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
-        Route::put('/{id}', [OrderController::class, 'update']);
-        Route::delete('/{id}', [OrderController::class, 'destroy']);
+        // Route::put('/{id}', [OrderController::class, 'update']);
+        // Route::delete('/{id}', [OrderController::class, 'destroy']);
     });
 });
 
@@ -95,8 +95,8 @@ Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCa
 |--------------------------------------------------------------------------
 */
 Route::prefix('weddings')->group(function () {
-    Route::get('/', [WeddingController::class, 'index']);
-    Route::post('/', [WeddingController::class, 'store']);
+    // Route::get('/', [WeddingController::class, 'index']);
+    // Route::post('/', [WeddingController::class, 'store']);
 
     // Auth: User
     Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
@@ -105,8 +105,8 @@ Route::prefix('weddings')->group(function () {
     
     // Auth: Admin
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
-        Route::put('/{id}', [WeddingController::class, 'update']);
-        Route::delete('/{id}', [WeddingController::class, 'destroy']);
+        // Route::put('/{id}', [WeddingController::class, 'update']);
+        // Route::delete('/{id}', [WeddingController::class, 'destroy']);
     });
 });
 
