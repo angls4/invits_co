@@ -71,7 +71,6 @@ Route::prefix('themes')->group(function () {
 */
 Route::prefix('orders')->group(function () {
     // Route::get('/', [OrderController::class, 'index']);
-    Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
     // Route::get('/{id}', [OrderController::class, 'show']);
     // Route::post('/', [OrderController::class, 'store']);
     
@@ -79,6 +78,13 @@ Route::prefix('orders')->group(function () {
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
         // Route::put('/{id}', [OrderController::class, 'update']);
         // Route::delete('/{id}', [OrderController::class, 'destroy']);
+    });
+});
+
+Route::prefix('orders-user')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
     });
 });
 
