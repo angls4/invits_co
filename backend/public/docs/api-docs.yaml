@@ -40,3 +40,14 @@ paths:
   
   /api/orders/{user_id}:
     $ref: './order.yaml#/Order_user_id'
+  
+  /api/weddings:
+    $ref: './wedding.yaml#/Weddings'
+
+  /api/weddings/{id}:
+    $ref: './wedding.yaml#/Wedding_id'
+  
+  /api/weddings/{order_id}:
+    $ref: './wedding.yaml#/Wedding_OrderID'
+  
+

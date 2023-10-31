@@ -4,8 +4,12 @@ namespace App\Http\Controllers\ApiControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Wedding;
 use Illuminate\Support\Facades\Validator;
+
+// Models
+use App\Models\Guest;
+use App\Models\Order;
+use App\Models\Wedding;
 
 class WeddingController extends Controller
 {
@@ -21,6 +25,31 @@ class WeddingController extends Controller
             return $this->jsonResponse($data, 'Weddings retrieved successfully');
         } catch (\Exception $e) {
             return $this->jsonResponse(null, 'Failed to retrieve weddings', [$e->getMessage()], false, 500);
+        }
+    }
+
+    public function get_by_order_id($order_id)
+    {
+        try {
+            $order = Order::with('invitation.wedding')->find($order_id);
+            
+            if (!$order) {
+                return $this->jsonResponse(null, 'Order not found', [], false, 404);
+            }
+
+            $guests = Guest::where('invitation_id', $order->invitation->id)->orderBy('id', 'desc')->limit(10)->get();
+            $guests_count = Guest::where('invitation_id', $order->invitation->id)->count();
+
+
+            $data = [
+                'order' => $order,
+                'guests' => $guests,
+                'guests_count' => $guests_count,
+            ];
+
+            return $this->jsonResponse($data, 'Wedding retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->jsonResponse(null, 'Failed to retrieve the wedding', [$e->getMessage()], false, 500);
         }
     }
 

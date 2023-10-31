@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
+use App\Http\Controllers\ApiControllers\WeddingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +89,26 @@ Route::prefix('orders')->group(function () {
 */
 Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCallback'])->name('midtransCallback');
 
+/*
+|--------------------------------------------------------------------------
+| Wedding
+|--------------------------------------------------------------------------
+*/
+Route::prefix('weddings')->group(function () {
+    Route::get('/', [WeddingController::class, 'index']);
+    Route::post('/', [WeddingController::class, 'store']);
 
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
+    });
+    
+    // Auth: Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::put('/{id}', [WeddingController::class, 'update']);
+        Route::delete('/{id}', [WeddingController::class, 'destroy']);
+    });
+});
 
 /*
 |--------------------------------------------------------------------------

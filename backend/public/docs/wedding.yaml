@@ -1,0 +1,286 @@
+wedding.yaml:
+components:
+  schemas:
+    Wedding:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        location:
+          type: string
+        location_gmap:
+          type: string
+        rekening_gift:
+          type: string
+        created_by:
+          type: integer
+        updated_by:
+          type: integer
+        deleted_by:
+          type: integer
+        invitation_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+
+Weddings:
+  get:
+    tags:
+      - Wedding
+    summary: Get all weddings
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Weddings retrieved successfully
+              data:
+                weddings:
+                  - id: 1
+                    title: "Our Wedding"
+                    location: "Beautiful Venue"
+                    location_gmap: "https://maps.example.com/venue"
+                    rekening_gift: "1234-5678-9012-3456"
+                    created_by: 1
+                    updated_by: 1
+                    deleted_by: null
+                    invitation_id: 1
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
+                    deleted_at: null
+  post:
+    tags:
+      - Wedding
+    summary: Create a new wedding
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            title: "Our Wedding"
+            location: "Beautiful Venue"
+            location_gmap: "https://maps.example.com/venue"
+            rekening_gift: "1234-5678-9012-3456"
+            invitation_id: 1
+    responses:
+      '201':
+        description: Wedding created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wedding created successfully
+              data:
+                wedding:
+                  id: 2
+                  title: "Our Wedding"
+                  location: "Beautiful Venue"
+                  location_gmap: "https://maps.example.com/venue"
+                  rekening_gift: "1234-5678-9012-3456"
+                  created_by: 1
+                  updated_by: null
+                  deleted_by: null
+                  invitation_id: 1
+                  created_at: "2023-10-26T00:00:00.000000Z"
+                  updated_at: "2023-10-26T00:00:00.000000Z"
+                  deleted_at: null
+
+Wedding_id:
+  get:
+    tags:
+      - Wedding
+    summary: Get a wedding by ID
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Wedding retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wedding retrieved successfully
+              data:
+                wedding:
+                  id: 1
+                  title: "Our Wedding"
+                  location: "Beautiful Venue"
+                  location_gmap: "https://maps.example.com/venue"
+                  rekening_gift: "1234-5678-9012-3456"
+                  created_by: 1
+                  updated_by: 1
+                  deleted_by: null
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-25T03:36:24.000000Z"
+                  deleted_at: null
+      '404':
+        description: Wedding not found
+  put:
+    tags:
+      - Wedding
+    summary: Update a wedding by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            title: "Updated Wedding"
+            location: "Updated Venue"
+            location_gmap: "https://maps.example.com/updated-venue"
+            rekening_gift: "1234-5678-9012-3456"
+            invitation_id: 1
+    responses:
+      '200':
+        description: Wedding updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wedding updated successfully
+              data:
+                wedding:
+                  id: 1
+                  title: "Updated Wedding"
+                  location: "Updated Venue"
+                  location_gmap: "https://maps.example.com/updated-venue"
+                  rekening_gift: "1234-5678-9012-3456"
+                  created_by: 1
+                  updated_by: null
+                  deleted_by: null
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-26T00:00:00.000000Z"
+                  deleted_at: null
+      '404':
+        description: Wedding not found
+  delete:
+    tags:
+      - Wedding
+    summary: Delete a wedding by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Wedding deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wedding deleted successfully
+              data: null
+      '404':
+        description: Wedding not found
+
+Wedding_OrderID:
+  get:
+    tags:
+      - Wedding
+    summary: Get a wedding by order ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Wedding retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wedding retrieved successfully
+              data:
+                order:
+                  id: '9a736a7e-976c-4781-97ad-1895d5f9a7ad'
+                  status: PAID
+                  user_id: 1
+                  package_id: 1
+                  theme_id: 1
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  created_at: '2023-10-25T03:36:24.000000Z'
+                  updated_at: '2023-10-25T03:36:24.000000Z'
+                  deleted_at: null
+                  invitation:
+                    id: 1
+                    status: ACTIVE
+                    slug: admin-istratorayHHTGluUSDqCEMy
+                    is_custom_domain: 0
+                    custom_domain: null
+                    user_id: 2
+                    order_id: '9a736a7e-976c-4781-97ad-1895d5f9a7ad'
+                    invitation_type_id: 1
+                    created_at: '2023-10-25T03:36:28.000000Z'
+                    updated_at: '2023-10-25T03:36:28.000000Z'
+                    deleted_at: null
+                    wedding:
+                      id: 1
+                      title: Quam earum
+                      location: '92152 Cassin Springs\nEast Chloeland, KY 42692-9078'
+                      location_gmap: null
+                      rekening_gift: null
+                      created_by: null
+                      updated_by: null
+                      deleted_by: null
+                      invitation_id: 1
+                      created_at: '2023-10-25T03:36:34.000000Z'
+                      updated_at: '2023-10-25T03:36:34.000000Z'
+                      deleted_at: null
+                guests:
+                  - id: 20
+                    name: Mr. Reggie Auer
+                    description: Eveniet in qui ipsam
+                    address: >-
+                      Aliquid dolores suscipit dolores tenetur nihil. Doloremque vel
+                      necessitatibus iusto qui. At vitae exercitationem harum et dolorem
+                      enim. Aut error nobis voluptatum et maxime fugiat numquam dolor.
+                    is_invited: 1
+                    no_whats_app: '+18503494834'
+                    email: nwalsh@vandervort.com
+                    invitation_id: 1
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: '2023-10-25T03:36:30.000000Z'
+                    updated_at: '2023-10-25T03:36:30.000000Z'
+                    deleted_at: null
+                guests_count: 1
+      '404':
+        description: Wedding not found
