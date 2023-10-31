@@ -9,6 +9,15 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+  schemas:
+    Package:
+      $ref: './package.yaml#/components/schemas/Package'
+    Theme:
+      $ref: './theme.yaml#/components/schemas/Theme'
+    Order:
+      $ref: './order.yaml#/components/schemas/Order'
+    Wedding:
+      $ref: './wedding.yaml#/components/schemas/Wedding'
 
 paths:
   /api/login:
