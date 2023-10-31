@@ -38,5 +38,5 @@ paths:
   /api/orders/{id}:
     $ref: './order.yaml#/Order_id'
   
-  /api/orders/{user_id}:
-    $ref: './order.yaml#/Order_user_id'
+  /api/orders-user/{user_id}:
+    $ref: './order.yaml#/OrderUser_UserID'
