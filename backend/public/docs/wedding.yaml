@@ -203,7 +203,7 @@ Wedding_id:
       '404':
         description: Wedding not found
 
-Wedding_OrderID:
+WeddingOrder_OrderID:
   get:
     tags:
       - Wedding

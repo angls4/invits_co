@@ -100,13 +100,20 @@ Route::prefix('weddings')->group(function () {
 
     // Auth: User
     Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
-        Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
+
     });
     
     // Auth: Admin
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
         // Route::put('/{id}', [WeddingController::class, 'update']);
         // Route::delete('/{id}', [WeddingController::class, 'destroy']);
+    });
+});
+
+Route::prefix('weddings-order')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
     });
 });
 

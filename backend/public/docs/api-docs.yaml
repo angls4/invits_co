@@ -47,7 +47,7 @@ paths:
   # /api/weddings/{id}:
   #   $ref: './wedding.yaml#/Wedding_id'
   
-  /api/weddings/{order_id}:
-    $ref: './wedding.yaml#/Wedding_OrderID'
+  /api/weddings-order/{order_id}:
+    $ref: './wedding.yaml#/WeddingOrder_OrderID'
   
 
