@@ -34,7 +34,7 @@ class OrderController extends Controller
     public function getByuserID($user_id)
     {
         try {
-            $orders = Order::where('user_id', $user_id)->with('invitation')->get();
+            $orders = Order::where('user_id', $user_id)->with('invitation', 'theme')->get();
 
             $data = [
                 'orders' => $orders,
