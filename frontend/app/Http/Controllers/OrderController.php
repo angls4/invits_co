@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
@@ -12,7 +14,27 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $response = Http::withToken(session('api_token'))->get(env('API_URL').'orders-user/'.session('user')['id']);
+        if($response->failed()) {
+            return back()->withErrors("Couldn't load orders");
+        }
+        $json = $response->object();
+
+        $title = "Order List";
+        $orders = collect($json->data->orders);
+
+        $perPage = 10;
+        $currentPage = request('page', 1);
+        $startIndex = ($currentPage - 1) * $perPage;
+        $slicedData = $orders->slice($startIndex, $perPage);
+
+        $data = new LengthAwarePaginator($slicedData, $orders->count(), $perPage, $currentPage, [
+            'path' => route('client.orders'),
+        ]);
+        
+        // dd($data);
+
+        return view("client.orders.index", compact('title', 'data'));
     }
 
     /**

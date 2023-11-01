@@ -34,7 +34,7 @@ class OrderController extends Controller
     public function getByuserID($user_id)
     {
         try {
-            $orders = Order::where('user_id', $user_id)->with('invitation')->get();
+            $orders = Order::where('user_id', $user_id)->with('invitation', 'theme')->get();
 
             $data = [
                 'orders' => $orders,
@@ -49,7 +49,7 @@ class OrderController extends Controller
     public function show($id)
     {
         try {
-            $order = Order::find($id);
+            $order = Order::with('user', 'package', 'theme', 'invitation', 'payment')->find($id);
 
             if (!$order) {
                 return $this->jsonResponse(null, 'Order not found', [], false, 404);

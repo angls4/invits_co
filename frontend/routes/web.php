@@ -42,35 +42,35 @@ Route::middleware('check.token')->group(function (){
                     ->name('logout');
     
     Route::prefix('client')->name('client.')->group(function () {
-        $controller_profile = 'App\Http\Controllers\ProfileController';
-        $controller_order = 'Modules\Order\Http\Controllers\Frontend\OrdersController';
-        $controller_invitation = 'Modules\Invitation\Http\Controllers\Frontend\InvitationsController';
-        $controller_guest = 'Modules\Invitation\Http\Controllers\Frontend\GuestController';
-        $controller_rsvp = 'Modules\Invitation\Http\Controllers\Frontend\RsvpController';
-
+        // $controller_profile = 'App\Http\Controllers\ProfileController';
+        // $controller_order = 'Modules\Order\Http\Controllers\Frontend\OrdersController';
+        // $controller_invitation = 'Modules\Invitation\Http\Controllers\Frontend\InvitationsController';
+        // $controller_guest = 'Modules\Invitation\Http\Controllers\Frontend\GuestController';
+        // $controller_rsvp = 'Modules\Invitation\Http\Controllers\Frontend\RsvpController';
+        
         // Client Order
-        Route::get('/orders', $controller_order . '@index')->name('orders');
-        Route::get('/orders/{id}', $controller_order . '@show')->name(('ordersDetail'));
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+        Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
         // Route::view('/bills', 'user/order/detail')->name('bills');
 
         // Client Invitation
-        Route::get('/invitations/{id}', $controller_invitation . '@show')->name(('editInvitation'));
-        Route::post('/save/invitations/{id}', $controller_invitation . '@edit')->name(('save.editInvitation'));
+        // Route::get('/invitations/{id}', $controller_invitation . '@show')->name(('editInvitation'));
+        // Route::post('/save/invitations/{id}', $controller_invitation . '@edit')->name(('save.editInvitation'));
 
-        // Client Guest
-        Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
-        Route::match(['GET', 'POST'], '/invitations/{id}/guests/edit', $controller_guest . '@editGuest')->name(('guest.edit'));
-        Route::get('/invitations/{id}/guests', $controller_guest . '@index')->name('guest.index');
-        Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
-        Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
+        // // Client Guest
+        // Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
+        // Route::match(['GET', 'POST'], '/invitations/{id}/guests/edit', $controller_guest . '@editGuest')->name(('guest.edit'));
+        // Route::get('/invitations/{id}/guests', $controller_guest . '@index')->name('guest.index');
+        // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
+        // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
 
         // Client RSVP
-        Route::get('/invitations/{id}/rsvps', $controller_rsvp . '@index')->name('rsvp');
+        // Route::get('/invitations/{id}/rsvps', $controller_rsvp . '@index')->name('rsvp');
 
-        // Client Profile
-        Route::get('/{id}', $controller_profile  . '@show')->name('index');
-        Route::post('/{id}', $controller_profile . '@edit')->name('editProfile');
-        Route::get('/{id}/changePassword', $controller_profile  . '@editPassword')->name('editPassword');
-        Route::post('/{id}/changePassword', $controller_profile . '@updatePassword')->name('updatePassword');
+        // // Client Profile
+        // Route::get('/{id}', $controller_profile  . '@show')->name('index');
+        // Route::post('/{id}', $controller_profile . '@edit')->name('editProfile');
+        // Route::get('/{id}/changePassword', $controller_profile  . '@editPassword')->name('editPassword');
+        // Route::post('/{id}/changePassword', $controller_profile . '@updatePassword')->name('updatePassword');
     });
 });
