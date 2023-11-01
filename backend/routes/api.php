@@ -120,6 +120,7 @@ Route::prefix('weddings-order')->group(function () {
     // Auth: User
     Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
         Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
+        Route::post('/{order_id}', [WeddingController::class, 'update_by_order_id']);
     });
 });
 
