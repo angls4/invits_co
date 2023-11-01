@@ -49,7 +49,7 @@ class OrderController extends Controller
     public function show($id)
     {
         try {
-            $order = Order::find($id);
+            $order = Order::with('user', 'package', 'theme', 'invitation', 'payment')->find($id);
 
             if (!$order) {
                 return $this->jsonResponse(null, 'Order not found', [], false, 404);
