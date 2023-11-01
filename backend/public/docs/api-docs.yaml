@@ -44,8 +44,8 @@ paths:
   # /api/orders:
   #   $ref: './order.yaml#/Orders'
 
-  # /api/orders/{id}:
-  #   $ref: './order.yaml#/Order_id'
+  /api/orders/{id}:
+    $ref: './order.yaml#/Order_id'
   
   /api/orders-user/{user_id}:
     $ref: './order.yaml#/OrderUser_UserID'
