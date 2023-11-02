@@ -14,6 +14,19 @@ class Order extends Model
     use HasUuids;
 
     protected $table = 'orders';
+    public $incrementing = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'status',
+        'user_id',
+        'package_id',
+        'theme_id'
+    ];
 
     /**
      * Create a new factory instance for the model.

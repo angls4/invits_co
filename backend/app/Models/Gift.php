@@ -12,7 +12,12 @@ class Gift extends Model
     use SoftDeletes;
 
     protected $table = 'gifts';
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'from',
+        'nominal',
+        'wedding_id',
+    ];
     
     protected static function newFactory()
     {

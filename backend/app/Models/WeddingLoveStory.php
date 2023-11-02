@@ -12,7 +12,12 @@ class WeddingLoveStory extends Model
     use SoftDeletes;
 
     protected $table = 'wedding_love_stories';
-    protected $fillable = [];
+    protected $fillable = [
+        'year',
+        'story',
+        'image',
+        'wedding_id',
+    ];
     
     protected static function newFactory()
     {

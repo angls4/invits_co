@@ -13,7 +13,15 @@ class Guest extends Model
 
     protected $table = 'guests';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'address',
+        'is_invited',
+        'no_whats_app',
+        'email',
+        'invitation_id',
+    ];
     
     protected static function newFactory()
     {

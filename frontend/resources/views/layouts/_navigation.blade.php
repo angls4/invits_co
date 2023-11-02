@@ -52,7 +52,7 @@
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="relative ml-3" x-data="{ isUserMenuOpen: false }">
                     <div class="flex flex-row gap-2">
-                        <x-button-a href=""
+                        <x-button-a href="{{ route('order.index') }}"
                             class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-brand-purple-500 group-[.nav-dark]:border border-white hover:bg-brand-yellow-500 hover:text-black md:visible">
                             <span class="mx-1">Pesan Sekarang</span>
                         </x-button-a>
@@ -63,7 +63,7 @@
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">{{ __('Open main menu') }}</span>
                             <img class="w-10 h-10 border border-transparent rounded-full hover:border-cyan-600"
-                                src="{{ asset(session('user.avatar')) }}" alt="User">
+                                src="{{ asset(session('user.avatar') ?? 'img/default-avatar.jpg') }}" alt="User">
                         </button>
                         @else
                         <x-button-a href="{{ route('login') }}"
@@ -81,7 +81,7 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                         class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <a href=""
+                            <a href="{{ route('client.orders') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
                                 role="menuitem">
                                 <i class="fas fa-user fa-fw"></i>&nbsp;Client Area

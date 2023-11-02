@@ -1,0 +1,240 @@
+components:
+  schemas:
+    ValidationErrors:
+      type: object
+      example: {}
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        username:
+          type: string
+          nullable: true
+          example: johndoe123
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        mobile:
+          type: string
+          nullable: true
+          example: +1234567890
+        gender:
+          type: string
+          nullable: true
+          example: Male
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          example: 1990-01-01
+        email_verified_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: 2023-10-04T12:00:00Z
+        password:
+          type: string
+          nullable: true
+          example: secret_password
+        avatar:
+          type: string
+          nullable: true
+          example: img/default-avatar.jpg
+        status:
+          type: integer
+          example: 1
+        role:
+          type: string
+          enum:
+            - user
+            - admin
+          example: user
+        
+
+Login:
+  post:
+    tags:
+      - Authentication
+    summary: Login User
+    description: Login user dengan email dan password.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+                example: user@example.com
+              password:
+                type: string
+                format: password
+                example: password123
+    responses:
+      '200':
+        description: Login berhasil
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Login successful.
+              data:
+                user:
+                  id: 6
+                  name: John Doe
+                  first_name: John
+                  last_name: Doe
+                  username: null
+                  email: user@example.com
+                  mobile: '1234567890'
+                  gender: null
+                  date_of_birth: null
+                  email_verified_at: null
+                  avatar: img/default-avatar.jpg
+                  status: 1
+                  role: user
+                  created_at: '2023-10-24T06:47:40.000000Z'
+                  updated_at: '2023-10-24T06:47:40.000000Z'
+                  deleted_at: null
+                token: 29|UZBuFUx4WfttuBJeYiNt2AuTj9ETDwuUBV4a64jR230d6e6d
+
+      '401':
+        description: Login gagal
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: false
+                message:
+                  type: string
+                  example: Login failed.
+                errors:
+                  type: object
+                  example:
+                    login: Invalid email and password combination.
+
+Register:
+  post:
+    tags:
+      - Authentication
+    summary: Registrasi User
+    description: Registrasi user baru dengan data yang diperlukan.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              first_name:
+                type: string
+                example: John
+              last_name:
+                type: string
+                example: Doe
+              mobile:
+                type: string
+                example: '1234567890'
+              email:
+                type: string
+                format: email
+                example: user@example.com
+              password:
+                type: string
+                format: password
+                example: password123
+              c_password:
+                type: string
+                format: password
+                example: password123
+    responses:
+      '201':
+        description: Registrasi berhasil
+        content:
+          application/json:
+            example:
+              success: true
+              errors: null
+              message: Registration successful.
+              data:
+                user:
+                  name: John2 Doe2
+                  first_name: John2
+                  last_name: Doe2
+                  mobile: '1234567890'
+                  email: user2@example.com
+                  role: user
+                  updated_at: '2023-10-24T18:43:02.000000Z'
+                  created_at: '2023-10-24T18:43:02.000000Z'
+                  id: 7
+                token: 30|DIRzhpEpiZGeXuBrpTLEtxpTTUA1nmmXEGq04Me7dc4a093a
+
+      '422':
+        description: Validasi gagal
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: false
+                message:
+                  type: string
+                  example: The given data was invalid.
+                errors:
+                  $ref: '#/components/schemas/ValidationErrors'
+      '500':
+        description: Error server
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: false
+                message:
+                  type: string
+                  example: Internal server error.
+                errors:
+                  type: object
+                  example: {}
+
+Logout:
+  post:
+    tags:
+      - Authentication
+    summary: Logout User
+    description: Logout pengguna saat ini.
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Logout berhasil
+        content:
+          application/json:
+            example:
+                success: true
+                errors: []
+                message: Logout successful.
+                data: null

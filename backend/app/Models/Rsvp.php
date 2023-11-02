@@ -13,7 +13,13 @@ class Rsvp extends Model
 
     protected $table = 'rsvps';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'amount_guest',
+        'is_attend',
+        'invitation_id',
+        'guest_id',
+    ];
     
     protected static function newFactory()
     {

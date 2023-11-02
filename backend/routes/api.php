@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiControllers\AuthController; // Import AuthController
+
+// Controllers
+use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\PackageController;
+use App\Http\Controllers\ApiControllers\ThemeController;
+use App\Http\Controllers\ApiControllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +20,96 @@ use App\Http\Controllers\ApiControllers\AuthController; // Import AuthController
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Authentication
+|--------------------------------------------------------------------------
+*/
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
+/*
+|--------------------------------------------------------------------------
+| Package
+|--------------------------------------------------------------------------
+*/
+Route::prefix('packages')->group(function () {
+    Route::get('/', [PackageController::class, 'index']);
+    Route::get('/{id}', [PackageController::class, 'show']);
+    
+    // Auth : Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::post('/', [PackageController::class, 'store']);
+        Route::put('/{id}', [PackageController::class, 'update']);
+        Route::delete('/{id}', [PackageController::class, 'destroy']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Theme
+|--------------------------------------------------------------------------
+*/
+Route::prefix('themes')->group(function () {
+    Route::get('/', [ThemeController::class, 'index']);
+    Route::get('/{id}', [ThemeController::class, 'show']);
+    
+    // Auth : Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::post('/', [ThemeController::class, 'store']);
+        Route::post('/{id}', [ThemeController::class, 'update']);
+        Route::delete('/{id}', [ThemeController::class, 'destroy']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Order
+|--------------------------------------------------------------------------
+*/
+Route::prefix('orders')->group(function () {
+    // Route::get('/', [OrderController::class, 'index']);
+    // Route::post('/', [OrderController::class, 'store']);
+    
+    // Auth
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{id}', [OrderController::class, 'show']);
+    });
+    
+    // Auth: Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        // Route::put('/{id}', [OrderController::class, 'update']);
+        // Route::delete('/{id}', [OrderController::class, 'destroy']);
+    });
+});
+
+Route::prefix('orders-user')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Midtrans
+|--------------------------------------------------------------------------
+*/
+Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCallback'])->name('midtransCallback');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Example
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
-    // Rute yang hanya dapat diakses oleh Admin
     Route::get('admin/dashboard', 'AdminController@dashboard');
 });
 
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);

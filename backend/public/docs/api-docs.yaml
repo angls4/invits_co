@@ -3,229 +3,40 @@ info:
   title: API invits.co
   version: 1.0.0
   description: Merupakan API pembuatan undangan digital
-paths:
-  /api/login:
-    post:
-      tags:
-        - Authentication
-      summary: Login User
-      description: Login user dengan email dan password.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  format: email
-                  example: user@example.com
-                password:
-                  type: string
-                  format: password
-                  example: password123
-      responses:
-        '200':
-          description: Login berhasil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  data:
-                    $ref: '#/components/schemas/User'
-                  message:
-                    type: string
-                    example: Login successful.
-        '401':
-          description: Login gagal
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Login failed.
-                  errors:
-                    type: object
-                    example:
-                      login: Invalid email and password combination.
-  /api/register:
-    post:
-      tags:
-        - Authentication
-      summary: Registrasi User
-      description: Registrasi user baru dengan data yang diperlukan.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                first_name:
-                  type: string
-                  example: John
-                last_name:
-                  type: string
-                  example: Doe
-                mobile:
-                  type: string
-                  example: '1234567890'
-                email:
-                  type: string
-                  format: email
-                  example: user@example.com
-                password:
-                  type: string
-                  format: password
-                  example: password123
-                c_password:
-                  type: string
-                  format: password
-                  example: password123
-      responses:
-        '201':
-          description: Registrasi berhasil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  data:
-                    $ref: '#/components/schemas/User'
-                  message:
-                    type: string
-                    example: Registration successful.
-        '422':
-          description: Validasi gagal
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: The given data was invalid.
-                  errors:
-                    $ref: '#/components/schemas/ValidationErrors'
-        '500':
-          description: Error server
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Internal server error.
-                  errors:
-                    type: object
-                    example: {}
-  /api/logout:
-    post:
-      tags:
-        - Authentication
-      summary: Logout User
-      description: Logout pengguna saat ini.
-      security:
-        - BearerAuth: []
-      responses:
-        '200':
-          description: Logout berhasil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: Logout successful.
+
 components:
-  schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        name:
-          type: string
-          example: John Doe
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Doe
-        username:
-          type: string
-          nullable: true
-          example: johndoe123
-        email:
-          type: string
-          format: email
-          example: john@example.com
-        mobile:
-          type: string
-          nullable: true
-          example: +1234567890
-        gender:
-          type: string
-          nullable: true
-          example: Male
-        date_of_birth:
-          type: string
-          format: date
-          nullable: true
-          example: 1990-01-01
-        email_verified_at:
-          type: string
-          format: date-time
-          nullable: true
-          example: 2023-10-04T12:00:00Z
-        password:
-          type: string
-          nullable: true
-          example: secret_password
-        avatar:
-          type: string
-          nullable: true
-          example: img/default-avatar.jpg
-        status:
-          type: integer
-          example: 1
-        role:
-          type: string
-          enum:
-            - user
-            - admin
-          example: user
-    ValidationErrors:
-      type: object
-      example: {}
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
+
+paths:
+  /api/login:
+    $ref: './auth.yaml#/Login'
+
+  /api/register:
+    $ref: './auth.yaml#/Register'
+
+  /api/logout:
+    $ref: './auth.yaml#/Logout'
+
+  /api/packages:
+    $ref: './package.yaml#/Packages'
+
+  /api/packages/{id}:
+    $ref: './package.yaml#/Package_id'
+  
+  /api/themes:
+    $ref: './theme.yaml#/Themes'
+
+  /api/themes/{id}:
+    $ref: './theme.yaml#/Theme_id'
+  
+  # /api/orders:
+  #   $ref: './order.yaml#/Orders'
+
+  /api/orders/{id}:
+    $ref: './order.yaml#/Order_id'
+  
+  /api/orders-user/{user_id}:
+    $ref: './order.yaml#/OrderUser_UserID'

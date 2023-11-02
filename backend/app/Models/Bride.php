@@ -12,7 +12,15 @@ class Bride extends Model
     use SoftDeletes;
 
     protected $table = 'brides';
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'father',
+        'mother',
+        'address',
+        'instagram',
+        'image',
+        'wedding_id',
+    ];
     
     protected static function newFactory()
     {

@@ -14,26 +14,27 @@
                 <div class="relative w-full glide-package">
                     <div class="overflow-hidden glide__track" data-glide-el="track">
                         <ul class="list-none glide__slides relative w-full overflow-hidden p-0 whitespace-no-wrap flex flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] text-center">
-                            @for ($i = 0; $i < 3; $i++)
+                            @foreach ($data["packages"] as $package)
                             <li class="py-2.5 glide__slide">
                                 <div class="flex flex-col items-center justify-between h-full p-6 bg-white rounded-lg shadow-lg">
                                     <div>
-                                        <h5 class="mb-3 text-2xl font-bold text-gray-900">Nama Paket</h4>
+                                        <h5 class="mb-3 text-2xl font-bold text-gray-900">{{ $package["name"] }}</h4>
                                         <div>
                                             <span class="block text-xs">Mulai Dari</span>
-                                            <span class="text-xl font-semibold text-brand-yellow-600">Rp100.000</span>
+                                            <span class="text-xl font-semibold text-brand-yellow-600">{{ $package["price"] }}</span>
                                         </div>
                                         {{-- <div>{{ $package->description }}</div> --}}
-                                        <ul class="my-4 text-center">
-                                            @for ($i = 0; $i < 3; $i++)
-                                            <li>Fitur {{ $i }}</li>
-                                            @endfor
+                                        <ul class="my-4 list-disc list-inside text-start">
+                                            {!! $package["features"] !!}
                                         </ul>
                                     </div>
-                                    <x-button-a href="" type="button" class="inline-block px-10 py-2.5 text-white bg-brand-purple-500 font-medium text-xs rounded-full hover:bg-brand-purple-100 focus:bg-brand-purple-100 active:bg-brand-purple-100 mt-4">Pilih</x-button-a>
+                                    <x-button-a href="{{ route('order.theme', encode_id($package['id'])) }}" type="button" 
+                                        class="!px-10 !py-2.5 text-white bg-brand-purple-500 !rounded-full hover:bg-brand-purple-100 focus:bg-brand-purple-100 active:bg-brand-purple-100 mt-4">
+                                        Pilih
+                                    </x-button-a>
                                 </div>
                             </li>
-                            @endfor
+                            @endforeach
                         </ul>
                     </div>
                 </div>

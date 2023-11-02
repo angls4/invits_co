@@ -1,0 +1,288 @@
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+        user_id:
+          type: integer
+        package_id:
+          type: integer
+        theme_id:
+          type: integer
+        created_by:
+          type: integer
+        updated_by:
+          type: integer
+        deleted_by:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+    ValidationErrors:
+      type: object
+      example: {}
+
+Orders:
+  get:
+    tags:
+      - Order
+    summary: Get all orders
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Orders retrieved successfully
+              data:
+                orders:
+                  - id: 1
+                    status: "PAID"
+                    user_id: 1
+                    package_id: 1
+                    theme_id: 1
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null
+                  - id: 2
+                    status: "UNPAID"
+                    user_id: 2
+                    package_id: 2
+                    theme_id: 2
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null
+
+  post:
+    tags:
+      - Order
+    summary: Create a new order
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            user_id: 1
+            theme_id: 1
+    responses:
+      '201':
+        description: Order created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Order created successfully
+              data:
+                order:
+                  id: 3
+                  status: "UNPAID"
+                  user_id: 1
+                  package_id: 1
+                  theme_id: 1
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  created_at: "2023-10-25T00:00:00.000000Z"
+                  updated_at: "2023-10-25T00:00:00.000000Z"
+
+Order_id:
+  get:
+    tags:
+      - Order
+    summary: Get an order by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '201':
+        description: Order created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Order created successfully
+              data:
+                theme:
+                  id: 1
+                  name: Basic White
+                  slug: basic-white
+                  img_preview: themes/theme-bronze.png
+                  description: Tema ini didominasi oleh warna basic putih yang simpel.
+                  price: 150000
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  package_id: 1
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-25T03:36:24.000000Z"
+                  deleted_at: null
+                payment_midtrans: bf26f202-0927-4a0b-be8d-5d091630aabd  
+      '404':
+        description: Order not found
+  # put:
+  #   tags:
+  #     - Order
+  #   summary: Update an order by ID
+  #   security:
+  #     - BearerAuth: []
+  #   parameters:
+  #     - name: id
+  #       in: path
+  #       required: true
+  #       schema:
+  #         type: integer
+  #   requestBody:
+  #     required: true
+  #     content:
+  #       application/json:
+  #         example:
+  #           status: "PAID"
+  #           user_id: 1
+  #           package_id: 1
+  #           theme_id: 1
+  #   responses:
+  #     '200':
+  #       description: Order updated successfully
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Order updated successfully
+  #             data:
+  #               order:
+  #                 id: 1
+  #                 status: "PAID"
+  #                 user_id: 1
+  #                 package_id: 1
+  #                 theme_id: 1
+  #                 created_by: null
+  #                 updated_by: null
+  #                 deleted_by: null
+  #                 created_at: "2023-10-25T00:00:00.000000Z"
+  #                 updated_at: "2023-10-25T00:00:00.000000Z"
+  #                 deleted_at: null
+  #     '404':
+  #       description: Order not found
+  # delete:
+  #   tags:
+  #     - Order
+  #   summary: Delete an order by ID
+  #   security:
+  #     - BearerAuth: []
+  #   parameters:
+  #     - name: id
+  #       in: path
+  #       required: true
+  #       schema:
+  #         type: integer
+  #   responses:
+  #     '200':
+  #       description: Order deleted successfully
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Order deleted successfully
+  #             data: null
+  #     '404':
+  #       description: Order not found
+
+OrderUser_UserID:
+  get:
+    tags:
+      - Order
+    summary: Get all orders by user id
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Orders retrieved successfully
+              data:
+                orders:
+                  - id: 9a736a80-8a3d-4ff9-ac3b-9a6a40b8f93a
+                    status: PAID
+                    user_id: 5
+                    package_id: 3
+                    theme_id: 3
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T03:36:25.000000Z"
+                    updated_at: "2023-10-25T03:36:25.000000Z"
+                    deleted_at: null
+                    invitation:
+                      id: 46
+                      status: ACTIVE
+                      slug: admin-istratorVA9NBYed9r2UtlEC
+                      is_custom_domain: 0
+                      custom_domain: null
+                      user_id: 2
+                      order_id: 9a736a80-8a3d-4ff9-ac3b-9a6a40b8f93a
+                      invitation_type_id: 1
+                      created_at: "2023-10-25T03:36:29.000000Z"
+                      updated_at: "2023-10-25T03:36:29.000000Z"
+                      deleted_at: null
+                  - id: 9a736a80-b57a-453e-9346-b5824d79c514
+                    status: UNPAID
+                    user_id: 5
+                    package_id: 1
+                    theme_id: 1
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T03:36:25.000000Z"
+                    updated_at: "2023-10-25T03:36:25.000000Z"
+                    deleted_at: null
+                    invitation:
+                      id: 49
+                      status: ACTIVE
+                      slug: executive-user9Ia0x2Gkvsckal8c
+                      is_custom_domain: 0
+                      custom_domain: null
+                      user_id: 4
+                      order_id: 9a736a80-b57a-453e-9346-b5824d79c514
+                      invitation_type_id: 1
+                      created_at: "2023-10-25T03:36:29.000000Z"
+                      updated_at: "2023-10-25T03:36:29.000000Z"
+                      deleted_at: null
+

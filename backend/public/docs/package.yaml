@@ -1,0 +1,206 @@
+components:
+  schemas:
+    Package:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        features:
+          type: string
+    ValidationErrors:
+      type: object
+      example: {}
+
+Packages:
+  get:
+    tags:
+      - Package
+    summary: Get all packages
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Packages retrieved successfully
+              data:
+                packages:
+                  - id: 1
+                    name: Bronze
+                    price: "Rp. 100.000"
+                    description: "Paket yang memenuhi kebutuhan dasar undanganmu"
+                    features: "<li>Informasi Dasar Pernikahan</li>"
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-15T09:52:51.000000Z"
+                    updated_at: "2023-10-15T09:52:51.000000Z"
+                    deleted_at: null
+                  - id: 2
+                    name: Silver
+                    price: "Rp. 300.000"
+                    description: "Pilihan paket membuat undanganmu lebih keren"
+                    features: "<li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li>"
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-15T09:52:51.000000Z"
+                    updated_at: "2023-10-15T09:52:51.000000Z"
+                    deleted_at: null
+                  - id: 3
+                    name: Gold
+                    price: "Rp. 500.000"
+                    description: "Paket mewah lengkap untuk undanganmu"
+                    features: "<li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li><li>Love Stories</li><li>Wishes & Gifts</li><li>Save to Google Calendar</li>"
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-15T09:52:51.000000Z"
+                    updated_at: "2023-10-15T09:52:51.000000Z"
+                    deleted_at: null
+
+  post:
+    tags:
+      - Package
+    summary: Create a new package
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: Package 4
+            price: Rp. 1.000.000
+            description: A new package
+            features: <li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li><li>Love Stories</li><li>Wishes & Gifts</li><li>Save to Google Calendar</li>
+    responses:
+      '201':
+        description: Package created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Package created successfully
+              data:
+                package:
+                  id: 4
+                  name: Package 4
+                  price: "Rp. 500.000"
+                  description: "A new package"
+                  updated_at: "2023-10-25T00:56:33.000000Z"
+                  created_at: "2023-10-25T00:56:33.000000Z"
+
+Package_id:
+  get:
+    tags:
+      - Package
+    summary: Get a package by ID
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Package retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Package retrieved successfully
+              data:
+                package:
+                  id: 1
+                  name: Bronze
+                  price: "Rp. 100.000"
+                  description: "Paket yang memenuhi kebutuhan dasar undanganmu"
+                  features: "<li>Informasi Dasar Pernikahan</li>"
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  created_at: "2023-10-15T09:52:51.000000Z"
+                  updated_at: "2023-10-15T09:52:51.000000Z"
+                  deleted_at: null
+      '404':
+        description: Package not found
+  put:
+    tags:
+      - Package
+    summary: Update a package by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: Edit Package 4
+            price: Rp. 1.000.000
+            description: Edit Description A new package
+            features: <li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li><li>Love Stories</li><li>Wishes & Gifts</li><li>Save to Google Calendar</li>
+    responses:
+      '200':
+        description: Package updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Package updated successfully
+              data:
+                package:
+                  id: 4
+                  name: "Edit Package 4"
+                  price: "Rp. 1.000.000"
+                  description: "Edit Description A new package"
+                  features: null
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  created_at: "2023-10-25T00:56:33.000000Z"
+                  updated_at: "2023-10-25T01:03:54.000000Z"
+                  deleted_at: null
+      '404':
+        description: Package not found
+  delete:
+    tags:
+      - Package
+    summary: Delete a package by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Package deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Package deleted successfully
+              data: null
+      '404':
+        description: Package not found
