@@ -45,6 +45,9 @@ class RegisterController extends Controller
             return back()->withErrors($errors ?? null)->withInput();
         }
 
+        $data = $response->json()["data"];
+        session(['api_token' => $data['token'], 'user' => $data['user']]);
+
         return redirect()->route('home');
     }
 }
