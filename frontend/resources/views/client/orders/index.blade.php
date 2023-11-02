@@ -56,7 +56,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 @if($order->status != "UNPAID")
-                                <a href="{{ "../" . $order["invitation"]["slug"] }}" target="_blank"> {{ $order->invitation->slug }} </a>
+                                <a href="{{ "../" . $order->invitation->slug }}" target="_blank"> {{ $order->invitation->slug }} </a>
                                 @else
                                 {{ "BELUM MEMBAYAR" }}
                                 @endif
@@ -73,7 +73,7 @@
                             </td>
                             @if($order->status != "UNPAID")
                                 <td class="px-6 py-4">
-                                    <a href=""
+                                    <a href="{{ route('client.ordersDetail', $order->id) }}"
                                         class="font-medium text-brand-pink hover:underline">Details</a>
                                 </td>
                                 <td class="px-6 py-4">

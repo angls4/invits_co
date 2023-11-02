@@ -63,7 +63,7 @@
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">{{ __('Open main menu') }}</span>
                             <img class="w-10 h-10 border border-transparent rounded-full hover:border-cyan-600"
-                                src="{{ asset(session('user.avatar')) }}" alt="User">
+                                src="{{ asset(session('user.avatar') ?? 'img/default-avatar.jpg') }}" alt="User">
                         </button>
                         @else
                         <x-button-a href="{{ route('login') }}"

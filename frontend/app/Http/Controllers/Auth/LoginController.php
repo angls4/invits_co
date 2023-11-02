@@ -40,6 +40,7 @@ class LoginController extends Controller
         ]);
 
         if($response->failed()) {
+            dd($response);
             $errors = $response->json()["errors"];
             return back()->withErrors($errors ?? null)->onlyInput('email');
         }else {
@@ -62,7 +63,7 @@ class LoginController extends Controller
         session()->forget(['api_token', 'user']);
 
         if($response->successful()){
-            return back();
+            return redirect()->route('home');
         }
         
     }

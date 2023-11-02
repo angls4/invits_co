@@ -69,10 +69,10 @@
 		<div class="px-5">
 			<div class="border-t-[1px] border-white flex py-5 items-center">
 				<div class="flex grow">
-					<img class="w-10 h-10 mr-2 rounded-full" src="{{asset(session('user')["avatar"])}}" alt="{{asset(session('user')["name"])}}">
+					<img class="w-10 h-10 mr-2 rounded-full" src="{{asset(session('user.avatar') ?? 'img/default-avatar.jpg')}}" alt="{{asset(session('user.name'))}}">
 					<div>
-						<strong class="block capitalize">{{ session('user')["name"] }}</strong>
-						<span>{{ session('user')["email"] }}</span>
+						<strong class="block capitalize">{{ session('user.name') }}</strong>
+						<span>{{ session('user.email') }}</span>
 					</div>
 				</div>
 				<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

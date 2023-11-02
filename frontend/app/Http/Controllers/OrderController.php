@@ -23,7 +23,7 @@ class OrderController extends Controller
         $title = "Order List";
         $orders = collect($json->data->orders);
 
-        $perPage = 10;
+        $perPage = 14;
         $currentPage = request('page', 1);
         $startIndex = ($currentPage - 1) * $perPage;
         $slicedData = $orders->slice($startIndex, $perPage);
@@ -31,8 +31,6 @@ class OrderController extends Controller
         $data = new LengthAwarePaginator($slicedData, $orders->count(), $perPage, $currentPage, [
             'path' => route('client.orders'),
         ]);
-        
-        // dd($data);
 
         return view("client.orders.index", compact('title', 'data'));
     }
@@ -58,7 +56,18 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $response = Http::withToken(session('api_token'))->get(env('API_URL').'orders/'.$id);
+        if($response->failed()) {
+            return back()->withErrors("Couldn't load orders");
+        }
+        $json = $response->object();
+
+        $title = "Order Detail";
+        $data = collect($json->data);
+
+        // dd($order);
+        
+        return view("client.orders.detail", compact('title', 'data'));
     }
 
     /**
