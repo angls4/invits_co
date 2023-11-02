@@ -137,6 +137,12 @@ class WeddingController extends Controller
     {
         try {
             $order = Order::with(
+                'user', 
+                'package', 
+                'theme',
+                'payment', 
+                'invitation',
+                'invitation.type', 
                 'invitation.wedding', 
                 'invitation.wedding.groom',
                 'invitation.wedding.bride',
