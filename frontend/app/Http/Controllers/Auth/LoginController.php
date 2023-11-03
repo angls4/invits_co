@@ -40,7 +40,6 @@ class LoginController extends Controller
         ]);
 
         if($response->failed()) {
-            dd($response);
             $errors = $response->json()["errors"];
             return back()->withErrors($errors ?? null)->onlyInput('email');
         }else {
