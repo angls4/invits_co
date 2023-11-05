@@ -18,6 +18,8 @@ components:
       $ref: './order.yaml#/components/schemas/Order'
     Wedding:
       $ref: './wedding.yaml#/components/schemas/Wedding'
+    Wish:
+      $ref: './wish.yaml#/components/schemas/Wish'
 
 paths:
   /api/login:
@@ -61,5 +63,14 @@ paths:
   
   /api/weddings-invitation/{slug}:
     $ref: './wedding.yaml#/WeddingInvitation_Slug'
+  
+  /api/wishes:
+    $ref: './wish.yaml#/Wishes'
+
+  /api/wishes/{id}:
+    $ref: './wish.yaml#/Wish_id'
+
+  /api/wishes-wedding/{wedding_id}:
+    $ref: './wish.yaml#/WishesWedding_WeddingID'
   
 
