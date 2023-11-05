@@ -54,13 +54,13 @@
 			@if ( request()->is('client/invitations/*') )
 			<a
 				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.guest.index', encode_id($data)) }}">
+				href="">
 				<i class="mr-3 fa-solid fa-users fa-lg"></i>
 				Tamu
 			</a>
 			<a
 				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.rsvp', encode_id($data)) }}">
+				href="">
 				<i class="mr-3 fa-solid fa-user-check fa-lg"></i>
 				RSVP
 			</a>

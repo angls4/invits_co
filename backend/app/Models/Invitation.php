@@ -178,4 +178,14 @@ class Invitation extends Model
             'story'              => "Story 3",
         ]);
     }
+
+    //  Get invitation by slug
+    public static function get_by_slug($slug){
+        return Invitation::where('slug', $slug)->first();
+    }
+
+    //  Get invitation by invitation id
+    public static function get_by_id($id){
+        return Invitation::where('id', $id)->first();
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -54,8 +55,8 @@ Route::middleware('check.token')->group(function (){
         // Route::view('/bills', 'user/order/detail')->name('bills');
 
         // Client Invitation
-        // Route::get('/invitations/{id}', $controller_invitation . '@show')->name(('editInvitation'));
-        // Route::post('/save/invitations/{id}', $controller_invitation . '@edit')->name(('save.editInvitation'));
+        Route::get('/invitations/{id}', [InvitationController::class, 'show'])->name(('editInvitation'));
+        Route::post('/save/invitations/{id}', [InvitationController::class, 'edit'])->name(('save.editInvitation'));
 
         // // Client Guest
         // Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
