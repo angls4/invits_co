@@ -623,18 +623,151 @@ WeddingOrder_OrderID:
               errors: []
               message: Wedding updated successfully
               data:
-                wedding:
-                  id: 1
-                  title: "Updated Wedding Title"
-                  location: "Updated Wedding Location"
-                  location_gmap: "Updated GMap Location"
-                  rekening_gift: "Updated Rekening Gift"
+                order:
+                  id: "9a736a7f-29f4-48d4-9903-ee3517da03fc"
+                  status: PAID
+                  user_id: 5
+                  package_id: 3
+                  theme_id: 3
                   created_by: null
                   updated_by: null
                   deleted_by: null
-                  invitation_id: 1
-                  created_at: "2023-10-25T03:55:11.000000Z"
-                  updated_at: "2023-10-25T04:36:33.000000Z"
+                  created_at: "2023-10-25T03:36:24.000000Z"
+                  updated_at: "2023-10-25T03:36:24.000000Z"
+                  deleted_at: null
+                  invitation:
+                    id: 6
+                    status: ACTIVE
+                    slug: ContohSlug333
+                    is_custom_domain: 0
+                    custom_domain: null
+                    user_id: 3
+                    order_id: "9a736a7f-29f4-48d4-9903-ee3517da03fc"
+                    invitation_type_id: 1
+                    created_at: "2023-10-25T03:36:28.000000Z"
+                    updated_at: "2023-11-05T11:57:53.000000Z"
+                    deleted_at: null
+                    wedding:
+                      id: 6
+                      title: Judul Wedding
+                      location: Lokasi Wedding
+                      location_gmap: Lokasi Google Maps
+                      rekening_gift: Nomor Rekening Gift
+                      created_by: null
+                      updated_by: null
+                      deleted_by: null
+                      invitation_id: 6
+                      created_at: "2023-10-25T03:36:34.000000Z"
+                      updated_at: "2023-11-05T11:57:53.000000Z"
+                      deleted_at: null
+                      groom:
+                        id: 6
+                        name: Nama Groom
+                        father: Ayah Groom
+                        mother: Ibu Groom
+                        address: Alamat Groom
+                        instagram: Instagram Groom
+                        image: URL Gambar Groom
+                        wedding_id: 6
+                        created_at: "2023-10-25T03:36:35.000000Z"
+                        updated_at: "2023-11-05T11:57:53.000000Z"
+                        deleted_at: null
+                      bride:
+                        id: 6
+                        name: Nama Bride
+                        father: Ayah Bride
+                        mother: Ibu Bride
+                        address: Alamat Bride
+                        instagram: Instagram Bride
+                        image: URL Gambar Bride
+                        wedding_id: 6
+                        created_at: "2023-10-25T03:36:36.000000Z"
+                        updated_at: "2023-11-05T11:57:53.000000Z"
+                        deleted_at: null
+                      event:
+                        - id: 16
+                          name: Akad Nikah
+                          date: "2023-12-01 14:00:00"
+                          start_time: "14:00:00"
+                          end_time: "16:00:00"
+                          place: Tempat Akad
+                          wedding_id: 6
+                          created_at: "2023-10-25T03:36:47.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                        - id: 17
+                          name: Resepsi
+                          date: "2023-12-02 18:00:00"
+                          start_time: "18:00:00"
+                          end_time: "22:00:00"
+                          place: Tempat Resepsi
+                          wedding_id: 6
+                          created_at: "2023-10-25T03:36:47.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                        - id: 18
+                          name: Unduh Mantu
+                          date: "2023-12-03 12:00:00"
+                          start_time: "12:00:00"
+                          end_time: "15:00:00"
+                          place: Tempat Unduh Mantu
+                          wedding_id: 6
+                          created_at: "2023-10-25T03:36:47.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                      love_story:
+                        - id: 316
+                          year: Tahun 2
+                          story: Story tahun 2
+                          image: love_story_image2
+                          wedding_id: 6
+                          created_at: "2023-11-05T11:57:53.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                        - id: 317
+                          year: Tahun 3
+                          story: Story tahun 3
+                          image: love_story_image3
+                          wedding_id: 6
+                          created_at: "2023-11-05T11:57:53.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                      gallery:
+                        - id: 268
+                          file: URLImageGallery1
+                          type: null
+                          wedding_id: 6
+                          created_at: "2023-11-05T11:57:53.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                        - id: 269
+                          file: URLImageGallery2
+                          type: null
+                          wedding_id: 6
+                          created_at: "2023-11-05T11:57:53.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+                        - id: 270
+                          file: URLImageGallery3
+                          type: null
+                          wedding_id: 6
+                          created_at: "2023-11-05T11:57:53.000000Z"
+                          updated_at: "2023-11-05T11:57:53.000000Z"
+                          deleted_at: null
+              guests:
+                - id: 20
+                  name: Mr. Reggie Auer
+                  description: Eveniet in qui ipsam
+                  address: Aliquid dolores suscipit dolores tenetur nihil. Doloremque vel necessitatibus iusto qui. At vitae exercitationem harum et dolorem enim. Aut error nobis voluptatum et maxime fugiat numquam dolor.
+                  is_invited: 1
+                  no_whats_app: "+18503494834"
+                  email: "nwalsh@vandervort.com"
+                  invitation_id: 6
+                  created_by: null
+                  updated_by: null
+                  deleted_by: null
+                  created_at: "2023-10-25T03:36:37.000000Z"
+                  updated_at: "2023-11-05T11:57:53.000000Z"
                   deleted_at: null
       '404':
         description: Wedding not found
@@ -642,4 +775,134 @@ WeddingOrder_OrderID:
         description: Validation error
       '500':
         description: Failed to update the wedding
+
+WeddingInvitation_Slug:
+  get:
+    tags:
+      - Wedding
+    summary: Get a wedding invitation by slug
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Wedding retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitation wedding retrieved successfully
+              data:
+                invitation:
+                  id: 6
+                  status: ACTIVE
+                  slug: ContohSlug333
+                  is_custom_domain: 0
+                  custom_domain: null
+                  user_id: 3
+                  order_id: "9a736a7f-29f4-48d4-9903-ee3517da03fc"
+                  invitation_type_id: 1
+                  created_at: "2023-10-25T03:36:28.000000Z"
+                  updated_at: "2023-11-05T11:57:53.000000Z"
+                  deleted_at: null
+                  wedding:
+                    id: 6
+                    title: Judul Wedding
+                    location: Lokasi Wedding
+                    location_gmap: Lokasi Google Maps
+                    rekening_gift: Nomor Rekening Gift
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    invitation_id: 6
+                    created_at: "2023-10-25T03:36:34.000000Z"
+                    updated_at: "2023-11-05T11:57:53.000000Z"
+                    deleted_at: null
+                    event:
+                      - id: 16
+                        name: Akad Nikah
+                        date: "2023-12-01 14:00:00"
+                        start_time: "14:00:00"
+                        end_time: "16:00:00"
+                        place: Tempat Akad
+                        wedding_id: 6
+                        created_at: "2023-10-25T03:36:47.000000Z"
+                        updated_at: "2023-11-05T11:57:53.000000Z"
+                        deleted_at: null
+                      - id: 17
+                        name: Resepsi
+                        date: "2023-12-02 18:00:00"
+                        start_time: "18:00:00"
+                        end_time: "22:00:00"
+                        place: Tempat Resepsi
+                        wedding_id: 6
+                        created_at: "2023-10-25T03:36:47.000000Z"
+                        updated_at: "2023-11-05T11:57:53.000000Z"
+                        deleted_at: null
+                      - id: 18
+                        name: Unduh Mantu
+                        date: "2023-12-03 12:00:00"
+                        start_time: "12:00:00"
+                        end_time: "15:00:00"
+                        place: Tempat Unduh Mantu
+                        wedding_id: 6
+                        created_at: "2023-10-25T03:36:47.000000Z"
+                        updated_at: "2023-11-05T11:57:53.000000Z"
+                        deleted_at: null
+                    groom:
+                      id: 6
+                      name: Nama Groom
+                      father: Ayah Groom
+                      mother: Ibu Groom
+                      address: Alamat Groom
+                      instagram: Instagram Groom
+                      image: URL Gambar Groom
+                      wedding_id: 6
+                      created_at: "2023-10-25T03:36:35.000000Z"
+                      updated_at: "2023-11-05T11:57:53.000000Z"
+                      deleted_at: null
+                    bride:
+                      id: 6
+                      name: Nama Bride
+                      father: Ayah Bride
+                      mother: Ibu Bride
+                      address: Alamat Bride
+                      instagram: Instagram Bride
+                      image: URL Gambar Bride
+                      wedding_id: 6
+                      created_at: "2023-10-25T03:36:36.000000Z"
+                      updated_at: "2023-11-05T11:57:53.000000Z"
+                      deleted_at: null
+                  order:
+                    id: "9a736a7f-29f4-48d4-9903-ee3517da03fc"
+                    status: PAID
+                    user_id: 5
+                    package_id: 3
+                    theme_id: 3
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
+                    deleted_at: null
+                    package:
+                      id: 3
+                      name: Gold
+                      price: "Rp. 500.000"
+                      description: Paket mewah lengkap untuk undanganmu
+                      features: "<li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li><li>Love Stories</li><li>Wishes & Gifts</li><li>Save to Google Calendar</li"
+                      created_by: null
+                      updated_by: null
+                      deleted_by: null
+                      created_at: "2023-10-25T03:36:24.000000Z"
+                      updated_at: "2023-10-25T03:36:24.000000Z"
+                      deleted_at: null
+                  g_calendar: "https://www.google.com/calendar/render?action=TEMPLATE&text=Judul Wedding&ctz=Asia/Jakarta&dates=20231201T140000/20231201T160000%7D&details=Acara Pernikahan Nama Groom dan Nama Bride&location=Lokasi Wedding&sprop=&sprop=name:"
+
 

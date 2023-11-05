@@ -128,6 +128,10 @@ Route::prefix('weddings-order')->group(function () {
     });
 });
 
+Route::prefix('weddings-invitation')->group(function () {
+    Route::get('/{slug}', [WeddingController::class, 'get_invitation_by_slug']);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Example

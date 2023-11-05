@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 // Models
 use App\Models\Guest;
 use App\Models\Order;
+use App\Models\Invitation;
 use App\Models\Wedding;
 use App\Models\WeddingLoveStory;
 
@@ -312,5 +313,54 @@ class WeddingController extends Controller
         } catch (\Exception $e) {
             return $this->jsonResponse(null, 'Failed to update the wedding', [$e->getMessage()], false, 500);
         }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Wedding - Invitation
+    |--------------------------------------------------------------------------
+    */
+
+    public function get_invitation_by_slug($slug)
+    {
+        try {
+            $invitation = Invitation::get_by_slug($slug);
+
+            if (!$invitation) {
+                return $this->jsonResponse(null, 'Invitation Wedding not found', [], false, 404);
+            }
+
+            $g_calendar =  $this->get_url_add_g_calendar($invitation->wedding);
+
+            $data = [
+                "invitation" => $invitation,
+                "wedding" => $invitation->wedding,
+                "package" => $invitation->order->package,
+                "g_calendar" => $g_calendar,
+            ];
+
+            return $this->jsonResponse($data, 'Invitation wedding retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->jsonResponse(null, 'Failed to retrieve the invitation wedding', [$e->getMessage()], false, 500);
+        }
+    }
+
+    public function get_url_add_g_calendar($wedding)
+    {
+        
+        $date = Carbon::createFromDate($wedding->event[0]->date)->format('Ymd');
+        $start_time = Carbon::createFromTimeString($wedding->event[0]->start_time)->format('His');
+        $end_time = Carbon::createFromTimeString($wedding->event[0]->end_time)->format('His');
+        
+        $start_date = $date . "T" . $start_time;
+        $end_date = $date . "T" . $end_time;
+
+        return "https://www.google.com/calendar/render?action=TEMPLATE&text=" . 
+                $wedding->title . 
+                "&ctz=Asia/Jakarta" . 
+                "&dates=" . $start_date . "/" . $end_date .
+                "%7D&details=" . "Acara Pernikahan ". $wedding->groom->name . " dan ". $wedding->bride->name . 
+                "&location=" . $wedding->location . "&sprop=&sprop=name:"; 
+    
     }
 }

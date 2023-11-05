@@ -59,4 +59,7 @@ paths:
   /api/weddings-order/{order_id}:
     $ref: './wedding.yaml#/WeddingOrder_OrderID'
   
+  /api/weddings-invitation/{slug}:
+    $ref: './wedding.yaml#/WeddingInvitation_Slug'
+  
 
