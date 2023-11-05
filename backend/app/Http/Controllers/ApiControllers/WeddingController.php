@@ -331,10 +331,15 @@ class WeddingController extends Controller
             }
 
             $g_calendar =  $this->get_url_add_g_calendar($invitation->wedding);
+            $wedding = $invitation->wedding;
+            $love_story = $wedding->love_story;
+            $gallery = $wedding->gallery;
+            $wish = $wedding->wish;
+            $gift = $wedding->gift;
 
             $data = [
                 "invitation" => $invitation,
-                "wedding" => $invitation->wedding,
+                // "wedding" => $invitation->wedding,
                 "package" => $invitation->order->package,
                 "g_calendar" => $g_calendar,
             ];
