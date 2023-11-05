@@ -9,6 +9,17 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+  schemas:
+    Package:
+      $ref: './package.yaml#/components/schemas/Package'
+    Theme:
+      $ref: './theme.yaml#/components/schemas/Theme'
+    Order:
+      $ref: './order.yaml#/components/schemas/Order'
+    Wedding:
+      $ref: './wedding.yaml#/components/schemas/Wedding'
+    Wish:
+      $ref: './wish.yaml#/components/schemas/Wish'
 
 paths:
   /api/login:
@@ -40,6 +51,27 @@ paths:
   
   /api/orders-user/{user_id}:
     $ref: './order.yaml#/OrderUser_UserID'
+  
+  # /api/weddings:
+  #   $ref: './wedding.yaml#/Weddings'
+
+  # /api/weddings/{id}:
+  #   $ref: './wedding.yaml#/Wedding_id'
+  
+  /api/weddings-order/{order_id}:
+    $ref: './wedding.yaml#/WeddingOrder_OrderID'
+  
+  /api/weddings-invitation/{slug}:
+    $ref: './wedding.yaml#/WeddingInvitation_Slug'
+  
+  /api/wishes:
+    $ref: './wish.yaml#/Wishes'
+
+  /api/wishes/{id}:
+    $ref: './wish.yaml#/Wish_id'
+
+  /api/wishes-wedding/{wedding_id}:
+    $ref: './wish.yaml#/WishesWedding_WeddingID'
 
   /api/rsvps:
     $ref: './rsvp.yaml#/Rsvps'
@@ -49,3 +81,5 @@ paths:
   
   /api/rsvps-invitation/{invitation_id}:
     $ref: './rsvp.yaml#/RsvpInvitation_InvitationID'
+  
+

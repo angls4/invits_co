@@ -8,6 +8,8 @@ use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
+use App\Http\Controllers\ApiControllers\WeddingController;
+use App\Http\Controllers\ApiControllers\WishController;
 use App\Http\Controllers\ApiControllers\RsvpController;
 
 /*
@@ -99,6 +101,58 @@ Route::prefix('orders-user')->group(function () {
 */
 Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCallback'])->name('midtransCallback');
 
+/*
+|--------------------------------------------------------------------------
+| Wedding
+|--------------------------------------------------------------------------
+*/
+Route::prefix('weddings')->group(function () {
+    // Route::get('/', [WeddingController::class, 'index']);
+    // Route::post('/', [WeddingController::class, 'store']);
+
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+
+    });
+    
+    // Auth: Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        // Route::put('/{id}', [WeddingController::class, 'update']);
+        // Route::delete('/{id}', [WeddingController::class, 'destroy']);
+    });
+});
+
+Route::prefix('weddings-order')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
+        Route::post('/{order_id}', [WeddingController::class, 'update_by_order_id']);
+    });
+});
+
+Route::prefix('weddings-invitation')->group(function () {
+    Route::get('/{slug}', [WeddingController::class, 'get_invitation_by_slug']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Wish
+|--------------------------------------------------------------------------
+*/
+Route::prefix('wishes')->group(function () {
+    Route::post('/', [WishController::class, 'store']);
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{id}', [WishController::class, 'show']);
+        Route::delete('/{id}', [WishController::class, 'destroy']);
+    });
+});
+
+Route::prefix('wishes-wedding')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{wedding_id}', [WishController::class, 'get_by_wedding_id']);
+    });
+});
 
 
 /*
