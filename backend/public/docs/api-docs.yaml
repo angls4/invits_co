@@ -40,3 +40,12 @@ paths:
   
   /api/orders-user/{user_id}:
     $ref: './order.yaml#/OrderUser_UserID'
+
+  /api/rsvps:
+    $ref: './rsvp.yaml#/Rsvps'
+
+  /api/rsvps/{id}:
+    $ref: './rsvp.yaml#/Rsvp_id'
+  
+  /api/rsvps-invitation/{invitation_id}:
+    $ref: './rsvp.yaml#/RsvpInvitation_InvitationID'
