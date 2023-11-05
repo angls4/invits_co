@@ -72,5 +72,14 @@ paths:
 
   /api/wishes-wedding/{wedding_id}:
     $ref: './wish.yaml#/WishesWedding_WeddingID'
+
+  /api/rsvps:
+    $ref: './rsvp.yaml#/Rsvps'
+
+  /api/rsvps/{id}:
+    $ref: './rsvp.yaml#/Rsvp_id'
+  
+  /api/rsvps-invitation/{invitation_id}:
+    $ref: './rsvp.yaml#/RsvpInvitation_InvitationID'
   
 

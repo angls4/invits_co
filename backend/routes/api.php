@@ -10,6 +10,7 @@ use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
 use App\Http\Controllers\ApiControllers\WeddingController;
 use App\Http\Controllers\ApiControllers\WishController;
+use App\Http\Controllers\ApiControllers\RsvpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,6 +154,28 @@ Route::prefix('wishes-wedding')->group(function () {
     });
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Rsvp
+|--------------------------------------------------------------------------
+*/
+Route::prefix('rsvps')->group(function () {
+    Route::post('/', [RsvpController::class, 'store']);
+
+    // Auth
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{id}', [RsvpController::class, 'show']);
+        Route::delete('/{id}', [RsvpController::class, 'destroy']);
+    });
+});
+
+Route::prefix('rsvps-invitation')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{invitation_id}', [RsvpController::class, 'get_by_invitation_id']);
+    });
+});
 
 /*
 |--------------------------------------------------------------------------

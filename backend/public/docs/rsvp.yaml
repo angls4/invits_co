@@ -1,0 +1,234 @@
+components:
+  schemas:
+    Rsvp:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        invitation_id:
+          type: integer
+        amount_guest:
+          type: integer
+        is_attend:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    ValidationErrors:
+      type: object
+      example: {}
+
+Rsvps:
+  # get:
+  #   tags:
+  #     - Rsvp
+  #   summary: Get all Rsvps
+  #   responses:
+  #     '200':
+  #       description: Successful response
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Rsvps retrieved successfully
+  #             data:
+  #               rsvps:
+  #                 - id: 1
+  #                   name: John Doe
+  #                   invitation_id: 123
+  #                   amount_guest: 2
+  #                   is_attend: true
+  #                   created_at: "2023-10-30T12:34:56.000000Z"
+  #                   updated_at: "2023-10-30T12:34:56.000000Z"
+  #                 - id: 2
+  #                   name: Jane Smith
+  #                   invitation_id: 124
+  #                   amount_guest: 1
+  #                   is_attend: false
+  #                   created_at: "2023-10-29T10:00:00.000000Z"
+  #                   updated_at: "2023-10-29T10:00:00.000000Z"
+
+  post:
+    tags:
+      - Rsvp
+    summary: Create a new Rsvp
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: John Doe
+            invitation_id: 12
+            amount_guest: 2
+            is_attend: "true"
+    responses:
+      '201':
+        description: Rsvp created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Rsvp created successfully
+              data:
+                rsvp:
+                  id: 3
+                  name: John Doe
+                  invitation_id: 123
+                  amount_guest: 2
+                  is_attend: true
+                  created_at: "2023-10-31T09:00:00.000000Z"
+                  updated_at: "2023-10-31T09:00:00.000000Z"
+
+Rsvp_id:
+  get:
+    tags:
+      - Rsvp
+    summary: Get an Rsvp by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Rsvp retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Rsvp retrieved successfully
+              data:
+                rsvp:
+                  id: 1
+                  name: John Doe
+                  invitation_id: 123
+                  amount_guest: 2
+                  is_attend: true
+                  created_at: "2023-10-30T12:34:56.000000Z"
+                  updated_at: "2023-10-30T12:34:56.000000Z"
+      '404':
+        description: Rsvp not found
+
+  # put:
+  #   tags:
+  #     - Rsvp
+  #   summary: Update an Rsvp by ID
+  #   parameters:
+  #     - name: id
+  #       in: path
+  #       required: true
+  #       schema:
+  #         type: integer
+  #   requestBody:
+  #     required: true
+  #     content:
+  #       application/json:
+  #         example:
+  #           name: Updated Name
+  #           invitation_id: 125
+  #           amount_guest: 3
+  #           is_attend: false
+  #   responses:
+  #     '200':
+  #       description: Rsvp updated successfully
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Rsvp updated successfully
+  #             data:
+  #               rsvp:
+  #                 id: 1
+  #                 name: Updated Name
+  #                 invitation_id: 125
+  #                 amount_guest: 3
+  #                 is_attend: false
+  #                 created_at: "2023-10-30T12:34:56.000000Z"
+  #                 updated_at: "2023-10-31T10:00:00.000000Z"
+  #     '404':
+  #       description: Rsvp not found
+
+  delete:
+    tags:
+      - Rsvp
+    summary: Delete an Rsvp by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Rsvp deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Rsvp deleted successfully
+              data: null
+      '404':
+        description: Rsvp not found
+
+RsvpInvitation_InvitationID:
+  get:
+    tags:
+      - Rsvp
+    summary: Get Rsvps by Invitation ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Rsvps by invitation ID retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Rsvps by invitation ID retrieved successfully
+              data:
+                invitation:
+                  id: 123
+                  name: Wedding Invitation
+                  created_at: "2023-10-29T14:00:00.000000Z"
+                  updated_at: "2023-10-29T14:00:00.000000Z"
+                rsvps:
+                  - id: 1
+                    name: John Doe
+                    invitation_id: 123
+                    amount_guest: 2
+                    is_attend: true
+                    created_at: "2023-10-30T12:34:56.000000Z"
+                    updated_at: "2023-10-30T12:34:56.000000Z"
+                  - id: 2
+                    name: Jane Smith
+                    invitation_id: 123
+                    amount_guest: 1
+                    is_attend: false
+                    created_at: "2023-10-29T10:00:00.000000Z"
+                    updated_at: "2023-10-29T10:00:00.000000Z"
+              package:
+                id: 1
+                name: Bronze
+                price: "Rp. 100.000"
+                description: "Basic wedding invitation package"
+                features: "<li>Basic wedding information</li>"
