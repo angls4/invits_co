@@ -80,11 +80,11 @@ Login:
               email:
                 type: string
                 format: email
-                example: user@example.com
+                example: user@user.com
               password:
                 type: string
                 format: password
-                example: password123
+                example: secret
     responses:
       '200':
         description: Login berhasil

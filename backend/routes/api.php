@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
 use App\Http\Controllers\ApiControllers\WeddingController;
+use App\Http\Controllers\ApiControllers\WishController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,27 @@ Route::prefix('weddings-order')->group(function () {
 Route::prefix('weddings-invitation')->group(function () {
     Route::get('/{slug}', [WeddingController::class, 'get_invitation_by_slug']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Wish
+|--------------------------------------------------------------------------
+*/
+Route::prefix('wishes')->group(function () {
+    Route::post('/', [WishController::class, 'store']);
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{id}', [WishController::class, 'show']);
+        Route::delete('/{id}', [WishController::class, 'destroy']);
+    });
+});
+
+Route::prefix('wishes-wedding')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+        Route::get('/{wedding_id}', [WishController::class, 'get_by_wedding_id']);
+    });
+});
+
 
 /*
 |--------------------------------------------------------------------------

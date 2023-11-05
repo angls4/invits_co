@@ -1,0 +1,179 @@
+components:
+  schemas:
+    Wish:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        from:
+          type: string
+        wish:
+          type: string
+        wedding_id:
+          type: integer
+
+Wishes:
+  post:
+    tags:
+      - Wish
+    summary: Create a new wish
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: John Doe
+            from: Jane Smith
+            wish: "Best wishes for a happy marriage!"
+            anonymous: true
+            wedding_id: 1
+    responses:
+      '201':
+        description: Wish created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wish created successfully
+              data:
+                wish:
+                  id: 3
+                  name: "John Doe"
+                  from: "Collage friend"
+                  wish: "Best wishes for a happy marriage!"
+                  wedding_id: 1
+
+Wish_id:
+  get:
+    tags:
+      - Wish
+    summary: Get a wish by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Wish retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wish retrieved successfully
+              data:
+                wish:
+                  id: 1
+                  name: "John Doe"
+                  from: "Jane Smith"
+                  wish: "Best wishes for a happy marriage!"
+                  wedding_id: 1
+      '404':
+        description: Wish not found
+
+  # put:
+  #   tags:
+  #     - Wish
+  #   summary: Update a wish by ID
+  #   parameters:
+  #     - name: id
+  #       in: path
+  #       required: true
+  #       schema:
+  #         type: integer
+  #   requestBody:
+  #     required: true
+  #     content:
+  #       application/json:
+  #         example:
+  #           name: Updated Name
+  #           from: Updated From
+  #           wish: "Updated wish for the couple"
+  #           wedding_id: 2
+  #   responses:
+  #     '200':
+  #       description: Wish updated successfully
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Wish updated successfully
+  #             data:
+  #               wish:
+  #                 id: 1
+  #                 name: "Updated Name"
+  #                 from: "Updated From"
+  #                 wish: "Updated wish for the couple"
+  #                 wedding_id: 2
+  #     '404':
+  #       description: Wish not found
+
+  delete:
+    tags:
+      - Wish
+    summary: Delete a wish by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Wish deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Wish deleted successfully
+              data: null
+      '404':
+        description: Wish not found
+
+WishesWedding_WeddingID:
+  get:
+      tags:
+        - Wish
+      summary: Get wishes by wedding ID
+      parameters:
+        - name: wedding_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Wishes by wedding id retrieved successfully
+          content:
+            application/json:
+              example:
+                success: true
+                errors: []
+                message: Wishes by wedding id retrieved successfully
+                data:
+                  wishes:
+                    - id: 1
+                      name: "John Doe"
+                      from: "Collage Friend"
+                      wish: "Best wishes for a happy marriage!"
+                      wedding_id: 1
+                    - id: 2
+                      name: "Anonymous"
+                      from: null
+                      wish: "Congratulations on your wedding!"
+                      wedding_id: 1
+        '404':
+          description: No wishes found for the given wedding ID
