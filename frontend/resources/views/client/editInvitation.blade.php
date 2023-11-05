@@ -17,6 +17,9 @@
 @endpush
 
 <main class="grow">
+    @if(session()->has('success'))
+     <script>alert("{{session('success')}}")</script>   
+    @endif
     <form action="{{ route("client.save.editInvitation", $data['order']->id) }}" method="post"
         enctype="multipart/form-data">
         @csrf
@@ -264,12 +267,12 @@
                     <div class="sm:w-1/3">
                         <span class="font-semibold">Foto</span>
                     </div>
-                    <div class="flex flex-col gap-1.5 sm:w-2/3 sm:flex-row">
-                        <div class="sm:w-1/3">
-                            <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px] rounded" src="{{ asset($data['order']->invitation->wedding->groom->image) }}" alt="">
+                    <div class="flex flex-col gap-3 sm:w-2/3 lg:flex-row">
+                        <div class="lg:w-full max-w-xs">
+                            <img class="w-full object-cover aspect-square rounded" src="{{ asset($data['order']->invitation->wedding->groom->image) }}" alt="">
                         </div>
-                        <div class="sm:w-2/3">
-                            <input name="groom_image" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
+                        <div class="lg:w-full">
+                            <input name="groom_image" value="{{ asset($data['order']->invitation->wedding->groom->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
                         </div>
                     </div>
                 </div>
@@ -351,12 +354,12 @@
                     <div class="sm:w-1/3">
                         <span class="font-semibold">Foto</span>
                     </div>
-                    <div class="flex flex-col gap-1.5 sm:w-2/3 sm:flex-row">
-                        <div class="sm:w-1/3">
-                            <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px] rounded" src="{{ asset($data['order']->invitation->wedding->bride->image) }}" alt="">
+                    <div class="flex flex-col gap-3 sm:w-2/3 lg:flex-row">
+                        <div class="lg:w-full max-w-xs">
+                            <img class="w-full object-cover aspect-square rounded" src="{{ asset($data['order']->invitation->wedding->bride->image) }}" alt="">
                         </div>
-                        <div class="sm:w-2/3">
-                            <input name="bride_image" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
+                        <div class="lg:w-full">
+                            <input name="bride_image" value="{{ asset($data['order']->invitation->wedding->bride->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
                         </div>
                     </div>
                 </div>
@@ -500,9 +503,10 @@
                     <h3 class="mb-0 text-xl font-medium">Love Stories</h3>
                     <p>Stories of your love</p>
                 </div>
-                <?php $i = 1; ?>
+                <?php $i = 0; ?>
                 {{-- <template x-for="i in eventsCount"> --}}
                 @foreach ($data['order']->invitation->wedding->love_story as $love_story)
+                    <input type="hidden" name="love_stories[{{$i}}][id]" value={{$love_story->id}}>
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Story {{ $i }}</span>
@@ -510,7 +514,7 @@
                         <div class="sm:w-2/3">
                             <div>
                                 <span class="font-semibold">Tahun</span>
-                                <input type="number" name="year[]" value="{{ $love_story->year }}"
+                                <input type="number" name="love_stories[{{$i}}][year]" value="{{ $love_story->year }}"
                                 
                                     class="mt-1.5 block min-h-[auto] rounded border border-gray-300 py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear motion-reduce:transition-none w-full"
                                     placeholder="Masukkan Tahun Kejadian" :disabled="edit ? false : true"
@@ -519,18 +523,18 @@
                             <div class="mt-4">
                                 <span class="font-semibold">Kisah</span>
                                 <textarea :disabled="edit ? false : true" :class="edit == false && 'bg-neutral-100 '" id="message"
-                                    name="story[]" rows="4" value="{{ $love_story->story }}"
+                                    name="love_stories[{{$i}}][story]" rows="4" value="{{ $love_story->story }}"
                                     class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 mt-1.5"
                                     placeholder="Ceritakan Kisahmu Disini...">{{ $love_story->story }}</textarea>
                             </div>
                             <div class="mt-4">
                                 <span class="font-semibold">Gambar</span>
-                                <div class="flex flex-col gap-1.5 sm:flex-row">
-                                    <div class="sm:w-1/3">
-                                        <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px] rounded" src="{{ asset($love_story->image) }}" alt="">
+                                <div class="flex flex-col gap-3 lg:flex-row">
+                                    <div class="lg:w-full max-w-xs">
+                                        <img class="w-full object-cover aspect-square rounded" src="{{ asset($love_story->image) }}" alt="">
                                     </div>
-                                    <div class="sm:w-2/3">
-                                        <input name="love_story_image[]" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
+                                    <div class="lg:w-full">
+                                        <input name="love_stories[{{$i}}][image]" value="{{ asset($love_story->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
                                     </div>
                                 </div>
                             </div>
@@ -560,22 +564,23 @@
                     <p>Upload your romantic images</p>
                 </div>
                 <?php
-                $i = 1;
+                $i = 0;
                 ?>
                 {{-- <template x-for="i in eventsCount"> --}}
                 @foreach ($data['order']->invitation->wedding->gallery as $gallery)
+                <input type="hidden" name="galleries[{{$i}}][id]" value={{$gallery->id}}>
                 <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                     <div class="sm:w-1/3">
                         <span class="font-bold">Image {{ $i }}</span>
                     </div>
                     <div class="sm:w-2/3">
                         <div class="mt-4">
-                            <div class="flex flex-col gap-1.5 sm:flex-row">
-                                <div class="sm:w-1/3">
-                                    <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px] rounded" src="{{ asset($gallery->file) }}" alt="">
+                            <div class="flex flex-col gap-3 lg:flex-row">
+                                <div class="lg:w-full max-w-xs">
+                                    <img class="w-full object-cover aspect-square rounded" src="{{ asset($gallery->file) }}" alt="">
                                 </div>
-                                <div class="sm:w-2/3">
-                                    <input name="gallery_image[]" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
+                                <div class="lg:w-full">
+                                    <input name="galleries[{{$i}}][file]" value="{{ asset($gallery->file) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
                                 </div>
                             </div>
                         </div>
