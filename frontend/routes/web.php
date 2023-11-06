@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\InvitationController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\RsvpController;
+use App\Http\Controllers\WishController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +45,9 @@ Route::middleware('check.token')->group(function (){
                     ->name('logout');
     
     Route::prefix('client')->name('client.')->group(function () {
+        // $controller_invitation = 'Modules\Invitation\Http\Controllers\Frontend\InvitationsController';
         // $controller_profile = 'App\Http\Controllers\ProfileController';
         // $controller_order = 'Modules\Order\Http\Controllers\Frontend\OrdersController';
-        // $controller_invitation = 'Modules\Invitation\Http\Controllers\Frontend\InvitationsController';
         // $controller_guest = 'Modules\Invitation\Http\Controllers\Frontend\GuestController';
         // $controller_rsvp = 'Modules\Invitation\Http\Controllers\Frontend\RsvpController';
         
@@ -55,8 +57,8 @@ Route::middleware('check.token')->group(function (){
         // Route::view('/bills', 'user/order/detail')->name('bills');
 
         // Client Invitation
-        Route::get('/invitations/{id}', [InvitationController::class, 'show'])->name(('editInvitation'));
-        Route::post('/save/invitations/{id}', [InvitationController::class, 'edit'])->name(('save.editInvitation'));
+        Route::get('/invitations/{id}', [InvitationController::class, 'edit'])->name(('editInvitation'));
+        Route::post('/save/invitations/{id}', [InvitationController::class, 'update'])->name(('save.editInvitation'));
 
         // // Client Guest
         // Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
@@ -75,3 +77,8 @@ Route::middleware('check.token')->group(function (){
         // Route::post('/{id}/changePassword', $controller_profile . '@updatePassword')->name('updatePassword');
     });
 });
+
+// invitation
+Route::get('/{slug}', [InvitationController::class, 'show'])->name(('showInvitation'));
+Route::post('/rsvp', [RsvpController::class, 'store'])->name(('rsvp'));
+Route::post('/wishes', [WishController::class, 'store'])->name(('sendWish'));
