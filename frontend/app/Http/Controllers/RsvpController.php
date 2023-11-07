@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 
 class RsvpController extends Controller
@@ -10,9 +12,35 @@ class RsvpController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        //
+        $response = Http::withToken(session('api_token'))->get(env('API_URL').'rsvps-invitation/'.decode_id($id));
+        if($response->failed()) {
+            return back()->withErrors("Couldn't load orders");
+        }
+        $json = $response->object();
+
+        $title = "Rsvp List";
+        $rsvps = collect($json->data->rsvps);
+
+        $perPage = 14;
+        $currentPage = request('page', 1);
+        $startIndex = ($currentPage - 1) * $perPage;
+        $slicedData = $rsvps->slice($startIndex, $perPage);
+
+        $sliced_rsvps = new LengthAwarePaginator($slicedData, $rsvps->count(), $perPage, $currentPage, [
+            'path' => route('client.rsvp', $id),
+        ]);
+
+        $data = [
+            'invitation' => $json->data->invitation,
+            'rsvps' => $sliced_rsvps,
+            'package' => $json->data->package
+        ];
+
+        // dd($data);
+
+        return view("client.rsvp", compact('title', 'data'));
     }
 
     /**
