@@ -20,6 +20,8 @@ components:
       $ref: './wedding.yaml#/components/schemas/Wedding'
     Wish:
       $ref: './wish.yaml#/components/schemas/Wish'
+    Guest:
+      $ref: './guest.yaml#/components/schemas/Guest'
 
 paths:
   /api/login:
