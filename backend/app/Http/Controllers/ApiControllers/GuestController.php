@@ -84,12 +84,12 @@ class GuestController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'nullable',
             'description' => 'nullable',
             'address' => 'nullable',
             'no_whats_app' => 'nullable',
             'email' => 'nullable|email',
-            'invitation_id' => 'required|exists:invitations,id',
+            'invitation_id' => 'nullable|exists:invitations,id',
         ]);
 
         if ($validator->fails()) {
