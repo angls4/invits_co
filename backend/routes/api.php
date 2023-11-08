@@ -185,10 +185,10 @@ Route::prefix('rsvps-invitation')->group(function () {
 */
 Route::prefix('guests')->group(function () {
     Route::get('/', [GuestController::class, 'index']);
-    Route::post('/', [GuestController::class, 'store']);
-
+    
     // Auth
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/', [GuestController::class, 'store']);
         Route::get('/{id}', [GuestController::class, 'show']);
         Route::put('/{id}', [GuestController::class, 'update']);
         Route::delete('/{id}', [GuestController::class, 'destroy']);

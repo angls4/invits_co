@@ -68,6 +68,8 @@ Guests:
     tags:
       - Guest
     summary: Create a new Guest
+    security:
+      - BearerAuth: []
     requestBody:
       required: true
       content:
@@ -143,6 +145,8 @@ Guest_id:
     tags:
       - Guest
     summary: Update a Guest by ID
+    security:
+      - BearerAuth: []
     parameters:
       - name: id
         in: path
