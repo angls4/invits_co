@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RsvpController;
 use App\Http\Controllers\WishController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvitationController;
@@ -63,7 +64,7 @@ Route::middleware('check.token')->group(function (){
         // // Client Guest
         // Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
         // Route::match(['GET', 'POST'], '/invitations/{id}/guests/edit', $controller_guest . '@editGuest')->name(('guest.edit'));
-        // Route::get('/invitations/{id}/guests', $controller_guest . '@index')->name('guest.index');
+        Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('guest.index');
         // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
         // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
 

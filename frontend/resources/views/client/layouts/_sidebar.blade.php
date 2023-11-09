@@ -54,7 +54,7 @@
 			@if ( request()->is('client/invitations/*') )
 			<a
 				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="">
+				href="{{ route('client.guest.index', encode_id($data)) }}">
 				<i class="ph-fill ph-user-list mr-3 text-[26px]"></i>
 				Tamu
 			</a>
