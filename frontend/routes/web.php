@@ -68,7 +68,7 @@ Route::middleware('check.token')->group(function (){
         // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
 
         // Client RSVP
-        // Route::get('/invitations/{id}/rsvps', $controller_rsvp . '@index')->name('rsvp');
+        Route::get('/invitations/{id}/rsvps', [RsvpController::class, 'index'])->name('rsvp');
 
         // // Client Profile
         // Route::get('/{id}', $controller_profile  . '@show')->name('index');
