@@ -1,5 +1,8 @@
 import "./bootstrap";
 import Alpine from "alpinejs";
+import Splide from "@splidejs/splide";
+import "@splidejs/splide/css";
+import "flowbite";
 
 Alpine.data("navState", () => ({
     navTheme: "",
@@ -20,5 +23,6 @@ Alpine.data("navState", () => ({
 }));
 
 window.Alpine = Alpine;
+window.Splide = Splide;
 
 Alpine.start();

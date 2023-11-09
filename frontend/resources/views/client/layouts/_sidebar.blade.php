@@ -55,13 +55,13 @@
 			<a
 				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
 				href="">
-				<i class="mr-3 fa-solid fa-users fa-lg"></i>
+				<i class="ph-fill ph-user-list mr-3 text-[26px]"></i>
 				Tamu
 			</a>
 			<a
 				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="">
-				<i class="mr-3 fa-solid fa-user-check fa-lg"></i>
+				href="{{ route('client.rsvp', encode_id($data)) }}">
+				<i class="ph-fill ph-list-checks mr-3 text-[26px]"></i>
 				RSVP
 			</a>
 			@endif

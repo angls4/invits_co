@@ -37,6 +37,25 @@ class InvitationController extends Controller
      */
     public function show(string $id)
     {
+        $response = Http::withToken(session('api_token'))->get(env('API_URL').'weddings-invitation/'.$id);
+        if($response->failed()) {
+            return back()->withErrors("Couldn't load invitation");
+        }
+        $json = $response->object();
+
+        $title = "Invitation Detail";
+        $data = collect($json->data);
+
+        // dd($data);
+
+        return view('client.invitation', compact('title', 'data'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Request $request, string $id)
+    {
         $response = Http::withToken(session('api_token'))->get(env('API_URL').'weddings-order/'.$id);
         if($response->failed()) {
             return back()->withErrors("Couldn't load invitation");
@@ -52,9 +71,9 @@ class InvitationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      */
-    public function edit(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         $data = $request->except('_token');
         $old_data = Http::withToken(session('api_token'))->get(env('API_URL').'weddings-order/'.$id)->object()->data;
@@ -97,14 +116,6 @@ class InvitationController extends Controller
         }
 
         return back()->with('success', 'Data berhasil diubah!');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**
