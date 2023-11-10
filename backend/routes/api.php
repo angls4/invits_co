@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Controllers
 use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\UserController;
 use App\Http\Controllers\ApiControllers\SocialLoginController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
@@ -35,6 +36,22 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 Route::post('social-login/{provider}', [SocialLoginController::class, 'handleProvider']);
+
+/*
+|--------------------------------------------------------------------------
+| User
+|--------------------------------------------------------------------------
+*/
+Route::prefix('users')->group(function () {
+    // Auth
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{id}', [UserController::class, 'show']);
+        // Route::post('/', [UserController::class, 'store']);
+        Route::put('/{id}', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
+    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -93,7 +110,7 @@ Route::prefix('orders')->group(function () {
 
 Route::prefix('orders-user')->group(function () {
     // Auth: User
-    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
     });
 });
@@ -144,7 +161,7 @@ Route::prefix('weddings')->group(function () {
 
 Route::prefix('weddings-order')->group(function () {
     // Auth: User
-    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{order_id}', [WeddingController::class, 'get_by_order_id']);
         Route::post('/{order_id}', [WeddingController::class, 'update_by_order_id']);
     });
@@ -169,7 +186,7 @@ Route::prefix('wishes')->group(function () {
 
 Route::prefix('wishes-wedding')->group(function () {
     // Auth: User
-    Route::middleware(['auth:sanctum', 'isUser'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{wedding_id}', [WishController::class, 'get_by_wedding_id']);
     });
 });
