@@ -27,7 +27,17 @@ class InvitationController extends Controller
     public function show($id)
     {
         try {
-            $invitation = Invitation::find($id);
+            $invitation = Invitation::with(
+                'type', 
+                'wedding', 
+                'wedding.groom',
+                'wedding.bride',
+                'wedding.wish',
+                'wedding.gift',
+                'wedding.event',
+                'wedding.love_story',
+                'wedding.gallery',
+            )->find($id);
 
             if (!$invitation) {
                 return $this->jsonResponse(null, 'Invitation not found', [], false, 404);

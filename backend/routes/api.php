@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiControllers\SocialLoginController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
+use App\Http\Controllers\ApiControllers\InvitationController;
 use App\Http\Controllers\ApiControllers\WeddingController;
 use App\Http\Controllers\ApiControllers\WishController;
 use App\Http\Controllers\ApiControllers\RsvpController;
@@ -103,6 +104,22 @@ Route::prefix('orders-user')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::post('/midtrans-callback',  [OrderController::class, 'makeOrderMidtransCallback'])->name('midtransCallback');
+
+/*
+|--------------------------------------------------------------------------
+| Invitation
+|--------------------------------------------------------------------------
+*/
+Route::prefix('invitations')->group(function () {
+    // Auth
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/', [InvitationController::class, 'index']);
+        Route::get('/{id}', [InvitationController::class, 'show']);
+        Route::post('/', [InvitationController::class, 'store']);
+        Route::put('/{id}', [InvitationController::class, 'update']);
+        Route::delete('/{id}', [InvitationController::class, 'destroy']);
+    });
+});
 
 /*
 |--------------------------------------------------------------------------

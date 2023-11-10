@@ -18,6 +18,8 @@ components:
       $ref: './order.yaml#/components/schemas/Order'
     Wedding:
       $ref: './wedding.yaml#/components/schemas/Wedding'
+    Invitation:
+      $ref: './invitation.yaml#/components/schemas/Invitation'
     Wish:
       $ref: './wish.yaml#/components/schemas/Wish'
     Guest:
@@ -56,6 +58,12 @@ paths:
   
   /api/orders-user/{user_id}:
     $ref: './order.yaml#/OrderUser_UserID'
+
+  /api/invitations:
+    $ref: './invitation.yaml#/Invitations'
+
+  /api/invitations/{id}:
+    $ref: './invitation.yaml#/Invitation_id'
   
   # /api/weddings:
   #   $ref: './wedding.yaml#/Weddings'
