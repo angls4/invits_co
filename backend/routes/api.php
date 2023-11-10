@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Controllers
 use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\SocialLoginController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\ApiControllers\RsvpController;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
+Route::post('social-login/{provider}', [SocialLoginController::class, 'handleProvider']);
 
 /*
 |--------------------------------------------------------------------------

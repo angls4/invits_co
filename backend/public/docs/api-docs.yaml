@@ -30,6 +30,9 @@ paths:
 
   /api/logout:
     $ref: './auth.yaml#/Logout'
+  
+  /api/social-login/{provider}:
+    $ref: './auth.yaml#/SocialLogin'
 
   /api/packages:
     $ref: './package.yaml#/Packages'
