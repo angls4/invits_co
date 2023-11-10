@@ -12,6 +12,7 @@ use App\Http\Controllers\ApiControllers\OrderController;
 use App\Http\Controllers\ApiControllers\WeddingController;
 use App\Http\Controllers\ApiControllers\WishController;
 use App\Http\Controllers\ApiControllers\RsvpController;
+use App\Http\Controllers\ApiControllers\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +179,31 @@ Route::prefix('rsvps-invitation')->group(function () {
         Route::get('/{invitation_id}', [RsvpController::class, 'get_by_invitation_id']);
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Guest
+|--------------------------------------------------------------------------
+*/
+Route::prefix('guests')->group(function () {
+    Route::get('/', [GuestController::class, 'index']);
+    
+    // Auth
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/', [GuestController::class, 'store']);
+        Route::get('/{id}', [GuestController::class, 'show']);
+        Route::put('/{id}', [GuestController::class, 'update']);
+        Route::delete('/{id}', [GuestController::class, 'destroy']);
+    });
+});
+
+Route::prefix('guests-invitation')->group(function () {
+    // Auth: User
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/{invitation_id}', [GuestController::class, 'get_by_invitation_id']);
+    });
+});
+
 
 /*
 |--------------------------------------------------------------------------
