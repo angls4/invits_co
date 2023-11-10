@@ -53,14 +53,14 @@
 			</a>
 			@if ( request()->is('client/invitations/*') )
 			<a
-				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.guest.index', encode_id($data)) }}">
+				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
+				href="{{ route('client.invitation.guest.index', encode_id($data)) }}">
 				<i class="ph-fill ph-user-list mr-3 text-[26px]"></i>
 				Tamu
 			</a>
 			<a
-				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.rsvp', encode_id($data)) }}">
+				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
+				href="{{ route('client.invitation.rsvp', encode_id($data)) }}">
 				<i class="ph-fill ph-list-checks mr-3 text-[26px]"></i>
 				RSVP
 			</a>

@@ -29,7 +29,7 @@ class RsvpController extends Controller
         $slicedData = $rsvps->slice($startIndex, $perPage);
 
         $sliced_rsvps = new LengthAwarePaginator($slicedData, $rsvps->count(), $perPage, $currentPage, [
-            'path' => route('client.rsvp', $id),
+            'path' => route('client.invitation.rsvp', $id),
         ]);
 
         $data = [
@@ -37,9 +37,7 @@ class RsvpController extends Controller
             'rsvps' => $sliced_rsvps,
             'package' => $json->data->package
         ];
-
-        // dd($data);
-
+        
         return view("client.rsvp", compact('title', 'data'));
     }
 

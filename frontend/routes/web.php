@@ -58,18 +58,24 @@ Route::middleware('check.token')->group(function (){
         // Route::view('/bills', 'user/order/detail')->name('bills');
 
         // Client Invitation
-        Route::get('/invitations/{id}', [InvitationController::class, 'edit'])->name(('editInvitation'));
-        Route::post('/save/invitations/{id}', [InvitationController::class, 'update'])->name(('save.editInvitation'));
-
-        // // Client Guest
-        // Route::match(['GET', 'POST'], '/invitations/{id}/guests/add', $controller_guest . '@addGuest')->name(('addGuest'));
-        // Route::match(['GET', 'POST'], '/invitations/{id}/guests/edit', $controller_guest . '@editGuest')->name(('guest.edit'));
-        Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('guest.index');
-        // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
-        // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
-
-        // Client RSVP
-        Route::get('/invitations/{id}/rsvps', [RsvpController::class, 'index'])->name('rsvp');
+        Route::name('invitation.')->group(function(){
+            Route::get('/invitations/{id}', [InvitationController::class, 'edit'])->name(('edit'));
+            Route::post('/save/invitations/{id}', [InvitationController::class, 'update'])->name(('save'));
+    
+            // // Client Guest
+            Route::name('guest.')->group(function(){
+                Route::get('/invitations/{id}/guests/add', [GuestController::class, 'create'])->name('add');
+                Route::post('/invitations/{id}/guests/save', [GuestController::class, 'store'])->name('save');
+                Route::get('/invitations/{id}/guests/edit', [GuestController::class, 'edit'])->name('edit');
+                Route::post('/invitations/{id}/guests/update', [GuestController::class, 'update'])->name('update');
+                Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('index');
+                // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
+                // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
+            });
+            
+            // Client RSVP
+            Route::get('/invitations/{id}/rsvps', [RsvpController::class, 'index'])->name('rsvp');
+        });
 
         // // Client Profile
         // Route::get('/{id}', $controller_profile  . '@show')->name('index');

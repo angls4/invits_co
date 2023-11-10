@@ -5,7 +5,7 @@
     $dataCount = count($data);
     $invitationID = 0;
     $alpineData = "guests";
-    $phpData = $data[0]->invitation_id;
+    $phpData = $invitationId;
 @endphp 
 <main class="py-3 bg-white grow">
     <div class="container">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="flex flex-col items-start justify-between gap-2 my-5 sm:items-center items sm:flex-row">
-            <x-button-a href="" type="button"
+            <x-button-a href="{{ route('client.invitation.guest.add', encode_id($invitationId)) }}" type="button"
                 class="sm:order-3 whitespace-nowrap w-full !px-6 !py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-fit bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                 <span class="font-extrabold">Add New</span>
             </x-button-a>
@@ -124,7 +124,7 @@
                                     class="w-9 h-9 mx-1.5 bg-brand-purple-100 text-brand-purple-500 transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-2xl ph ph-whatsapp-logo"></i>
                                 </x-button-a>
-                                <x-button-a href=""
+                                <x-button-a href="{{ route('client.invitation.guest.edit', encode_id($guest->id)) }}"
                                     class="w-9 h-9 mx-1.5 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-2xl ph ph-pencil-simple"></i>
                                 </x-button-a>
@@ -145,6 +145,9 @@
 </main>
 @endsection
 @push('before-scripts')
+    @if (session()->has('success'))
+        <script>alert("{{ session('success') }}")</script>
+    @endif
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('guests', () => ({
