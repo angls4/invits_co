@@ -76,7 +76,7 @@ Themes:
     requestBody:
       required: true
       content:
-        multipart/form-data:
+        application/json:
           schema:
             type: object
             properties:
@@ -101,7 +101,6 @@ Themes:
                 required: true
               img_preview:
                 type: string
-                format: binary
                 required: true
     responses:
       '201':
@@ -172,7 +171,7 @@ Theme_id:
     requestBody:
       required: true
       content:
-        multipart/form-data:
+        application/json:
           schema:
             type: object
             properties:
@@ -197,7 +196,6 @@ Theme_id:
                 required: true
               img_preview:
                 type: string
-                format: binary
                 required: true
     responses:
       '200':

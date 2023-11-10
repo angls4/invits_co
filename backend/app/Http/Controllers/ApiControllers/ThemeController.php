@@ -52,7 +52,7 @@ class ThemeController extends Controller
             'price' => 'required|numeric',
             'description' => 'string',
             'slug' => 'string',
-            'img_preview' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'img_preview' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -61,10 +61,6 @@ class ThemeController extends Controller
 
         try {
             $theme = $request->all();
-
-            if ($request->hasFile('img_preview')) {
-                $theme['img_preview'] = FileTrait::store_file(null, $request->img_preview, 'themes');
-            }
 
             $theme = Theme::create($theme);
 
@@ -92,7 +88,7 @@ class ThemeController extends Controller
             'price' => 'numeric',
             'description' => 'string',
             'slug' => 'string',
-            'img_preview' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'img_preview' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -101,10 +97,6 @@ class ThemeController extends Controller
 
         try {
             $theme_new = $request->all();
-
-            if ($request->hasFile('img_preview')) {
-                $theme_new['img_preview'] = FileTrait::store_file($theme->img_preview, $request->img_preview, 'themes');
-            }
             
             $theme->update($theme_new);
 
