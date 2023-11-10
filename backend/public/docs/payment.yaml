@@ -1,0 +1,84 @@
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id:
+          type: integer
+        total_price:
+          type: number
+        type:
+          type: string
+        transaction_id:
+          type: string
+        transaction_time:
+          type: string
+        transaction_status:
+          type: string
+        user_id:
+          type: integer
+        order_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+
+Total:
+  get:
+    tags:
+      - Payment
+    summary: Get total payments
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Total payments retrieved successfully
+              data:
+                total_payments: "5000000"
+
+TotalPaid:
+  get:
+    tags:
+      - Payment
+    summary: Get total paid payments
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Total paid payments retrieved successfully
+              data:
+                total_payments_paid: "3000000"
+
+TotalUnpaid:
+  get:
+    tags:
+      - Payment
+    summary: Get total unpaid payments
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Total unpaid payments retrieved successfully
+              data:
+                total_payments_unpaid: "2000000"
