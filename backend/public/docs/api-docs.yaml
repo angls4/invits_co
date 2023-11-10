@@ -20,6 +20,8 @@ components:
       $ref: './wedding.yaml#/components/schemas/Wedding'
     Wish:
       $ref: './wish.yaml#/components/schemas/Wish'
+    Guest:
+      $ref: './guest.yaml#/components/schemas/Guest'
 
 paths:
   /api/login:
@@ -81,5 +83,14 @@ paths:
   
   /api/rsvps-invitation/{invitation_id}:
     $ref: './rsvp.yaml#/RsvpInvitation_InvitationID'
+
+  /api/guests:
+    $ref: './guest.yaml#/Guests'
+
+  /api/guests/{id}:
+    $ref: './guest.yaml#/Guest_id'
+  
+  /api/guests-invitation/{invitation_id}:
+    $ref: './guest.yaml#/GuestInvitation_InvitationID'
   
 

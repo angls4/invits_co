@@ -1,0 +1,261 @@
+components:
+  schemas:
+    Guest:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        address:
+          type: string
+        is_invited:
+          type: boolean
+        no_whats_app:
+          type: string
+        email:
+          type: string
+        invitation_id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    ValidationErrors:
+      type: object
+      example: {}
+
+Guests:
+  # get:
+  #   tags:
+  #     - Guest
+  #   summary: Get all Guests
+  #   responses:
+  #     '200':
+  #       description: Successful response
+  #       content:
+  #         application/json:
+  #           example:
+  #             success: true
+  #             errors: []
+  #             message: Guests retrieved successfully
+  #             data:
+  #               guests:
+  #                 - id: 1
+  #                   name: John Doe
+  #                   description: "Some description"
+  #                   address: "123 Main St"
+  #                   is_invited: true
+  #                   no_whats_app: "1234567890"
+  #                   email: "johndoe@example.com"
+  #                   invitation_id: 123
+  #                   created_at: "2023-10-30T12:34:56.000000Z"
+  #                   updated_at: "2023-10-30T12:34:56.000000Z"
+  #                 - id: 2
+  #                   name: Jane Smith
+  #                   description: "Another description"
+  #                   address: "456 Elm St"
+  #                   is_invited: false
+  #                   no_whats_app: "0987654321"
+  #                   email: "janesmith@example.com"
+  #                   invitation_id: 124
+  #                   created_at: "2023-10-29T10:00:00.000000Z"
+  #                   updated_at: "2023-10-29T10:00:00.000000Z"
+
+  post:
+    tags:
+      - Guest
+    summary: Create a new Guest
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: John Doe
+            description: "Some description"
+            address: "123 Main St"
+            is_invited: true
+            no_whats_app: "1234567890"
+            email: "johndoe@example.com"
+            invitation_id: 12
+    responses:
+      '201':
+        description: Guest created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Guest created successfully
+              data:
+                guest:
+                  id: 3
+                  name: John Doe
+                  description: "Some description"
+                  address: "123 Main St"
+                  is_invited: true
+                  no_whats_app: "1234567890"
+                  email: "johndoe@example.com"
+                  invitation_id: 123
+                  created_at: "2023-10-31T09:00:00.000000Z"
+                  updated_at: "2023-10-31T09:00:00.000000Z"
+
+Guest_id:
+  get:
+    tags:
+      - Guest
+    summary: Get a Guest by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Guest retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Guest retrieved successfully
+              data:
+                guest:
+                  id: 1
+                  name: John Doe
+                  description: "Some description"
+                  address: "123 Main St"
+                  is_invited: true
+                  no_whats_app: "1234567890"
+                  email: "johndoe@example.com"
+                  invitation_id: 123
+                  created_at: "2023-10-30T12:34:56.000000Z"
+                  updated_at: "2023-10-30T12:34:56.000000Z"
+      '404':
+        description: Guest not found
+
+  put:
+    tags:
+      - Guest
+    summary: Update a Guest by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            name: Updated Name
+            description: "Updated description"
+            address: "456 Elm St"
+            is_invited: false
+            no_whats_app: "0987654321"
+            email: "updated@example.com"
+            invitation_id: 125
+    responses:
+      '200':
+        description: Guest updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Guest updated successfully
+              data:
+                guest:
+                  id: 1
+                  name: Updated Name
+                  description: "Updated description"
+                  address: "456 Elm St"
+                  is_invited: false
+                  no_whats_app: "0987654321"
+                  email: "updated@example.com"
+                  invitation_id: 125
+                  created_at: "2023-10-30T12:34:56.000000Z"
+                  updated_at: "2023-10-31T10:00:00.000000Z"
+      '404':
+        description: Guest not found
+
+  delete:
+    tags:
+      - Guest
+    summary: Delete a Guest by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Guest deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Guest deleted successfully
+              data: null
+      '404':
+        description: Guest not found
+
+GuestInvitation_InvitationID:
+  get:
+    tags:
+      - Guest
+    summary: Get Guests by Invitation ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Guests by invitation ID retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Guests by invitation ID retrieved successfully
+              data:
+                guests:
+                  - id: 1
+                    name: John Doe
+                    description: "Some description"
+                    address: "123 Main St"
+                    is_invited: true
+                    no_whats_app: "1234567890"
+                    email: "johndoe@example.com"
+                    invitation_id: 123
+                    created_at: "2023-10-30T12:34:56.000000Z"
+                    updated_at: "2023-10-30T12:34:56.000000Z"
+                  - id: 2
+                    name: Jane Smith
+                    description: "Another description"
+                    address: "456 Elm St"
+                    is_invited: false
+                    no_whats_app: "0987654321"
+                    email: "janesmith@example.com"
+                    invitation_id: 123
+                    created_at: "2023-10-29T10:00:00.000000Z"
+                    updated_at: "2023-10-29T10:00:00.000000Z"
+

@@ -20,7 +20,7 @@
     @if(session()->has('success'))
      <script>alert("{{session('success')}}")</script>   
     @endif
-    <form action="{{ route("client.save.editInvitation", $data['order']->id) }}" method="post"
+    <form action="{{ route("client.invitation.save", $data['order']->id) }}" method="post"
         enctype="multipart/form-data">
         @csrf
         <section class="bg-white">
@@ -268,8 +268,8 @@
                         <span class="font-semibold">Foto</span>
                     </div>
                     <div class="flex flex-col gap-3 sm:w-2/3 lg:flex-row">
-                        <div class="lg:w-full max-w-xs">
-                            <img class="w-full object-cover aspect-square rounded" src="{{ asset($data['order']->invitation->wedding->groom->image) }}" alt="">
+                        <div class="max-w-xs lg:w-full">
+                            <img class="object-cover w-full rounded aspect-square" src="{{ asset($data['order']->invitation->wedding->groom->image) }}" alt="">
                         </div>
                         <div class="lg:w-full">
                             <input name="groom_image" value="{{ asset($data['order']->invitation->wedding->groom->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
@@ -355,8 +355,8 @@
                         <span class="font-semibold">Foto</span>
                     </div>
                     <div class="flex flex-col gap-3 sm:w-2/3 lg:flex-row">
-                        <div class="lg:w-full max-w-xs">
-                            <img class="w-full object-cover aspect-square rounded" src="{{ asset($data['order']->invitation->wedding->bride->image) }}" alt="">
+                        <div class="max-w-xs lg:w-full">
+                            <img class="object-cover w-full rounded aspect-square" src="{{ asset($data['order']->invitation->wedding->bride->image) }}" alt="">
                         </div>
                         <div class="lg:w-full">
                             <input name="bride_image" value="{{ asset($data['order']->invitation->wedding->bride->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
@@ -530,8 +530,8 @@
                             <div class="mt-4">
                                 <span class="font-semibold">Gambar</span>
                                 <div class="flex flex-col gap-3 lg:flex-row">
-                                    <div class="lg:w-full max-w-xs">
-                                        <img class="w-full object-cover aspect-square rounded" src="{{ asset($love_story->image) }}" alt="">
+                                    <div class="max-w-xs lg:w-full">
+                                        <img class="object-cover w-full rounded aspect-square" src="{{ asset($love_story->image) }}" alt="">
                                     </div>
                                     <div class="lg:w-full">
                                         <input name="love_stories[{{$i}}][image]" value="{{ asset($love_story->image) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
@@ -576,8 +576,8 @@
                     <div class="sm:w-2/3">
                         <div class="mt-4">
                             <div class="flex flex-col gap-3 lg:flex-row">
-                                <div class="lg:w-full max-w-xs">
-                                    <img class="w-full object-cover aspect-square rounded" src="{{ asset($gallery->file) }}" alt="">
+                                <div class="max-w-xs lg:w-full">
+                                    <img class="object-cover w-full rounded aspect-square" src="{{ asset($gallery->file) }}" alt="">
                                 </div>
                                 <div class="lg:w-full">
                                     <input name="galleries[{{$i}}][file]" value="{{ asset($gallery->file) }}" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5" id="file_input" type="file" :disabled="edit ? false : true">
@@ -600,11 +600,11 @@
                 </div>
                 <div class="flex justify-end gap-2 py-4 border-t border-gray-200" x-show="edit">
                     <x-button type="button" @click="reset()"
-                        class="w-full whitespace-nowrap tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+                        class="w-full tracking-wide capitalize transition-colors duration-200 transform bg-white whitespace-nowrap sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
                         <span class="mx-1">Batalkan</span>
                     </x-button>
                     <x-button type="submit"
-                        class="w-full whitespace-nowrap tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+                        class="w-full tracking-wide text-white capitalize transition-colors duration-200 transform whitespace-nowrap sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                         Simpan Perubahan
                     </x-button>
                 </div>
