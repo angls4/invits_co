@@ -44,10 +44,10 @@ Orders:
             example:
               success: true
               errors: []
-              message: Orders retrieved successfully
+              message: "Orders retrieved successfully"
               data:
                 orders:
-                  - id: 1
+                  - id: "9a736a7e-976c-4781-97ad-1895d5f9a7ad"
                     status: "PAID"
                     user_id: 1
                     package_id: 1
@@ -55,20 +55,74 @@ Orders:
                     created_by: null
                     updated_by: null
                     deleted_by: null
-                    created_at: "2023-10-25T00:00:00.000000Z"
-                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
                     deleted_at: null
-                  - id: 2
-                    status: "UNPAID"
-                    user_id: 2
+                    invitation:
+                      id: 1
+                      status: "ACTIVE"
+                      slug: "ContohSlug9a736a7e-976c-4781-97ad-1895d5f9a7ad"
+                      is_custom_domain: 0
+                      custom_domain: null
+                      user_id: 2
+                      order_id: "9a736a7e-976c-4781-97ad-1895d5f9a7ad"
+                      invitation_type_id: 1
+                      created_at: "2023-10-25T03:36:28.000000Z"
+                      updated_at: "2023-11-01T07:44:29.000000Z"
+                      deleted_at: null
+                    theme:
+                      id: 1
+                      name: "Basic White"
+                      slug: "basic-white"
+                      img_preview: "themes/theme-bronze.png"
+                      description: "Tema ini didominasi oleh warna basic putih yang simpel."
+                      price: 150000
+                      created_by: null
+                      updated_by: null
+                      deleted_by: null
+                      package_id: 1
+                      created_at: "2023-10-25T03:36:24.000000Z"
+                      updated_at: "2023-10-25T03:36:24.000000Z"
+                      deleted_at: null
+
+                  - id: "9a736a7e-e489-4e67-b7b8-7b484c76db16"
+                    status: "PAID"
+                    user_id: 1
                     package_id: 2
                     theme_id: 2
                     created_by: null
                     updated_by: null
                     deleted_by: null
-                    created_at: "2023-10-25T00:00:00.000000Z"
-                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
                     deleted_at: null
+                    invitation:
+                      id: 2
+                      status: "ACTIVE"
+                      slug: "executive-usergYoaLzO4NTUJUDSm"
+                      is_custom_domain: 1
+                      custom_domain: "Link"
+                      user_id: 4
+                      order_id: "9a736a7e-e489-4e67-b7b8-7b484c76db16"
+                      invitation_type_id: 1
+                      created_at: "2023-10-25T03:36:28.000000Z"
+                      updated_at: "2023-10-25T03:36:28.000000Z"
+                      deleted_at: null
+                    theme:
+                      id: 2
+                      name: "Lego"
+                      slug: "lego"
+                      img_preview: "themes/theme-silver.png"
+                      description: "Tema ini didasarkan pada lego yang membuat suasana menjadi fun."
+                      price: 300000
+                      created_by: null
+                      updated_by: null
+                      deleted_by: null
+                      package_id: 2
+                      created_at: "2023-10-25T03:36:24.000000Z"
+                      updated_at: "2023-10-25T03:36:24.000000Z"
+                      deleted_at: null
+
 
   post:
     tags:
@@ -126,23 +180,88 @@ Order_id:
             example:
               success: true
               errors: []
-              message: Order created successfully
+              message: "Order retrieved successfully"
               data:
-                theme:
-                  id: 1
-                  name: Basic White
-                  slug: basic-white
-                  img_preview: themes/theme-bronze.png
-                  description: Tema ini didominasi oleh warna basic putih yang simpel.
-                  price: 150000
+                order:
+                  id: "9a736a80-6fdd-4319-869f-fb029b4312bb"
+                  status: "UNPAID"
+                  user_id: 4
+                  package_id: 2
+                  theme_id: 2
                   created_by: null
                   updated_by: null
                   deleted_by: null
-                  package_id: 1
-                  created_at: "2023-10-25T03:36:24.000000Z"
-                  updated_at: "2023-10-25T03:36:24.000000Z"
+                  created_at: "2023-10-25T03:36:25.000000Z"
+                  updated_at: "2023-10-25T03:36:25.000000Z"
                   deleted_at: null
-                payment_midtrans: bf26f202-0927-4a0b-be8d-5d091630aabd  
+                  user:
+                    id: 4
+                    name: "Executive User"
+                    first_name: "Executive"
+                    last_name: "User"
+                    username: "100004"
+                    email: "executive@executive.com"
+                    mobile: "+17342764957"
+                    gender: "Female"
+                    date_of_birth: "1999-10-19"
+                    email_verified_at: "2023-10-25T03:36:23.000000Z"
+                    avatar: "img/default-avatar.jpg"
+                    status: 1
+                    role: "user"
+                    created_at: "2023-10-25T03:36:23.000000Z"
+                    updated_at: "2023-10-25T03:36:23.000000Z"
+                    deleted_at: null
+                  package:
+                    id: 2
+                    name: "Silver"
+                    price: "Rp. 300.000"
+                    description: "Pilihan paket membuat undanganmu lebih keren"
+                    features: "<li>Informasi Dasar Pernikahan</li><li>Gallery</li><li>Konfirmasi Kehadiran</li>"
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
+                    deleted_at: null
+                  theme:
+                    id: 2
+                    name: "Lego"
+                    slug: "lego"
+                    img_preview: "themes/theme-silver.png"
+                    description: "Tema ini didasarkan pada lego yang membuat suasana menjadi fun."
+                    price: 300000
+                    created_by: null
+                    updated_by: null
+                    deleted_by: null
+                    package_id: 2
+                    created_at: "2023-10-25T03:36:24.000000Z"
+                    updated_at: "2023-10-25T03:36:24.000000Z"
+                    deleted_at: null
+                  invitation:
+                    id: 43
+                    status: "INACTIVE"
+                    slug: "general-userlYYNSjgGsixp6bBo"
+                    is_custom_domain: 1
+                    custom_domain: "Link"
+                    user_id: 5
+                    order_id: "9a736a80-6fdd-4319-869f-fb029b4312bb"
+                    invitation_type_id: 1
+                    created_at: "2023-10-25T03:36:29.000000Z"
+                    updated_at: "2023-10-25T03:36:29.000000Z"
+                    deleted_at: null
+                  payment:
+                    id: 43
+                    total_price: 300000
+                    type: null
+                    transaction_id: null
+                    transaction_time: null
+                    transaction_status: null
+                    user_id: 4
+                    order_id: "9a736a80-6fdd-4319-869f-fb029b4312bb"
+                    created_at: "2023-10-25T03:36:28.000000Z"
+                    updated_at: "2023-10-25T03:36:28.000000Z"
+                    deleted_at: null
+
       '404':
         description: Order not found
   # put:
@@ -190,30 +309,30 @@ Order_id:
   #                 deleted_at: null
   #     '404':
   #       description: Order not found
-  # delete:
-  #   tags:
-  #     - Order
-  #   summary: Delete an order by ID
-  #   security:
-  #     - BearerAuth: []
-  #   parameters:
-  #     - name: id
-  #       in: path
-  #       required: true
-  #       schema:
-  #         type: integer
-  #   responses:
-  #     '200':
-  #       description: Order deleted successfully
-  #       content:
-  #         application/json:
-  #           example:
-  #             success: true
-  #             errors: []
-  #             message: Order deleted successfully
-  #             data: null
-  #     '404':
-  #       description: Order not found
+  delete:
+    tags:
+      - Order
+    summary: Delete an order by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Order deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Order deleted successfully
+              data: null
+      '404':
+        description: Order not found
 
 OrderUser_UserID:
   get:

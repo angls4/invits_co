@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         try {
-            $orders = Order::all();
+            $orders = Order::with('invitation', 'theme')->get();
 
             $data = [
                 'orders' => $orders,

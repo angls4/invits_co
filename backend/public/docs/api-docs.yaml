@@ -60,8 +60,8 @@ paths:
   /api/themes/{id}:
     $ref: './theme.yaml#/Theme_id'
   
-  # /api/orders:
-  #   $ref: './order.yaml#/Orders'
+  /api/orders:
+    $ref: './order.yaml#/Orders'
 
   /api/orders/{id}:
     $ref: './order.yaml#/Order_id'

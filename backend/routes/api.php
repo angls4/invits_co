@@ -93,9 +93,6 @@ Route::prefix('themes')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::prefix('orders')->group(function () {
-    // Route::get('/', [OrderController::class, 'index']);
-    // Route::post('/', [OrderController::class, 'store']);
-    
     // Auth
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{id}', [OrderController::class, 'show']);
@@ -103,8 +100,9 @@ Route::prefix('orders')->group(function () {
     
     // Auth: Admin
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::get('/', [OrderController::class, 'index']);
         // Route::put('/{id}', [OrderController::class, 'update']);
-        // Route::delete('/{id}', [OrderController::class, 'destroy']);
+        Route::delete('/{id}', [OrderController::class, 'destroy']);
     });
 });
 
