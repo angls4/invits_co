@@ -117,6 +117,12 @@ class GuestController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $response = Http::withToken(session('api_token'))->delete(env('API_URL').'guests/'.decode_id($id));
+        if($response->failed()){
+            $errors = $response->json()["errors"];
+            return back()->with("failed", "Gagal menghapus tamu");
+        }
+        
+        return back()->with('success', 'Data berhasil dihapus');
     }
 }

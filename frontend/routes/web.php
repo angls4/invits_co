@@ -70,7 +70,7 @@ Route::middleware('check.token')->group(function (){
                 Route::post('/invitations/{id}/guests/update', [GuestController::class, 'update'])->name('update');
                 Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('index');
                 // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
-                // Route::get('guests/{id}', $controller_guest . '@deleteGuest')->name('guest.delete');
+                Route::get('/invitations/{id}/guests/delete', [GuestController::class, 'destroy'])->name('delete');
             });
             
             // Client RSVP
