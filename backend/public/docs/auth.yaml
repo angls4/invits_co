@@ -238,3 +238,78 @@ Logout:
                 errors: []
                 message: Logout successful.
                 data: null
+
+SocialLogin:
+  post:
+    tags:
+      - Authentication
+    summary: Social Login
+    description: Login user using social provider.
+    parameters:
+      - name: provider
+        in: path
+        required: true
+        description: Social provider (e.g., facebook, google).
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            id: 'uuidcdcsvlj123efwf;we456789'
+            name: 'John Doe'
+            email: 'john@example.com'
+    responses:
+      '200':
+        description: Social login successful
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Login successful.
+              data:
+                user:
+                  id: 6
+                  name: John Doe
+                  email: user@example.com
+                  role: user
+                  created_at: '2023-10-24T06:47:40.000000Z'
+                  updated_at: '2023-10-24T06:47:40.000000Z'
+                  avatar: img/default-avatar.jpg
+                  status: 1
+                token: 29|UZBuFUx4WfttuBJeYiNt2AuTj9ETDwuUBV4a64jR230d6e6d
+      '401':
+        description: Social login failed
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: false
+                message:
+                  type: string
+                  example: Login failed.
+                errors:
+                  type: object
+                  example:
+                    login: Invalid social provider access token.
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: false
+                message:
+                  type: string
+                  example: Internal server error.
+                errors:
+                  type: object
+                  example: {}

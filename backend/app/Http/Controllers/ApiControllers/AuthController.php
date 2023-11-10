@@ -67,6 +67,7 @@ class AuthController extends Controller
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'mobile' => $request->input('mobile'),
+                'avatar' => 'img/default-avatar.jpg',
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
                 'role' => 'user',
