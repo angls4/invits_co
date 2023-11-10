@@ -10,6 +10,10 @@ components:
       type: http
       scheme: bearer
   schemas:
+    User:
+      $ref: './user.yaml#/components/schemas/User'
+    UserProfile:
+      $ref: './user.yaml#/components/schemas/UserProfile'
     Package:
       $ref: './package.yaml#/components/schemas/Package'
     Theme:
@@ -37,6 +41,12 @@ paths:
   
   /api/social-login/{provider}:
     $ref: './auth.yaml#/SocialLogin'
+
+  /api/users:
+    $ref: './user.yaml#/Users'
+
+  /api/users/{id}:
+    $ref: './user.yaml#/User_id'
 
   /api/packages:
     $ref: './package.yaml#/Packages'
