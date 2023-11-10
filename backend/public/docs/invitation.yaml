@@ -1,0 +1,223 @@
+components:
+  schemas:
+    Invitation:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - INCOMPLETE
+        slug:
+          type: string
+        is_custom_domain:
+          type: boolean
+        custom_domain:
+          type: string
+        user_id:
+          type: integer
+        order_id:
+          type: integer
+        invitation_type_id:
+          type: integer
+
+    ValidationErrors:
+      type: object
+      example: {}
+
+Invitations:
+  get:
+    tags:
+      - Invitation
+    summary: Get all invitations
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitations retrieved successfully
+              data:
+                invitations:
+                  - id: 1
+                    status: ACTIVE
+                    slug: invitation-1
+                    is_custom_domain: true
+                    custom_domain: custom-domain-1
+                    user_id: 1
+                    order_id: 1
+                    invitation_type_id: 1
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null
+                  - id: 2
+                    status: INACTIVE
+                    slug: invitation-2
+                    is_custom_domain: false
+                    custom_domain: null
+                    user_id: 2
+                    order_id: 2
+                    invitation_type_id: 2
+                    created_at: "2023-10-25T00:00:00.000000Z"
+                    updated_at: "2023-10-25T00:00:00.000000Z"
+                    deleted_at: null
+
+  post:
+    tags:
+      - Invitation
+    summary: Create a new invitation
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            status: ACTIVE
+            slug: invitation-new
+            is_custom_domain: true
+            custom_domain: custom-domain-new
+            user_id: 1
+            order_id: 1
+            invitation_type_id: 1
+    responses:
+      '201':
+        description: Invitation created successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitation created successfully
+              data:
+                invitation:
+                  id: 3
+                  status: ACTIVE
+                  slug: invitation-new
+                  is_custom_domain: true
+                  custom_domain: custom-domain-new
+                  user_id: 1
+                  order_id: 1
+                  invitation_type_id: 1
+                  created_at: "2023-10-25T00:00:00.000000Z"
+                  updated_at: "2023-10-25T00:00:00.000000Z"
+                  deleted_at: null
+
+Invitation_id:
+  get:
+    tags:
+      - Invitation
+    summary: Get an invitation by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Invitation retrieved successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitation retrieved successfully
+              data:
+                invitation:
+                  id: 1
+                  status: ACTIVE
+                  slug: invitation-1
+                  is_custom_domain: true
+                  custom_domain: custom-domain-1
+                  user_id: 1
+                  order_id: 1
+                  invitation_type_id: 1
+                  created_at: "2023-10-25T00:00:00.000000Z"
+                  updated_at: "2023-10-25T00:00:00.000000Z"
+                  deleted_at: null
+      '404':
+        description: Invitation not found
+
+  put:
+    tags:
+      - Invitation
+    summary: Update an invitation by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            status: INACTIVE
+            slug: invitation-updated
+            is_custom_domain: false
+            custom_domain: null
+            user_id: 2
+            order_id: 2
+            invitation_type_id: 2
+    responses:
+      '200':
+        description: Invitation updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitation updated successfully
+              data:
+                invitation:
+                  id: 2
+                  status: INACTIVE
+                  slug: invitation-updated
+                  is_custom_domain: false
+                  custom_domain: null
+                  user_id: 2
+                  order_id: 2
+                  invitation_type_id: 2
+                  created_at: "2023-10-25T00:00:00.000000Z"
+                  updated_at: "2023-10-25T00:00:00.000000Z"
+                  deleted_at: null
+      '404':
+        description: Invitation not found
+
+  delete:
+    tags:
+      - Invitation
+    summary: Delete an invitation by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Invitation deleted successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Invitation deleted successfully
+              data: null
+      '404':
+        description: Invitation not found
