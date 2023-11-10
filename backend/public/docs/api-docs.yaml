@@ -60,14 +60,23 @@ paths:
   /api/themes/{id}:
     $ref: './theme.yaml#/Theme_id'
   
-  # /api/orders:
-  #   $ref: './order.yaml#/Orders'
+  /api/orders:
+    $ref: './order.yaml#/Orders'
 
   /api/orders/{id}:
     $ref: './order.yaml#/Order_id'
   
   /api/orders-user/{user_id}:
     $ref: './order.yaml#/OrderUser_UserID'
+  
+  /api/payments/total:
+    $ref: './payment.yaml#/Total'
+  
+  /api/payments/total/paid:
+    $ref: './payment.yaml#/TotalPaid'
+  
+  /api/payments/total/unpaid:
+    $ref: './payment.yaml#/TotalUnpaid'
 
   /api/invitations:
     $ref: './invitation.yaml#/Invitations'

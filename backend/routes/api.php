@@ -10,6 +10,7 @@ use App\Http\Controllers\ApiControllers\SocialLoginController;
 use App\Http\Controllers\ApiControllers\PackageController;
 use App\Http\Controllers\ApiControllers\ThemeController;
 use App\Http\Controllers\ApiControllers\OrderController;
+use App\Http\Controllers\ApiControllers\PaymentController;
 use App\Http\Controllers\ApiControllers\InvitationController;
 use App\Http\Controllers\ApiControllers\WeddingController;
 use App\Http\Controllers\ApiControllers\WishController;
@@ -93,9 +94,6 @@ Route::prefix('themes')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::prefix('orders')->group(function () {
-    // Route::get('/', [OrderController::class, 'index']);
-    // Route::post('/', [OrderController::class, 'store']);
-    
     // Auth
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{id}', [OrderController::class, 'show']);
@@ -103,8 +101,9 @@ Route::prefix('orders')->group(function () {
     
     // Auth: Admin
     Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::get('/', [OrderController::class, 'index']);
         // Route::put('/{id}', [OrderController::class, 'update']);
-        // Route::delete('/{id}', [OrderController::class, 'destroy']);
+        Route::delete('/{id}', [OrderController::class, 'destroy']);
     });
 });
 
@@ -112,6 +111,20 @@ Route::prefix('orders-user')->group(function () {
     // Auth: User
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{user_id}', [OrderController::class, 'getByUserID']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Payment
+|--------------------------------------------------------------------------
+*/
+Route::prefix('payments')->group(function () {
+    // Auth: Admin
+    Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+        Route::get('/total', [PaymentController::class, 'total']);
+        Route::get('/total/paid', [PaymentController::class, 'total_paid']);
+        Route::get('/total/unpaid', [PaymentController::class, 'total_unpaid']);
     });
 });
 
