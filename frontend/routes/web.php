@@ -72,7 +72,6 @@ Route::middleware('check.token')->group(function (){
                 Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('index');
                 Route::get('/invitations/{id}/guests/delete', [GuestController::class, 'destroy'])->name('delete');
                 Route::post('/sendInvitation/{id}', [SendInvitation::class, 'sendInvitation'])->name('sendInvitation');
-                Route::get('/test', [SendInvitation::class, 'index'])->name('test');
             });
             
             // Client RSVP

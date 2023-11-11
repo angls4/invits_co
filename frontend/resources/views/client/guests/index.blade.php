@@ -44,7 +44,7 @@
                         class="!px-0 !py-0 text-brand-red sm:w-fit hover:text-black">
                         <span class="font-extrabold">Delete</span>
                     </x-button>
-                    <x-button @click="" type="button" x-show="selectedCheckboxCount > 0"
+                    <x-button @click="modals.broadcast.show()" type="button" x-show="selectedCheckboxCount > 0"
                         class="!px-0 !py-0 text-brand-purple-500 sm:w-fit hover:text-brand-purple-600">
                         <span class="font-extrabold">Broadcast</span>
                     </x-button>
@@ -153,7 +153,7 @@
         <div class="flex-grow">
             <select name="broadcastMethod" x-model="method"
                 class=" border border-gray-300 text-sm rounded-lg focus:ring-brand-purple-500 focus:border-brand-ring-brand-purple-500 block w-full p-2.5">
-                <option value="email">Email</option>
+                <option value="email" selected>Email</option>
                 <option value="wa">Whatsapp</option>
             </select>
         </div>
@@ -333,8 +333,9 @@
         }
 
         function broadcast() {
-            broadcastMethod = modals.broadcast.xdata.method;
-            confirmInvitation(getSelectedGuests(), broadcastMethod);
+            modals.broadcast.hide();
+            const method = document.getElementsByName("broadcastMethod")[0].value;
+            confirmInvitation(getSelectedGuests(), method);
         }
 
         function confirmInvitation(target, method) {

@@ -17,6 +17,7 @@ class SendInvitation extends Controller
         $method = $request->selectedMethod;
         
         $invitation = Http::withToken(session('api_token'))->get(env('API_URL').'invitations/'.decode_id($id))->object()->data->invitation;
+        $success_sent = [];
         
         foreach ($ids as $id) {
             $guest = Http::withToken(session('api_token'))->get(env('API_URL').'guests/'.$id)->object()->data->guest;
@@ -26,24 +27,19 @@ class SendInvitation extends Controller
                 "wedding" => $invitation->wedding,
                 "guest" => $guest,
             ];
+
             try {
                 Mail::to($guest->email)->send(new InvitationMail($data));
-                return response()->json(['output' => 'BERHASIL'], $status);
             } catch (\Throwable $th) {
                 return response()->json(['output' => $data], $status);
             }
             
-            // $guest->is_invited = true;
-            // $guest->save();
+            $guest = Http::withToken(session('api_token'))->put(env('API_URL').'guests/'.$id, ["is_invited" => true]);
         }
         $status = 200;
 
         if (count($ids) == 0) $status = 400;
 
         return response()->json(['ids' => $request->selectedIDs, 'method' => $request->selectedMethod], $status);
-    }
-
-    public function index() {
-        Mail::to("alfadlimaulana@gmail.com")->send(new InvitationMail());
     }
 }
