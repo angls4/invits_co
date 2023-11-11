@@ -1,6 +1,7 @@
 import "./bootstrap";
 import Alpine from "alpinejs";
 import Splide from "@splidejs/splide";
+import jQuery from "jquery";
 import "@splidejs/splide/css";
 import "flowbite";
 
@@ -24,5 +25,6 @@ Alpine.data("navState", () => ({
 
 window.Alpine = Alpine;
 window.Splide = Splide;
+window.$ = jQuery;
 
 Alpine.start();

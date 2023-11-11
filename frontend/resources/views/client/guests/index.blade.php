@@ -44,7 +44,7 @@
                         class="!px-0 !py-0 text-brand-red sm:w-fit hover:text-black">
                         <span class="font-extrabold">Delete</span>
                     </x-button>
-                    <x-button @click="modals.broadcast.show()" type="button" x-show="selectedCheckboxCount > 0"
+                    <x-button @click="" type="button" x-show="selectedCheckboxCount > 0"
                         class="!px-0 !py-0 text-brand-purple-500 sm:w-fit hover:text-brand-purple-600">
                         <span class="font-extrabold">Broadcast</span>
                     </x-button>
@@ -128,10 +128,10 @@
                                     class="w-9 h-9 mx-1.5 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-2xl ph ph-pencil-simple"></i>
                                 </x-button-a>
-                                <x-button-a href="{{ route('client.invitation.guest.delete', encode_id($guest->id)) }}"
+                                <x-button @click="confirmDelete([{{ $guest->id }}])"
                                     class="w-9 h-9 mx-1.5 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-2xl ph ph-trash"></i>
-                                </x-button-a>
+                                </x-button>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -143,6 +143,75 @@
         {{ $data->links() }}
     </div>
 </main>
+
+<x-flowbite-modal id="confirmDelete" title="Hapus Tamu">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-question text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span class="font-bold">Apakah anda yakin untuk menghapus tamu?</span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide()"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Batalkan</span>
+        </x-button>
+        <x-button type="button" @click="deleteGuest(); hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Hapus
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="success" title="successTitle" xdata="{message:'operasi berhasil'}" closable="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-check text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="window.location.reload(true)"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            OK
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="failed" title="failTitle" xdata="{message:'operasi gagal'}" closable="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-xmark text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            OK
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="loading" title="loadingTitle" xdata="{message:'Mohon tunggu ...'}" closable="false"
+    header="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-solid fa-spinner fa-spin-pulse text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+</x-flowbite-modal>
 @endsection
 @push('before-scripts')
     @if (session()->has('success'))
@@ -198,5 +267,47 @@
                 }
             }))
         });
+
+        let targetGuests = [];
+
+        function getSelectedGuests() {
+            selectedGuests = [];
+            $("input:checkbox[name=guestCheckbox]:checked").each(function() {
+                selectedGuests.push($(this).val());
+            });
+            return selectedGuests;
+        }
+
+        function confirmDelete(target) {
+            targetGuests = target;
+            modals.confirmDelete.show();
+        }
+
+        function deleteGuest() {
+            var csrfToken = '{{ csrf_token() }}';
+
+            $.ajax({
+                url: '{{ route('client.invitation.guest.delete', encode_id($invitationId)) }}',
+                method: 'GET',
+                data: {
+                    selectedIDs: targetGuests,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) { //status 200
+                    console.log(response);
+                    modals.loading.hide();
+                    modals.success.show();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.log(xhr);
+                    modals.loading.hide();
+                    modals.failed.show();
+                }
+            });
+            modals.loading.show();
+        }
     </script>
 @endpush
