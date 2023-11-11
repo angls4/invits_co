@@ -16,6 +16,7 @@
     "dependencies": {
         "@splidejs/splide": "^4.1.4",
         "alpinejs": "^3.13.0",
-        "flowbite": "^2.0.0"
+        "flowbite": "^2.0.0",
+        "jquery": "^3.7.1"
     }
 }

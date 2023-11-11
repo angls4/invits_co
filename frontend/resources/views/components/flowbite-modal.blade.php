@@ -2,7 +2,7 @@
 
 {{-- Akses xdata modal = modals.<nama modal>.xdata --}}
 
-<div id="{{ $id }}" tabindex="-1" aria-hidden="false" x-data="modals.{{ $id }}.initData() " x-init="console.log(modalID);" class="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full text-white">
+<div id="{{ $id }}" tabindex="-1" aria-hidden="false" x-data="modals.{{ $id }}.initData() " x-init="console.log(modalID);" class="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-2xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-gray-50 rounded-lg shadow">

@@ -143,7 +143,128 @@
         {{ $data->links() }}
     </div>
 </main>
+
+<x-flowbite-modal id="broadcast" title="Broadcast" xdata="{method:'wa'}">
+    <!--  body -->
+    <div class="flex flex-col p-6 my-6 sm:flex-row sm:justify-between sm:items-center">
+        <div class="mr-4">
+            <span class="font-bold">Broadcast Via</span>
+        </div>
+        <div class="flex-grow">
+            <select name="broadcastMethod" x-model="method"
+                class=" border border-gray-300 text-sm rounded-lg focus:ring-brand-purple-500 focus:border-brand-ring-brand-purple-500 block w-full p-2.5">
+                <option value="email">Email</option>
+                <option value="wa">Whatsapp</option>
+            </select>
+        </div>
+    </div>
+    <!--  footer -->
+
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button @click="hide()" type="button"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Cancel</span>
+        </x-button>
+        <x-button type="button" @click="broadcast()"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Broadcast
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="confirmInvite" title="Send Invitation">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-question text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span class="font-bold">Apakah anda yakin untuk mengirim undangan?</span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide()"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Batalkan</span>
+        </x-button>
+        <x-button type="button" @click="sendInvitation(); hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Kirim
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="confirmDelete" title="Hapus Tamu">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-question text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span class="font-bold">Apakah anda yakin untuk menghapus tamu?</span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide()"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Batalkan</span>
+        </x-button>
+        <x-button type="button" @click="deleteGuest(); hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Hapus
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="success" title="successTitle" xdata="{message:'operasi berhasil'}" closable="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-check text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="window.location.reload(true)"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            OK
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="failed" title="failTitle" xdata="{message:'operasi gagal'}" closable="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-xmark text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            OK
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="loading" title="loadingTitle" xdata="{message:'Mohon tunggu ...'}" closable="false"
+    header="false">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-solid fa-spinner fa-spin-pulse text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span x-text="message" class="font-bold"></span>
+        </div>
+    </div>
+</x-flowbite-modal>
 @endsection
+
 @push('before-scripts')
     @if (session()->has('success'))
         <script>alert("{{ session('success') }}")</script>
@@ -198,5 +319,94 @@
                 }
             }))
         });
+
+        let defaultMethod = 'email';
+        let targetGuests = [];
+
+
+        function getSelectedGuests() {
+            selectedGuests = [];
+            $("input:checkbox[name=guestCheckbox]:checked").each(function() {
+                selectedGuests.push($(this).val());
+            });
+            return selectedGuests;
+        }
+
+        function broadcast() {
+            broadcastMethod = modals.broadcast.xdata.method;
+            confirmInvitation(getSelectedGuests(), broadcastMethod);
+        }
+
+        function confirmInvitation(target, method) {
+            targetGuests = target;
+            selectedMethod = method;
+            modals.confirmInvite.show();
+        }
+
+        function sendInvitation() {
+            modals.broadcast.hide();
+            if (selectedMethod === "" || !selectedMethod) {
+                selectedMethod = defaultMethod;
+            }
+            var csrfToken = '{{ csrf_token() }}';
+
+            console.log("{{ route('client.invitation.guest.sendInvitation', encode_id($invitationId)) }}")
+
+            $.ajax({
+                url: '{{ route('client.invitation.guest.sendInvitation', encode_id($invitationId)) }}',
+                method: 'POST',
+                data: {
+                    selectedIDs: targetGuests,
+                    selectedMethod: selectedMethod
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) { //status 200
+                    console.log(response.output);
+                    modals.loading.hide();
+                    modals.success.show();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    modals.loading.hide();
+                    modals.failed.show();
+                }
+            });
+            modals.loading.show();
+        }
+
+        function confirmDelete(target) {
+            targetGuests = target;
+            modals.confirmDelete.show();
+        }
+
+        function deleteGuest() {
+            var csrfToken = '{{ csrf_token() }}';
+
+            $.ajax({
+                url: '{{ route('client.invitation.guest.delete', encode_id($invitationId)) }}',
+                method: 'GET',
+                data: {
+                    selectedIDs: targetGuests,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) { //status 200
+                    console.log(response);
+                    modals.loading.hide();
+                    modals.success.show();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.log(xhr);
+                    modals.loading.hide();
+                    modals.failed.show();
+                }
+            });
+            modals.loading.show();
+        }
     </script>
 @endpush
+
