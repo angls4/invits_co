@@ -115,14 +115,22 @@ class GuestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        $response = Http::withToken(session('api_token'))->delete(env('API_URL').'guests/'.decode_id($id));
-        if($response->failed()){
-            $errors = $response->json()["errors"];
-            return back()->with("failed", "Gagal menghapus tamu");
+        $ids = $request->selectedIDs;
+        if (!$ids) $ids = [];
+
+        try {
+            foreach ($ids as $guest_id) {
+                $guest = Http::withToken(session('api_token'))->delete(env('API_URL').'guests/'.$guest_id);
+            }
+            $status = 200;
+        } catch (\Throwable $th) {
+            $status = 400;
         }
-        
-        return back()->with('success', 'Data berhasil dihapus');
+
+        if (count($ids) == 0) $status = 400;
+
+        return response()->json(['ids' => $request->selectedIDs], $status);
     }
 }
