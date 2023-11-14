@@ -351,8 +351,6 @@
             }
             var csrfToken = '{{ csrf_token() }}';
 
-            console.log("{{ route('client.invitation.guest.sendInvitation', encode_id($invitationId)) }}")
-
             $.ajax({
                 url: '{{ route('client.invitation.guest.sendInvitation', encode_id($invitationId)) }}',
                 method: 'POST',
