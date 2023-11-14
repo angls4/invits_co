@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RsvpController;
+use App\Http\Controllers\SendInvitation;
 use App\Http\Controllers\WishController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
@@ -69,8 +70,8 @@ Route::middleware('check.token')->group(function (){
                 Route::get('/invitations/{id}/guests/edit', [GuestController::class, 'edit'])->name('edit');
                 Route::post('/invitations/{id}/guests/update', [GuestController::class, 'update'])->name('update');
                 Route::get('/invitations/{id}/guests', [GuestController::class, 'index'])->name('index');
-                // Route::post('/sendInvitation/{id}', $controller_guest . '@sendInvitation')->name('guest.sendInvitation');
                 Route::get('/invitations/{id}/guests/delete', [GuestController::class, 'destroy'])->name('delete');
+                Route::post('/sendInvitation/{id}', [SendInvitation::class, 'sendInvitation'])->name('sendInvitation');
             });
             
             // Client RSVP

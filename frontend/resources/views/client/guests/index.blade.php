@@ -44,7 +44,7 @@
                         class="!px-0 !py-0 text-brand-red sm:w-fit hover:text-black">
                         <span class="font-extrabold">Delete</span>
                     </x-button>
-                    <x-button @click="" type="button" x-show="selectedCheckboxCount > 0"
+                    <x-button @click="modals.broadcast.show()" type="button" x-show="selectedCheckboxCount > 0"
                         class="!px-0 !py-0 text-brand-purple-500 sm:w-fit hover:text-brand-purple-600">
                         <span class="font-extrabold">Broadcast</span>
                     </x-button>
@@ -144,6 +144,57 @@
     </div>
 </main>
 
+<x-flowbite-modal id="broadcast" title="Broadcast" xdata="{method:'wa'}">
+    <!--  body -->
+    <div class="flex flex-col p-6 my-6 sm:flex-row sm:justify-between sm:items-center">
+        <div class="mr-4">
+            <span class="font-bold">Broadcast Via</span>
+        </div>
+        <div class="flex-grow">
+            <select name="broadcastMethod" x-model="method"
+                class=" border border-gray-300 text-sm rounded-lg focus:ring-brand-purple-500 focus:border-brand-ring-brand-purple-500 block w-full p-2.5">
+                <option value="email" selected>Email</option>
+                <option value="wa">Whatsapp</option>
+            </select>
+        </div>
+    </div>
+    <!--  footer -->
+
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button @click="hide()" type="button"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Cancel</span>
+        </x-button>
+        <x-button type="button" @click="broadcast()"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Broadcast
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
+<x-flowbite-modal id="confirmInvite" title="Send Invitation">
+    <!--  body -->
+    <div class="flex flex-col items-center justify-center p-6">
+        <i class="fa-regular fa-circle-question text-brand-purple-500 text-9xl"></i>
+        <div class="mt-4">
+            <span class="font-bold">Apakah anda yakin untuk mengirim undangan?</span>
+        </div>
+    </div>
+    <!--  footer -->
+    <div
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <x-button type="button" @click="hide()"
+            class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+            <span class="mx-1">Batalkan</span>
+        </x-button>
+        <x-button type="button" @click="sendInvitation(); hide();"
+            class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+            Kirim
+        </x-button>
+    </div>
+</x-flowbite-modal>
+
 <x-flowbite-modal id="confirmDelete" title="Hapus Tamu">
     <!--  body -->
     <div class="flex flex-col items-center justify-center p-6">
@@ -213,6 +264,7 @@
     </div>
 </x-flowbite-modal>
 @endsection
+
 @push('before-scripts')
     @if (session()->has('success'))
         <script>alert("{{ session('success') }}")</script>
@@ -268,7 +320,9 @@
             }))
         });
 
+        let defaultMethod = 'email';
         let targetGuests = [];
+
 
         function getSelectedGuests() {
             selectedGuests = [];
@@ -276,6 +330,49 @@
                 selectedGuests.push($(this).val());
             });
             return selectedGuests;
+        }
+
+        function broadcast() {
+            modals.broadcast.hide();
+            const method = document.getElementsByName("broadcastMethod")[0].value;
+            confirmInvitation(getSelectedGuests(), method);
+        }
+
+        function confirmInvitation(target, method) {
+            targetGuests = target;
+            selectedMethod = method;
+            modals.confirmInvite.show();
+        }
+
+        function sendInvitation() {
+            modals.broadcast.hide();
+            if (selectedMethod === "" || !selectedMethod) {
+                selectedMethod = defaultMethod;
+            }
+            var csrfToken = '{{ csrf_token() }}';
+
+            $.ajax({
+                url: '{{ route('client.invitation.guest.sendInvitation', encode_id($invitationId)) }}',
+                method: 'POST',
+                data: {
+                    selectedIDs: targetGuests,
+                    selectedMethod: selectedMethod
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) { //status 200
+                    console.log(response.output);
+                    modals.loading.hide();
+                    modals.success.show();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    modals.loading.hide();
+                    modals.failed.show();
+                }
+            });
+            modals.loading.show();
         }
 
         function confirmDelete(target) {
@@ -311,3 +408,4 @@
         }
     </script>
 @endpush
+
