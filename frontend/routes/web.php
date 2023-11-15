@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RsvpController;
 use App\Http\Controllers\SendInvitation;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -47,12 +49,6 @@ Route::middleware('check.token')->group(function (){
                     ->name('logout');
     
     Route::prefix('client')->name('client.')->group(function () {
-        // $controller_invitation = 'Modules\Invitation\Http\Controllers\Frontend\InvitationsController';
-        // $controller_profile = 'App\Http\Controllers\ProfileController';
-        // $controller_order = 'Modules\Order\Http\Controllers\Frontend\OrdersController';
-        // $controller_guest = 'Modules\Invitation\Http\Controllers\Frontend\GuestController';
-        // $controller_rsvp = 'Modules\Invitation\Http\Controllers\Frontend\RsvpController';
-        
         // Client Order
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
         Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
@@ -79,10 +75,14 @@ Route::middleware('check.token')->group(function (){
         });
 
         // // Client Profile
-        // Route::get('/{id}', $controller_profile  . '@show')->name('index');
-        // Route::post('/{id}', $controller_profile . '@edit')->name('editProfile');
-        // Route::get('/{id}/changePassword', $controller_profile  . '@editPassword')->name('editPassword');
-        // Route::post('/{id}/changePassword', $controller_profile . '@updatePassword')->name('updatePassword');
+        Route::name('profile.')->group(function(){
+            Route::get('/{id}', [UserController::class, 'show'])->name('index');
+            Route::post('/{id}', [UserController::class, 'update'])->name('update');
+            Route::name('password.')->group(function(){
+                Route::get('/{id}/changePassword', [PasswordController::class, 'edit'])->name('edit');
+                Route::post('/{id}/changePassword', [PasswordController::class, 'store'])->name('update');
+            });
+        });
     });
 });
 
