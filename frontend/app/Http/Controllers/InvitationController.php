@@ -45,6 +45,7 @@ class InvitationController extends Controller
 
         $title = "Invitation Detail";
         $data = collect($json->data);
+        $data['quran'] = Http::get("http://api.alquran.cloud/v1/ayah/30:21/en.asad")->object()->data;
 
         // dd($data);
 
