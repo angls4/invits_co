@@ -97,6 +97,7 @@ Route::prefix('orders')->group(function () {
     // Auth
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{id}', [OrderController::class, 'show']);
+        Route::post('/', [OrderController::class, 'store']);
     });
     
     // Auth: Admin
