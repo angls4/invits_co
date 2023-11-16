@@ -134,10 +134,11 @@
     </section>
     <section id="mempelai" class="">
         <div class="container py-12 text-center">
-            <h2 class="text-5xl font-bold">{{ $data['invitation']->wedding->title }}</h2>
+            <h2 class="text-5xl font-bold mb-4">{{ $data['invitation']->wedding->title }}</h2>
+            <p class="italic text-lg">"{{ $data['quran']->text }}" <span class="not-italic">({{$data['quran']->surah->englishName}}:{{$data['quran']->numberInSurah}})</span></p>
         </div>
         <div class="relative text-white xl:flex">
-            <div class="w-full gap-3 p-4 max-xl:pb-8 bg-brand-purple-900 sm:flex h-fit">
+            <div class="w-full gap-3 p-8 max-xl:pb-8 bg-brand-purple-900 sm:flex h-fit xl:rounded-r-full">
                 <h3 class="uppercase sm:vertical-lr sm:text-justify sm:text-justify-last text-3xl font-bold">
                     <span class="justify-between font-light xl:flex">
                         <span>T</span><span>h</span><span>e</span>
@@ -148,12 +149,12 @@
                 </h3>
                 <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px]" src="{{ $data['invitation']->wedding->groom->image }}" alt="">
                 <div class="w-full mt-5 sm:mt-0">
-                    <h4 class="text-2xl md:text-4xl font-medium">{{ $data['invitation']->wedding->groom->name }}</h4>
+                    <h4 class="text-3xl md:max-xl:text-4xl font-medium">{{ $data['invitation']->wedding->groom->name }}</h4>
                     <p class="mb-1.5">Anak dari Bpk. {{ $data['invitation']->wedding->groom->father }}</p>
                     <p class="m-0"><i class="mr-1.5 fa-brands fa-instagram text-brand-yellow-500"></i>{{ $data['invitation']->wedding->groom->instagram  }}</p>
                 </div>
             </div>
-            <div class="flex-row-reverse w-full gap-3 p-4 max-xl:pt-8 bg-brand-purple-900 sm:flex h-fit">
+            <div class="flex-row-reverse w-full gap-3 p-8 max-xl:pt-8 bg-brand-purple-900 sm:flex h-fit xl:rounded-l-full">
                 <h3 class="uppercase sm:vertical-rl sm:text-justify sm:text-justify-last text-3xl font-bold">
                     <span class="justify-between font-light xl:flex">
                         <span>T</span><span>h</span><span>e</span>
@@ -164,12 +165,12 @@
                 </h3>
                 <img class="object-cover mt-3 mb-5 sm:m-0 aspect-square sm:max-w-xs xl:max-w-[220px]" src="{{ $data['invitation']->wedding->bride->image }}" alt="">
                 <div class="w-full mt-5 sm:mt-0 sm:text-end">
-                    <h4 class="text-2xl md:text-4xl font-medium">{{ $data['invitation']->wedding->bride->name }}</h4>
+                    <h4 class="text-3xl md:max-xl:text-4xl font-medium">{{ $data['invitation']->wedding->bride->name }}</h4>
                     <p class="mb-1.5">Anak dari Bpk. {{ $data['invitation']->wedding->bride->father }}</p>
                     <p class="m-0"><i class="mr-1.5 fa-brands fa-instagram text-brand-yellow-500"></i>{{ $data['invitation']->wedding->bride->instagram  }}</p>
                 </div>
             </div>
-            <img src="{{ asset("img/flowers.png")}}" alt="" class="absolute -translate-x-1/2 -translate-y-1/2 w-28 top-1/2 left-1/2">
+            <img src="{{ asset("img/illustration/flowers.png")}}" alt="" class="absolute -translate-x-1/2 -translate-y-1/2 w-28 top-1/2 left-1/2">
         </div>
     </section>
     <section id="acara" class="relative py-12">
