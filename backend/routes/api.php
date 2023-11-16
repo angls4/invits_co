@@ -33,7 +33,7 @@ use App\Http\Controllers\ApiControllers\GuestController;
 | Authentication
 |--------------------------------------------------------------------------
 */
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 Route::post('social-login/{provider}', [SocialLoginController::class, 'handleProvider']);
@@ -97,6 +97,7 @@ Route::prefix('orders')->group(function () {
     // Auth
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{id}', [OrderController::class, 'show']);
+        Route::post('/', [OrderController::class, 'store']);
     });
     
     // Auth: Admin
