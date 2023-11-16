@@ -9,6 +9,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -33,13 +34,14 @@ Route::prefix('order')->name('order.')->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', [LoginController::class, 'create'])
-                ->name('login');
+    Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store']);
 
-    Route::get('register', [RegisterController::class, 'create'])
-                    ->name('register');
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
     Route::post('register', [RegisterController::class, 'store']);
+
+    Route::get('login/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name('social.login');
+    Route::get('login/{provider}/callback', [SocialLoginController::class, 'handleProviderCallback'])->name('social.login.callback');
 });
 
 Route::middleware('check.token')->group(function (){
