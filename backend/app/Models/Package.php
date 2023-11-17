@@ -22,7 +22,7 @@ class Package extends Model
         'name',
         'price',
         'description',
-        'feature'
+        'features'
     ];
 
     /**
