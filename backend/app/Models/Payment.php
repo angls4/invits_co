@@ -59,6 +59,11 @@ class Payment extends Model
      */
     public static function midtrans($user, $order, $payment)
     {
+        // Mock for testing
+        if(env('APP_ENV') == 'testing' 
+        // || env('APP_ENV') == 'local'
+        ) return "test-dummy-snap-token-orderId:$order->id";
+
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
