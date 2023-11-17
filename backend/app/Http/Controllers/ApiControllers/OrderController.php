@@ -34,6 +34,12 @@ class OrderController extends Controller
     public function getByuserID($user_id)
     {
         try {
+            $user = User::find($user_id);
+
+            if (!$user) {
+                return $this->jsonResponse(null, 'User not found', [], false, 404);
+            }
+
             $orders = Order::where('user_id', $user_id)->with('invitation', 'theme')->get();
 
             $data = [
@@ -68,8 +74,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'theme_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'theme_id' => 'required|exists:themes,id',
         ]);
 
         if ($validator->fails()) {
