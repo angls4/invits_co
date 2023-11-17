@@ -50,6 +50,7 @@ Route::prefix('users')->group(function () {
         Route::get('/{id}', [UserController::class, 'show']);
         // Route::post('/', [UserController::class, 'store']);
         Route::put('/{id}', [UserController::class, 'update']);
+        Route::put('/{id}/change-password', [UserController::class, 'update_password']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
     });
 });

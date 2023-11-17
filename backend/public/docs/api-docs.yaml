@@ -47,6 +47,9 @@ paths:
 
   /api/users/{id}:
     $ref: './user.yaml#/User_id'
+  
+  /api/users/{id}/change-password:
+    $ref: './user.yaml#/ChangePassword'
 
   /api/packages:
     $ref: './package.yaml#/Packages'

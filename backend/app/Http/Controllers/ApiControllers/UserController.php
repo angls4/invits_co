@@ -135,4 +135,42 @@ class UserController extends Controller
             return $this->jsonResponse(null, 'Failed to delete the user', [$e->getMessage()], false, 500);
         }
     }
+
+    public function update_password(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return $this->jsonResponse(null, 'User not found', [], false, 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->password)) {
+                        $fail('Incorrect old password');
+                    }
+                },
+            ],
+            'new_password' => 'required|string|min:6',
+            'c_new_password' => 'required|same:new_password',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->jsonResponse(null, 'Validation error', $validator->errors(), false, 422);
+        }
+
+        try {
+            $user->update([
+                'password' => Hash::make($request->input('new_password')),
+            ]);
+
+            return $this->jsonResponse(null, 'Password updated successfully');
+        } catch (\Exception $e) {
+            return $this->jsonResponse(null, 'Failed to update the password', [$e->getMessage()], false, 500);
+        }
+    }
+
 }
