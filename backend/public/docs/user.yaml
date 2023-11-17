@@ -470,3 +470,40 @@ User_id:
               data: null
       '404':
         description: User not found
+
+ChangePassword:
+  put:
+    tags:
+      - User
+    summary: Update user password by ID
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            old_password: old_secret_password
+            new_password: new_secret_password
+            c_new_password: new_secret_password
+    responses:
+      '200':
+        description: Password updated successfully
+        content:
+          application/json:
+            example:
+              success: true
+              errors: []
+              message: Password updated successfully
+              data: null
+      '401':
+        description: Unauthorized, incorrect old password
+      '404':
+        description: User not found
+
