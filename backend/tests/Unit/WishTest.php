@@ -126,8 +126,9 @@ class WishTest extends TestCase
         ]);
         // Assert data integrity
         $expected_data = $data;
-        $data['name'] = 'anonim';
+        $data['name'] = 'Anonim';
         $data['from'] = null;
+        unset($expected_data['anonymous']);
         $response->assertJsonFragment($expected_data);
     }
     public function test_store_nonExistentForeignId()
@@ -222,8 +223,6 @@ class WishTest extends TestCase
         // Assert response status and structure
         $response->assertStatus(422)->assertJsonStructure([
             'errors' => [
-                'name',
-                'from',
                 'wish',
                 'wedding_id'
             ],

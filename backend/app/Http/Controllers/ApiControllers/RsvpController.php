@@ -57,20 +57,21 @@ class RsvpController extends Controller
         }
 
         try {
-            $is_attend = $request->is_attend === "true";
+            $is_attend = $request->is_attend == "true";
             $amount_guest = $request->amount_guest ? $request->amount_guest : ($is_attend ? 1 : 0);
 
             $rsvp = [
                 "invitation_id" => $request->invitation_id,
                 "name" => $request->name,
                 "amount_guest" => $amount_guest,
-                "is_attend" => $is_attend
+                "is_attend" => $is_attend,
+                "guest_id" => $request->guest_id ?? null
             ];
 
             DB::beginTransaction();
             
             // Create RSVP
-            Rsvp::create($rsvp);
+            $rsvp = Rsvp::create($rsvp);
             
             DB::commit();
 
@@ -142,6 +143,10 @@ class RsvpController extends Controller
     {
         try {
             $invitation= Invitation::where('id', $invitation_id)->first();
+
+            if (!$invitation) {
+                return $this->jsonResponse(null, 'Invitation not found', [], false, 404);
+            }
 
             if($request->query('key')) {
                 $key = $request->query('key');

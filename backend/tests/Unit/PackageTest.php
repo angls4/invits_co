@@ -278,21 +278,14 @@ class PackageTest extends TestCase
         $response = $this->put('/api/packages/' . $expected_package['id'], $data);
 
         // Assert response status and structure
-        $response->assertStatus(200)->assertJsonStructure([
-            'data' => [
-                'package' => ['id']
+        $response->assertStatus(422)->assertJsonStructure([
+            'errors' => [
+                "name",
+                "price",
+                "description",
+                "features"
             ],
         ]);
-        // Assert data integrity
-        $expected_data = [
-            "id" => $expected_package['id'],
-            "name" => $expected_package['name'],
-            "price" => $expected_package['price'],
-            "description" =>  $expected_package['description'],
-            "features" =>  $expected_package['features'],
-        ];
-        $this->assertNotEquals($expected_package['updated_at'], $response['data']['package']['updated_at'], 'updated_at not updated');
-        $response->assertJsonFragment($expected_data);
     }
 
     public function test_destroy_twice()

@@ -165,7 +165,6 @@ class RsvpTest extends TestCase
         $response->assertStatus(422)->assertJsonStructure([
             'errors' => [
                 'invitation_id',
-                'guest_id'
             ],
         ]);
     }
