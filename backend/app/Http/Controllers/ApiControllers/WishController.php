@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Wish;
+use App\Models\Wedding;
 use Illuminate\Support\Facades\Validator;
 
 class WishController extends Controller
@@ -47,9 +48,9 @@ class WishController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|string',
-            'from' => 'nullable|string',
-            'wish' => 'required|string',
+            'name' => 'nullable|string|filled',
+            'from' => 'nullable|string|filled',
+            'wish' => 'required|string|filled',
             'wedding_id' => 'required|exists:weddings,id',
         ]);
 
@@ -85,7 +86,7 @@ class WishController extends Controller
                 'wish' => $wish,
             ];
 
-            return $this->jsonResponse($data, 'Wish created successfully', true, 201);
+            return $this->jsonResponse($data, 'Wish created successfully', null, true, 201);
         } catch (\Exception $e) {
             return $this->jsonResponse(null, 'Failed to create the wish', [$e->getMessage()], false, 500);
         }
@@ -147,6 +148,12 @@ class WishController extends Controller
     public function get_by_wedding_id($wedding_id)
     {
         try {
+            $wedding= Wedding::where('id', $wedding_id)->first();
+
+            if (!$wedding) {
+                return $this->jsonResponse(null, 'Wedding not found', [], false, 404);
+            }
+
             $wishes = Wish::where('wedding_id', $wedding_id)->get();
 
             $data = [
