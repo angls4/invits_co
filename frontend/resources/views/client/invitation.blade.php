@@ -199,8 +199,8 @@
                 <hr class="h-[1px] inline-block w-full border-0 bg-gray-700">
                 <img class="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2" src="{{asset('img/illustration/flower.png')}}" alt="">
             </div>
-            <div class="flex flex-col justify-between gap-4 sm:flex-row">
-                <div class="w-full max-sm:order-1">
+            <div class="flex flex-col justify-center gap-8 sm:flex-row">
+                <div class="text-end max-sm:order-1">
                     <h3 class="text-2xl mb-1.5 font-bold">Lokasi</h3>
                     {{-- <p>Gedung PPBS D</p> --}}
     
@@ -209,12 +209,19 @@
                     <x-button-a href="{{ $data['g_calendar'] }}" target="__blank" class="py-3 mt-4 text-white bg-brand-purple-500 hover:bg-brand-purple-600"><i class="mr-2 fa-solid fa-calendar"></i>Simpan acara ke kalender</x-button-a>
                     @endif
                 </div>
-                {{-- <iframe class="w-full aspect-square min-w-[250px] max-w-xs" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.7024030526295!2d107.77211317486105!3d-6.926132093073627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e653eb17e239%3A0xc6192a1f92aa9e41!2sPadjadjaran%20University!5e0!3m2!1sen!2sid!4v1682163086134!5m2!1sen!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
-                <div class="w-40 max-sm:order-0">
+                <iframe
+                    class="w-40 2xl:w-80 aspect-square"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="{{"https://www.google.com/maps/embed/v1/place?key=AIzaSyD_5nwHk4Pg-uUSSwpwQM93gBi5fXwY6J0&q=".str_replace(' ', '+', $data['invitation']->wedding->event[1]->place)}}">
+                </iframe>
+                {{-- <div class="w-40 max-sm:order-0">
                     <a href="{{ $data['invitation']->wedding->location_gmap }}" target="__blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77V504.3L192 449.4V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
         <img class="absolute top-0 left-0 hidden w-40 sm:block" src="{{asset('img/illustration/corner-flowers.png')}}" alt="">
