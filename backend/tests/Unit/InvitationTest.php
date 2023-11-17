@@ -175,7 +175,7 @@ class InvitationTest extends TestCase
         $response = $this->post('/api/invitations/', $data);
 
         // Assert response status and structure
-        $response->assertStatus(441)->assertJsonStructure([
+        $response->assertStatus(422)->assertJsonStructure([
             'errors' => [
                 'slug'
             ],

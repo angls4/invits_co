@@ -60,9 +60,9 @@ class InvitationController extends Controller
             'slug' => 'nullable|unique:invitations',
             'is_custom_domain' => 'required|boolean',
             'custom_domain' => 'nullable',
-            'user_id' => 'required',
-            'order_id' => 'required',
-            'invitation_type_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'order_id' => 'required|exists:orders,id',
+            'invitation_type_id' => 'required|exists:invitation_types,id',
         ]);
 
         if ($validator->fails()) {
@@ -91,18 +91,24 @@ class InvitationController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'status' => 'required|in:ACTIVE,INACTIVE,INCOMPLETE',
-            'slug' => 'nullable|unique:invitations,slug,' . $id,
-            'is_custom_domain' => 'required|boolean',
-            'custom_domain' => 'nullable',
-            'user_id' => 'required',
-            'order_id' => 'required',
-            'invitation_type_id' => 'required',
+            'status' => 'nullable|in:ACTIVE,INACTIVE,INCOMPLETE|filled',
+            'slug' => 'nullable|filled|unique:invitations,slug,' . $id,
+            'is_custom_domain' => 'nullable|filled|boolean',
+            'custom_domain' => 'nullable|filled',
+            'user_id' => 'nullable|filled|exists:users,id',
+            'order_id' => 'nullable|filled|exists:orders,id',
+            'invitation_type_id' => 'nullable|filled|exists:invitation_types,id',
         ]);
+        
 
         if ($validator->fails()) {
             return $this->jsonResponse(null, 'Validation error', $validator->errors(), false, 422);
         }
+
+        // Filter out null and empty values from the request data
+        $filteredData = array_filter($request->all(), function ($value) {
+            return !is_null($value) && $value !== '';
+        });
 
         try {
             $invitation->update($request->all());

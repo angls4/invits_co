@@ -32,6 +32,7 @@ class Invitation extends Model
         'status',
         'slug',
         'is_custom_domain',
+        'custom_domain',
         'user_id',
         'order_id',
         'invitation_type_id',
