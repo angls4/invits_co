@@ -89,7 +89,7 @@ class GuestController extends Controller
             'address' => 'nullable',
             'no_whats_app' => 'nullable',
             'email' => 'nullable|email',
-            'invitation_id' => 'nullable|exists:invitations,id',
+            'invitation_id' => 'required|exists:invitations,id',
         ]);
 
         if ($validator->fails()) {
@@ -135,6 +135,10 @@ class GuestController extends Controller
     {
         try {
             $invitation = Invitation::where('id', $invitation_id)->first();
+            
+            if (!$invitation) {
+                return $this->jsonResponse(null, 'Error not found', ['invitation_id' => 'invitation_id not found'], false, 404);
+            }
 
             if ($request->query('key')) {
                 $key = $request->query('key');
