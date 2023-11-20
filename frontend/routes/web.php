@@ -80,7 +80,7 @@ Route::middleware('check.token')->group(function (){
             Route::post('/{id}', [UserController::class, 'update'])->name('update');
             Route::name('password.')->group(function(){
                 Route::get('/{id}/changePassword', [PasswordController::class, 'edit'])->name('edit');
-                Route::post('/{id}/changePassword', [PasswordController::class, 'store'])->name('update');
+                Route::post('/{id}/changePassword', [PasswordController::class, 'update'])->name('update');
             });
         });
     });

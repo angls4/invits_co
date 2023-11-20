@@ -20,6 +20,12 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Name</span>
+                            @error('first_name')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
+                            @error('last_name')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="flex flex-col gap-1.5 sm:gap-4 sm:flex-row sm:w-2/3">
                             <input type="text" name="first_name" value="" x-model="form.profile.first_name"
@@ -35,7 +41,9 @@
                             <span class="font-bold">
                                 Your Photo
                             </span>
-                            <p class="m-0">This will be displayed on your profile.</p>
+                            @error('avatar')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <input name="avatar" class="block w-full text-sm text-gray-900 focus:outline-none file:bg-brand-purple-500 file:text-white file:rounded-md file:px-5 file:py-2 file:mr-5 file:disabled:bg-gray-100 file:disabled:text-gray-400 " id="file_input" type="file" :disabled="isEdit() ? false : true">
@@ -44,6 +52,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Bio</span>
+                            @error('bio')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <textarea :disabled="isEdit() ? false : true" :class="isEdit() == false && 'bg-neutral-100 '" 
@@ -54,6 +65,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Alamat</span>
+                            @error('address')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <textarea :disabled="isEdit() ? false : true" :class="isEdit() == false && 'bg-neutral-100 '" 
@@ -64,6 +78,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">URL Website</span>
+                            @error('url_website')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <input type="text" name="url_website" value="" x-model="form.profile.url_website"
@@ -74,6 +91,18 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">URL Media Sosial</span>
+                            @error('url_facebook')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
+                            @error('url_linkedin')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
+                            @error('url_twitter')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
+                            @error('url_instagram')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="flex flex-col gap-1.5 sm:w-2/3 sm:gap-4">
                             <div class="flex flex-col sm:flex-row gap-1.5 sm:gap-4">
@@ -104,6 +133,9 @@
                     </div><div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Email</span>
+                            @error('email')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <input type="text" name="email" value="" x-model="form.profile.email"
@@ -114,6 +146,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">No. Telepon</span>
+                            @error('mobile')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <input type="text" name="mobile" value="" x-model="form.profile.mobile"
@@ -124,6 +159,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Date of Birth</span>
+                            @error('date_of_birth')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <input type="date" name="date_of_birth" value="" x-model="form.profile.date_of_birth"
@@ -134,6 +172,9 @@
                     <div class="flex flex-col gap-1.5 py-4 border-t border-gray-200 sm:flex-row">
                         <div class="sm:w-1/3">
                             <span class="font-bold">Gender</span>
+                            @error('gender')
+                            <p class="mt-2 text-sm text-red-600"><span class="font-medium">{{ $message }}</span></p>
+                            @enderror
                         </div>
                         <div class="sm:w-2/3">
                             <select name="gender" class=" border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

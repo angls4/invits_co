@@ -39,12 +39,16 @@ class UserController extends Controller
     public function show(string $id)
     {
         $id = decode_id($id);
+
         $response = Http::withToken(session('api_token'))->get(env('API_URL').'users/'.$id);
+
+        if($response->failed()){
+            $errors = $response->json()['errors'];
+            return back()->withErrors($errors ?? null);
+        }
 
         $title = "Profile";
         $user = $response->object()->data->user;
-        
-        // dd($user);
 
         return view("client.profile.index", compact('title', 'user'));
     }
@@ -76,6 +80,10 @@ class UserController extends Controller
 
             // Update data user
             $response = Http::withToken(session('api_token'))->put(env('API_URL').'users/'.$id, $input);
+            if($response->failed()){
+                $errors = $response->json()['errors'];
+                return back()->withErrors($errors ?? null);
+            }
 
             DB::commit();
 
