@@ -50,7 +50,7 @@ Route::middleware('check.token')->group(function (){
     Route::post('logout', [LoginController::class, 'destroy'])
                     ->name('logout');
     
-    Route::prefix('client')->name('client.')->group(function () {
+    Route::middleware('role:user')->prefix('client')->name('client.')->group(function () {
         // Client Order
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
         Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
@@ -85,6 +85,10 @@ Route::middleware('check.token')->group(function (){
                 Route::post('/{id}/changePassword', [PasswordController::class, 'update'])->name('update');
             });
         });
+    });
+
+    Route::middleware('role:admin')->prefix('dashboard')->name('admin.')->group(function () {
+        Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
     });
 });
 
