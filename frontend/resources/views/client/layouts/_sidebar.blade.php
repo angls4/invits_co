@@ -39,31 +39,60 @@
 			>
 				<i class="ph-fill ph-house mr-3 text-[26px]"></i>Back to Home
 			</a>
-			<a
-				class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.index') ? 'sidebar-active' : '' }}"
-				href="{{ route('client.profile.index', encode_id(session("user.id"))) }}"
-			>
-				<i class="ph-fill ph-user mr-3 text-[26px]"></i></i>Profile
-			</a>
-			<a
-				class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
-				href="{{ route('client.orders') }}"
-			>
-				<i class="ph-fill ph-shopping-cart-simple mr-3 text-[26px]"></i>Orders
-			</a>
-			@if ( request()->is('client/invitations/*') )
-			<a
-				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.invitation.guest.index', encode_id($data)) }}">
-				<i class="ph-fill ph-user-list mr-3 text-[26px]"></i>
-				Tamu
-			</a>
-			<a
-				class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
-				href="{{ route('client.invitation.rsvp', encode_id($data)) }}">
-				<i class="ph-fill ph-list-checks mr-3 text-[26px]"></i>
-				RSVP
-			</a>
+			@if(session('user.role') == 'user')
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.index') ? 'sidebar-active' : '' }}"
+					href="{{ route('client.profile.index', encode_id(session("user.id"))) }}"
+				>
+					<i class="ph-fill ph-user mr-3 text-[26px]"></i></i>Profile
+				</a>
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
+					href="{{ route('client.orders') }}"
+				>
+					<i class="ph-fill ph-shopping-cart-simple mr-3 text-[26px]"></i>Orders
+				</a>
+				@if ( request()->is('client/invitations/*') )
+				<a
+					class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.guest.index') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
+					href="{{ route('client.invitation.guest.index', encode_id($data)) }}">
+					<i class="ph-fill ph-user-list mr-3 text-[26px]"></i>
+					Tamu
+				</a>
+				<a
+					class="flex items-center w-full p-3 pl-6 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.invitation.rsvp') ? 'sidebar-active' : 'bg-brand-purple-600' }}"
+					href="{{ route('client.invitation.rsvp', encode_id($data)) }}">
+					<i class="ph-fill ph-list-checks mr-3 text-[26px]"></i>
+					RSVP
+				</a>
+				@endif
+			@endif
+			
+			@if(session('user.role') == 'admin')
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.index') ? 'sidebar-active' : '' }}"
+					href="{{ route('client.profile.index', encode_id(session("user.id"))) }}"
+				>
+					<i class="ph-fill ph-user mr-3 text-[26px]"></i></i>Users
+				</a>
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
+					href="{{ route('admin.orders') }}"
+				>
+					<i class="ph-fill ph-shopping-cart-simple mr-3 text-[26px]"></i>Orders
+				</a>
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
+					href="{{ route('client.orders') }}"
+				>
+					<i class="ph-fill ph-package mr-3 text-[26px]"></i>Packages
+				</a>
+				<a
+					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
+					href="{{ route('client.orders') }}"
+				>
+					<i class="ph-fill ph-palette mr-3 text-[26px]"></i>Themes
+				</a>
 			@endif
 		</div>
 		<div class="px-5">

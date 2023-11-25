@@ -49,12 +49,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('check.token')->group(function (){
     Route::post('logout', [LoginController::class, 'destroy'])
                     ->name('logout');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
     
     Route::middleware('role:user')->prefix('client')->name('client.')->group(function () {
         // Client Order
-        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-        Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
-        // Route::view('/bills', 'user/order/detail')->name('bills');
+        Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders');
 
         // Client Invitation
         Route::name('invitation.')->group(function(){
@@ -89,6 +88,7 @@ Route::middleware('check.token')->group(function (){
 
     Route::middleware('role:admin')->prefix('dashboard')->name('admin.')->group(function () {
         Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     });
 });
 
