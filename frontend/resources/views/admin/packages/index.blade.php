@@ -25,7 +25,7 @@
                 </form>
             </div>
         </div>
-        <x-button-a href="" type="button"
+        <x-button-a href="{{ route('admin.packages.add') }}" type="button"
             class="whitespace-nowrap w-full !px-6 !py-3 my-4 ml-auto !block tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-fit bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
             <span>Add New</span>
         </x-button-a>

@@ -28,7 +28,7 @@ class PackageController extends Controller
         $slicedData = $packages->slice($startIndex, $perPage);
 
         $data = new LengthAwarePaginator($slicedData, $packages->count(), $perPage, $currentPage, [
-            'path' => route('admin.packages'),
+            'path' => route('admin.packages.index'),
         ]);
 
         return view('admin.packages.index', compact("title", "data"));
@@ -39,7 +39,8 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Add New Package";
+        return view('admin.packages.add', compact('title'));
     }
 
     /**
@@ -47,7 +48,19 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+        $data['price'] = 'Rp. ' . number_format($request['price'], 0, ',', '.');
+        $data['features'] = collect($data['features'])->map(function ($item) {
+            return "<li>" . $item . "</li>";
+        })->implode('');
+
+        $response = Http::withToken(session('api_token'))->post(env('API_URL').'packages', $data);
+        if($response->failed()){
+            $errors = $response->json()["errors"];
+            return back()->withErrors($errors ?? null)->withInput();
+        }
+
+        return redirect()->route('admin.packages.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

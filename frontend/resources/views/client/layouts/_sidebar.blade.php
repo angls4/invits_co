@@ -83,7 +83,7 @@
 				</a>
 				<a
 					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
-					href="{{ route('admin.packages') }}"
+					href="{{ route('admin.packages.index') }}"
 				>
 					<i class="ph-fill ph-package mr-3 text-[26px]"></i>Packages
 				</a>

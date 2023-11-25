@@ -90,7 +90,11 @@ Route::middleware('check.token')->group(function (){
     Route::middleware('role:admin')->prefix('dashboard')->name('admin.')->group(function () {
         Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-        Route::get('/packages', [PackageController::class, 'index'])->name('packages');
+        Route::prefix('packages')->name('packages.')->group(function(){
+            Route::get('/', [PackageController::class, 'index'])->name('index');
+            Route::get('/add', [PackageController::class, 'create'])->name('add');
+            Route::post('/store', [PackageController::class, 'store'])->name('store');
+        });
     });
 });
 
