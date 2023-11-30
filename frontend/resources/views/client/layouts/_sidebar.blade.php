@@ -89,7 +89,7 @@
 				</a>
 				<a
 					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.orders') ? 'sidebar-active' : '' }}"
-					href="{{ route('client.orders') }}"
+					href="{{ route('admin.themes.index') }}"
 				>
 					<i class="ph-fill ph-palette mr-3 text-[26px]"></i>Themes
 				</a>

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -90,6 +91,7 @@ Route::middleware('check.token')->group(function (){
     Route::middleware('role:admin')->prefix('dashboard')->name('admin.')->group(function () {
         Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+
         Route::prefix('packages')->name('packages.')->group(function(){
             Route::get('/', [PackageController::class, 'index'])->name('index');
             Route::get('/add', [PackageController::class, 'create'])->name('add');
@@ -97,6 +99,15 @@ Route::middleware('check.token')->group(function (){
             Route::get('/{id}/edit', [PackageController::class, 'edit'])->name('edit');
             Route::post('/{id}/update', [PackageController::class, 'update'])->name('update');
             Route::post('/delete', [PackageController::class, 'destroy'])->name('delete');
+        });
+
+        Route::prefix('themes')->name('themes.')->group(function(){
+            Route::get('/', [ThemeController::class, 'index'])->name('index');
+            Route::get('/add', [ThemeController::class, 'create'])->name('add');
+            Route::post('/store', [ThemeController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [ThemeController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [ThemeController::class, 'update'])->name('update');
+            Route::post('/delete', [ThemeController::class, 'destroy'])->name('delete');
         });
     });
 });
