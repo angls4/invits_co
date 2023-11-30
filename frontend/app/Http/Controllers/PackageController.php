@@ -78,7 +78,7 @@ class PackageController extends Controller
     {
         $response = Http::get(env('API_URL').'packages/'.decode_id($id));
         if($response->failed()) {
-            return back()->with("failed", "Couldn't load guest");
+            return back()->with("failed", "Couldn't load package");
         }
 
         $title = "Edit Package";

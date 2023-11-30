@@ -83,7 +83,18 @@ class ThemeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $theme_response = Http::get(env('API_URL').'themes/'.decode_id($id));
+        $packages_response = Http::get(env('API_URL').'packages');
+
+        if($theme_response->failed() || $packages_response->failed()) {
+            return back()->with("failed", "Couldn't load data");
+        }
+
+        $title = "Edit Theme";
+        $theme = $theme_response->object()->data->theme;
+        $packages = collect($packages_response->object()->data->packages);
+
+        return view('admin.themes.edit', compact('title', 'theme', 'packages'));
     }
 
     /**
@@ -91,7 +102,24 @@ class ThemeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token');
+        $old_data = Http::withToken(session('api_token'))->get(env('API_URL').'themes/'.decode_id($id))->object()->data->theme;
+        $lowercase = strtolower($request->name);
+        $data['slug'] = str_replace(' ', '-', $lowercase);
+        
+        if(isset($data['img_preview'])){
+            $data['img_preview'] = FileTrait::store_file(null, $data['img_preview'], 'theme_images');
+        }else {
+            $data['img_preview'] = $old_data->img_preview;
+        }       
+
+        $response = Http::withToken(session('api_token'))->post(env('API_URL').'themes/'.decode_id($id), $data);
+        if($response->failed()){
+            $errors = $response->json()["errors"];
+            return back()->withErrors($errors ?? null)->withInput();
+        }
+        return redirect()->route('admin.themes.index')->with('success', 'Data berhasil diubah');
+
     }
 
     /**

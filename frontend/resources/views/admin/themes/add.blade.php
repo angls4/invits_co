@@ -16,7 +16,7 @@
                         <span class="font-bold">Paket</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.select name="package_id" :value="old('material')" required>
+                        <x-forms.select name="package_id" required>
                             <option selected disabled>Pilih Paket</option>
                             @foreach ($packages as $package)
                                 <option value="{{ $package->id }}">{{ $package->name }}</option>
