@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Traits\FileTrait;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -39,7 +40,15 @@ class ThemeController extends Controller
      */
     public function create()
     {
-        //
+        $packages_response = Http::get(env('API_URL').'packages');
+
+        if($packages_response->failed()) {
+            return back()->with(["error" => "Couldn't load data"]);
+        }
+
+        $title = "Add New Theme";
+        $packages = collect($packages_response->object()->data->packages);
+        return view('admin.themes.add', compact('title', 'packages'));
     }
 
     /**
@@ -47,7 +56,18 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+        $lowercase = strtolower($request->name);
+        $data['slug'] = str_replace(' ', '-', $lowercase);
+        $data['img_preview'] = FileTrait::store_file(null, $data['img_preview'], 'theme_images');
+
+        $response = Http::withToken(session('api_token'))->post(env('API_URL').'themes', $data);
+        if($response->failed()){
+            $errors = $response->json()["errors"];
+            return back()->withErrors($errors ?? null)->withInput();
+        }
+
+        return redirect()->route('admin.themes.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

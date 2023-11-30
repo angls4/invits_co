@@ -37,7 +37,7 @@
                     <span class="uppercase">Total Themes</span>
                 </div>
             </div>
-            <x-button-a class="w-full text-white rounded-t-none bg-brand-purple-400 hover:bg-brand-purple-500">View More<i></i></x-button>
+            <x-button-a href="{{ route('admin.themes.index') }}" class="w-full text-white rounded-t-none bg-brand-purple-400 hover:bg-brand-purple-500">View More<i></i></x-button>
         </div>
         <div class="w-full border rounded-md border-brand-purple-300">
             <div class="flex items-center gap-4 p-2.5">
