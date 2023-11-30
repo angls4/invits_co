@@ -96,6 +96,7 @@ Route::middleware('check.token')->group(function (){
             Route::post('/store', [PackageController::class, 'store'])->name('store');
             Route::get('/{id}/edit', [PackageController::class, 'edit'])->name('edit');
             Route::post('/{id}/update', [PackageController::class, 'update'])->name('update');
+            Route::post('/delete', [PackageController::class, 'destroy'])->name('delete');
         });
     });
 });
