@@ -94,6 +94,8 @@ Route::middleware('check.token')->group(function (){
             Route::get('/', [PackageController::class, 'index'])->name('index');
             Route::get('/add', [PackageController::class, 'create'])->name('add');
             Route::post('/store', [PackageController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [PackageController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [PackageController::class, 'update'])->name('update');
         });
     });
 });

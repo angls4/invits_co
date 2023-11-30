@@ -66,14 +66,14 @@
                             <td class="px-6 py-4">
                                 {{ $package->description }}
                             </td>
-                            <td class="flex justify-center py-4">
-                                <x-button-a href="{{ route('client.invitation.guest.edit', encode_id($package->id)) }}"
-                                    class="w-9 h-9 mx-1.5 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
-                                    <i class="text-2xl ph ph-pencil-simple"></i>
+                            <td class="flex justify-center py-4 gap-1">
+                                <x-button-a href="{{ route('admin.packages.edit', encode_id($package->id)) }}"
+                                    class="w-9 h-9 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
+                                    <i class="text-lg ph ph-pencil-simple"></i>
                                 </x-button-a>
                                 <x-button
-                                    class="w-9 h-9 mx-1.5 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
-                                    <i class="text-2xl ph ph-trash"></i>
+                                    class="w-9 h-9 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
+                                    <i class="text-xl ph ph-trash"></i>
                                 </x-button>
                             </td>
                         </tr>
@@ -97,7 +97,7 @@
     </div>
     <!--  footer -->
     <div
-        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
         <x-button type="button"
             class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:w-40 ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
             <span class="mx-1">Batalkan</span>

@@ -76,7 +76,19 @@ class PackageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $response = Http::get(env('API_URL').'packages/'.decode_id($id));
+        if($response->failed()) {
+            return back()->with("failed", "Couldn't load guest");
+        }
+
+        $title = "Edit Package";
+        $package = $response->object()->data->package;
+
+        $package->price = str_replace(['Rp. ', '.'], '', $package->price);
+        $package->features = explode('</li><li>', $package->features);
+        $package->features = array_map('strip_tags', $package->features);
+
+        return view('admin.packages.edit', compact('title', 'package'));
     }
 
     /**
@@ -84,7 +96,20 @@ class PackageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $data['price'] = 'Rp. ' . number_format($request['price'], 0, ',', '.');
+        $data['features'] = collect($data['features'])->map(function ($item) {
+            return "<li>" . $item . "</li>";
+        })->implode('');
+
+        $response = Http::withToken(session('api_token'))->put(env('API_URL').'packages/'.decode_id($id), $data);
+        if($response->failed()){
+            $errors = $response->json()["errors"];
+            return back()->withErrors($errors ?? null)->withInput();
+        }
+
+        return redirect()->route('admin.packages.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
