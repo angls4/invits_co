@@ -127,7 +127,7 @@ class PackageController extends Controller
             $status = 200;
         } catch (\Throwable $th) {
             $status = 400;
-        }
+        } 
 
         if (count($ids) == 0) $status = 400;
 

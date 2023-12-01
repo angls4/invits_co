@@ -125,8 +125,22 @@ class ThemeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->selectedIDs;
+        if (!$ids) $ids = [];
+
+        try {
+            foreach ($ids as $theme_id) {
+                $theme = Http::withToken(session('api_token'))->delete(env('API_URL').'themes/'.$theme_id);
+            }
+            $status = 200;
+        } catch (\Throwable $th) {
+            $status = 400;
+        }
+
+        if (count($ids) == 0) $status = 400;
+
+        return response()->json(['ids' => $request->selectedIDs], $status);
     }
 }

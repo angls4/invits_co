@@ -92,6 +92,11 @@ Route::middleware('check.token')->group(function (){
         Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
+        Route::prefix('users')->name('users.')->group(function(){
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::post('/delete', [UserController::class, 'destroy'])->name('delete');
+        });
+
         Route::prefix('packages')->name('packages.')->group(function(){
             Route::get('/', [PackageController::class, 'index'])->name('index');
             Route::get('/add', [PackageController::class, 'create'])->name('add');
