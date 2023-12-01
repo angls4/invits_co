@@ -3,7 +3,7 @@
 @section('content')
 @php
     $dataCount = count($data);
-    $alpineData = "packages";
+    $alpineData = "users";
 @endphp 
 <main class="py-3 bg-white grow">
     <div class="container">
@@ -33,7 +33,7 @@
             <div class="flex w-full max-sm:justify-between">
                 <p class="m-0"><span x-text="selectedCheckboxCount"></span> baris dipilih</p>
                 <div class="flex justify-between gap-3 sm:mx-auto">
-                    <x-button @click="confirmDelete(getSelectedPackages())" type="button"
+                    <x-button @click="confirmDelete(getSelectedUsers())" type="button"
                         x-show="selectedCheckboxCount > 0"
                         class="!px-0 !py-0 text-brand-red sm:w-fit hover:text-black">
                         <span class="font-extrabold">Delete</span>
@@ -62,10 +62,10 @@
                         <th scope="col" class="px-6 py-3">
                             No. Hp
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-6 py-3">
                             Jenis Kelamin
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-6 py-3">
                             Tgl Lahir
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
@@ -101,7 +101,7 @@
                             <td class="px-6 py-4">
                                 {{ $user->date_of_birth }}
                             </td>
-                            <td class="flex justify-center py-4 gap-1">
+                            <td class="py-4 gap-1">
                                 <x-button @click="confirmDelete([{{ $user->id }}])"
                                     class="w-9 h-9 mx-1.5 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-lg ph ph-trash"></i>
@@ -194,11 +194,11 @@
     @endif
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('packages', () => ({
+            Alpine.data('users', () => ({
                 selectedCheckboxCount: 0,
                 dataCount: {{ $dataCount }},
-                togglePackageCheckboxes() {
-                    var checkboxes = document.getElementsByName("packageCheckbox");
+                toggleUserCheckboxes() {
+                    var checkboxes = document.getElementsByName("userCheckbox");
                     var selectAllCheckbox = document.getElementById("selectAllCheckbox");
 
                     for (var i = 0; i < checkboxes.length; i++) {
@@ -206,7 +206,7 @@
                     }
                 },
                 updateSelectAllCheckbox() {
-                    var checkboxes = document.getElementsByName("packageCheckbox");
+                    var checkboxes = document.getElementsByName("userCheckbox");
                     var selectAllCheckbox = document.getElementById("selectAllCheckbox");
 
                     for (var i = 0; i < checkboxes.length; i++) {
@@ -223,7 +223,7 @@
                 },
                 headerCheckboxChange(el) {
                     console.log(el);
-                    this.togglePackageCheckboxes();
+                    this.toggleUserCheckboxes();
                     if (el.checked) {
                         this.selectedCheckboxCount = this.dataCount;
                     } else {
@@ -244,29 +244,29 @@
         });
 
         let defaultMethod = 'email';
-        let targetPackage = [];
+        let targetUser = [];
 
-        function getSelectedPackages() {
-            selectedPackage = [];
-            $("input:checkbox[name=packageCheckbox]:checked").each(function() {
-                selectedPackage.push($(this).val());
+        function getSelectedUsers() {
+            selectedUser = [];
+            $("input:checkbox[name=userCheckbox]:checked").each(function() {
+                selectedUser.push($(this).val());
             });
-            return selectedPackage;
+            return selectedUser;
         }
 
         function confirmDelete(target) {
-            targetPackage = target;
+            targetUser = target;
             modals.confirmDelete.show();
         }
 
-        function deletePackages() {
+        function deleteUsers() {
             var csrfToken = '{{ csrf_token() }}';
 
             $.ajax({
-                url: '{{ route('admin.packages.delete') }}',
+                url: '{{ route('admin.users.delete') }}',
                 method: 'POST',
                 data: {
-                    selectedIDs: targetPackage,
+                    selectedIDs: targetUser,
                 },
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
