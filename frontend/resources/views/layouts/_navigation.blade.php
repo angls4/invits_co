@@ -51,7 +51,7 @@
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="relative ml-3" x-data="{ isUserMenuOpen: false }">
-                    <div class="flex flex-row gap-2">
+                    <div class="flex items-center flex-row gap-2">
                         <x-button-a href="{{ route('order.index') }}"
                             class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-brand-purple-500 group-[.nav-dark]:border border-white hover:bg-brand-yellow-500 hover:text-black md:visible">
                             <span class="mx-1">Pesan Sekarang</span>
@@ -59,10 +59,10 @@
                         @if(session()->has('api_token'))
                         <button @click="isUserMenuOpen = !isUserMenuOpen" @keydown.escape="isUserMenuOpen = false"
                             type="button"
-                            class="flex text-sm transition duration-300 ease-out bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-cyan-800 focus:ring-white"
+                            class="flex white w-10 h-10 text-sm transition duration-300 ease-out bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-cyan-800 focus:ring-white"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">{{ __('Open main menu') }}</span>
-                            <img class="w-10 h-10 border border-transparent rounded-full hover:border-cyan-600"
+                            <img class=" border border-transparent rounded-full hover:border-cyan-600"
                                 src="{{ asset(session('user.avatar') ?? 'img/default-avatar.jpg') }}" alt="User">
                         </button>
                         @else

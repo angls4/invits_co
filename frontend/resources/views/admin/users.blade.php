@@ -7,7 +7,7 @@
 @endphp 
 <main class="py-3 bg-white grow">
     <div class="container">
-        <div class="flex flex-col gap-2 text-center sm:flex-row">
+        {{-- <div class="flex flex-col gap-2 text-center sm:flex-row">
             <div class="grow">
                 <form>
                     <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
@@ -28,8 +28,8 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="flex flex-col items-start justify-between gap-2 my-5 sm:items-center items sm:flex-row">
+        </div> --}}
+        <div class="flex flex-col items-start justify-between gap-2 mb-5 sm:items-center items sm:flex-row">
             <div class="flex w-full max-sm:justify-between">
                 <p class="m-0"><span x-text="selectedCheckboxCount"></span> baris dipilih</p>
                 <div class="flex justify-between gap-3 sm:mx-auto">
@@ -101,9 +101,9 @@
                             <td class="px-6 py-4">
                                 {{ $user->date_of_birth }}
                             </td>
-                            <td class="py-4 gap-1">
+                            <td class="py-4 gap-1 text-center">
                                 <x-button @click="confirmDelete([{{ $user->id }}])"
-                                    class="w-9 h-9 mx-1.5 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
+                                    class="w-9 h-9 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-lg ph ph-trash"></i>
                                 </x-button>
                             </td>

@@ -71,13 +71,13 @@
 			@if(session('user.role') == 'admin')
 				<a
 					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.index') ? 'sidebar-active' : '' }}"
-					href="{{ route('client.profile.index', encode_id(session("user.id"))) }}"
+					href="{{ route('admin.index', encode_id(session("user.id"))) }}"
 				>
 					<i class="ph-fill ph-gauge mr-3 text-[26px]"></i></i>Dashboard
 				</a>
 				<a
 					class="flex items-center w-full p-3 hover:bg-brand-yellow-500 hover:text-black {{ request()->routeIs('client.index') ? 'sidebar-active' : '' }}"
-					href="{{ route('client.profile.index', encode_id(session("user.id"))) }}"
+					href="{{ route('admin.users.index', encode_id(session("user.id"))) }}"
 				>
 					<i class="ph-fill ph-user mr-3 text-[26px]"></i></i>Users
 				</a>

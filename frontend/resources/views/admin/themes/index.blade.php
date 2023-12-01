@@ -7,7 +7,7 @@
 @endphp 
 <main class="py-3 bg-white grow">
     <div class="container">
-        <div class="flex flex-col gap-2 text-center sm:flex-row">
+        {{-- <div class="flex flex-col gap-2 text-center sm:flex-row">
             <div class="grow">
                 <form>
                     <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
@@ -28,8 +28,8 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="flex flex-col items-start justify-between gap-2 my-5 sm:items-center items sm:flex-row">
+        </div> --}}
+        <div class="flex flex-col items-start justify-between gap-2 mb-5 sm:items-center items sm:flex-row">
             <x-button-a href="{{ route('admin.themes.add') }}" type="button"
                 class="sm:order-3 whitespace-nowrap w-full !px-6 !py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-fit bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                 <span>Add New</span>
@@ -93,14 +93,14 @@
                             <td class="px-6 py-4">
                                 {{ $theme->description }}
                             </td>
-                            <td class="flex justify-center py-4 gap-1">
+                            <td class="py-4 gap-1">
                                 <x-button-a href="{{ route('admin.themes.edit', encode_id($theme->id)) }}"
-                                    class="w-9 h-9 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
+                                    class="!w-9 !h-9 bg-brand-purple-500 text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
                                     <i class="text-lg ph ph-pencil-simple"></i>
                                 </x-button-a>
                                 <x-button @click="confirmDelete([{{ $theme->id }}])"
-                                    class="w-9 h-9 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
-                                    <i class="text-2xl ph ph-trash"></i>
+                                    class="!w-9 !h-9 bg-brand-red text-white transition-colors duration-200 transform ring-brand-purple-500 hover:text-black hover:bg-brand-yellow-500">
+                                    <i class="text-lg ph ph-trash"></i>
                                 </x-button>
                             </td>
                         </tr>
