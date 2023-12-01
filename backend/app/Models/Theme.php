@@ -32,12 +32,12 @@ class Theme extends Model
     // Package
     public function package()
     {
-        return $this->belongsTo('Modules\Package\Entities\Package');
+        return $this->belongsTo('App\Models\Package');
     }
 
     // Order
     public function order()
     {
-        return $this->hasMany('Modules\Order\Entities\Order');
+        return $this->hasMany('App\Models\Order');
     }
 }

@@ -13,7 +13,7 @@ class ThemeController extends Controller
     public function index()
     {
         try {
-            $themes = Theme::all();
+            $themes = Theme::with('package')->get();
 
             $data = [
                 'themes' => $themes,
@@ -28,7 +28,7 @@ class ThemeController extends Controller
     public function show($id)
     {
         try {
-            $theme = Theme::find($id);
+            $theme = Theme::with('package')->find($id);
 
             if (!$theme) {
                 return $this->jsonResponse(null, 'Theme not found', [], false, 404);
