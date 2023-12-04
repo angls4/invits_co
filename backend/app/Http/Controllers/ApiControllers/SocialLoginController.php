@@ -57,7 +57,7 @@ class SocialLoginController extends Controller
         } elseif ($authUser = User::where('email', $socialUser->email)->first()) {
             UserProvider::create([
                 'user_id'     => $authUser->id,
-                'provider_id' => $socialUser->getId(),
+                'provider_id' => $socialUser->id,
                 'avatar'      => 'img/default-avatar.jpg',
                 'provider'    => $provider,
             ]);
