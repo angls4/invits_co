@@ -47,10 +47,43 @@
         </div>
     </div>
     
+    @php
+        $snapToken = $data["order"]["payment_midtrans"];
+        $order_id = explode(':',$snapToken)[1];
+        $server_key = env('MIDTRANS_SERVER_KEY');
+        $signature_key = hash("sha512", $order_id . $server_key);
+    @endphp
     <script type="text/javascript">
     // For example trigger on button clicked, or any time you need
     var payButton = document.getElementById('pay-button');
-    payButton.addEventListener('click', function () {
+    var mockSnapPay = function () {
+        const data = {
+            order_id: '{{ $order_id }}',
+            transaction_status: 'capture',
+            signature_key: '{{ $signature_key }}'
+        };
+        console.log(data);
+        fetch('http://'+'{{ env('API_URL').'midtrans-callback/' }}', {
+            method: 'POST',
+             headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (!response.ok) {
+                alert("payment failed!"); console.log(response);
+                return
+            }
+            alert("payment success!"); console.log(response);
+            window.location.href = "{{ route('home')}}";
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Fetch error:', error);
+        });
+    }
+    var snapPay = function () {
         // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
         window.snap.pay('{{ $data["order"]["payment_midtrans"] }}', {
             onSuccess: function(result){
@@ -71,7 +104,8 @@
                 alert('you closed the popup without finishing the payment');
             }
         })
-    });
+    }
+    payButton.addEventListener('click', {{ env('APP_ENV') == 'testing' ? 'mockSnapPay' : 'snapPay' }});
     </script>
 </section>
 @endsection
