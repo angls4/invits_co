@@ -79,6 +79,7 @@ class InvitationController extends Controller
         $data = $request->except('_token');
         $old_data = Http::withToken(session('api_token'))->get(env('API_URL').'weddings-order/'.$id)->object()->data;
 
+        if (!isset($data['love_stories'])) $data['love_stories'] = [];
         foreach ($data['love_stories'] as $index => $love_story) {
             $data['love_stories'][$index]['id'] = (int)$love_story['id'];
             if(isset($love_story['image'])){
@@ -87,7 +88,8 @@ class InvitationController extends Controller
                 $data['love_stories'][$index]['image'] = $old_data->order->invitation->wedding->love_story[$index]->image;
             }
         }
-        
+
+        if (!isset($data['galleries'])) $data['galleries'] = [];
         foreach ($data['galleries'] as $index => $gallery) {
             $data['galleries'][$index]['id'] = (int)$gallery['id'];
             if(isset($gallery['file'])){
