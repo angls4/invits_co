@@ -168,7 +168,7 @@
         </x-button>
         <x-button type="button" @click="broadcast()"
             class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:w-40 bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
-            Broadcast
+            Confirm
         </x-button>
     </div>
 </x-flowbite-modal>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Events\Frontend\UserRegistered;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
@@ -38,6 +39,7 @@ class SocialLoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
+        if(env('APP_ENV') == 'testing') return view('auth.mockOAuth');
         return Socialite::driver($provider)->redirect();
     }
 
@@ -46,9 +48,18 @@ class SocialLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
-        $user = Socialite::driver($provider)->user();
+        $user = [];
+        if (env('APP_ENV') == 'testing'){
+            $email = $request->query('email');
+            $user = (object)[
+                'id' => $email,
+                'name' => 'mock OAuth User',
+                'email' => $email
+            ];
+        }
+        else $user = Socialite::driver($provider)->user();
 
         $response = Http::post(env('API_URL').'social-login/'.$provider, [
             'id' => $user->id, 

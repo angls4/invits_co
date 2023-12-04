@@ -22,7 +22,7 @@
                         <span class="font-bold">Nama</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.input type="text" name="name" value="" x-model="form.name"
+                        <x-forms.input type="text" id="name" name="name" value="" x-model="form.name"
                             placeholder="Masukkan nama lengkap tamu" />
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         <span class="font-bold">Deskripsi</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.input type="text" name="description" value="" x-model="form.description"
+                        <x-forms.input type="text" id="description" name="description" value="" x-model="form.description"
                             placeholder="Masukkan deskripsi tamu" />
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <span class="font-bold">Alamat</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.textarea id="address" name="address" rows="4" value=""
+                        <x-forms.textarea id="address" id="address" name="address" rows="4" value=""
                             x-model="form.address" placeholder="Masukkan alamat tamu"></x-forms.textarea>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <span class="font-bold">No. WhatsApp</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.input type="text" name="no_whats_app" value="" x-model="form.no_whats_app"
+                        <x-forms.input type="text" id="no_whats_app"  name="no_whats_app" value="" x-model="form.no_whats_app"
                             placeholder="Masukkan nomor WhatsApp tamu" />
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <span class="font-bold">Email</span>
                     </div>
                     <div class="sm:w-2/3">
-                        <x-forms.input type="email" name="email" x-model="form.email"
+                        <x-forms.input type="email" id="email" name="email" x-model="form.email"
                             placeholder="Masukkan email tamu" />
                     </div>
                 </div>

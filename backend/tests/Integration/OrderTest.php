@@ -470,5 +470,15 @@ class OrderTest extends TestCase
         $payment = $order->payment;
         $this->assertEquals($order['status'],'PAID');
         $this->assertEquals($payment['transaction_status'],$data['transaction_status']);
+
+        // Wrong input
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => 'capture',
+            'signature_key' => 'wrong'
+        ];
+        $response = $this->post('/api/midtrans-callback/', $data);
+        // assert response status
+        $response->assertStatus(422);
     }
 }
