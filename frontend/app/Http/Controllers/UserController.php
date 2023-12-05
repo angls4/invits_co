@@ -95,24 +95,12 @@ class UserController extends Controller
             $input['avatar'] = 'img/default-avatar.jpg';
         }
 
-        try {
-            DB::beginTransaction();
-
-            // Update data user
-            $response = Http::withToken(session('api_token'))->put(env('API_URL').'users/'.$id, $input);
-            if($response->failed()){
-                $errors = $response->json()['errors'];
-                return back()->withErrors($errors ?? null);
-            }
-
-            DB::commit();
-
-            return redirect()->back()->with("success", "Edit success");
-        } catch (Exception $e) {
-            DB::rollback();
-            // dd($e);
+        $response = Http::withToken(session('api_token'))->put(env('API_URL').'users/'.$id, $input);
+        if($response->failed()){
             return redirect()->back()->with("error", "Edit failed");
         }
+        
+        return redirect()->back()->with("success", "Edit success");
     }
 
     /**
