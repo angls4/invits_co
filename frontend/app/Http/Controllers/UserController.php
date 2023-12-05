@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use index;
 use Illuminate\Http\Request;
 use App\Http\Traits\FileTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
@@ -14,7 +16,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users_response = Http::withToken(session('api_token'))->get(env('API_URL').'users');
+
+        if($users_response->failed()) {
+            return back()->with(["error" => "Couldn't load data"]);
+        }
+
+        $title = "All Users";
+        $users = collect($users_response->object()->data->users)->where('role', 'user');
+
+        $perPage = 14;
+        $currentPage = request('page', 1);
+        $startIndex = ($currentPage - 1) * $perPage;
+        $slicedData = $users->slice($startIndex, $perPage);
+
+        $data = new LengthAwarePaginator($slicedData, $users->count(), $perPage, $currentPage, [
+            'path' => route('admin.users.index'),
+        ]);
+
+        return view('admin.users', compact("title", "data"));
     }
 
     /**
@@ -98,8 +118,22 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->selectedIDs;
+        if (!$ids) $ids = [];
+
+        try {
+            foreach ($ids as $user_id) {
+                $user = Http::withToken(session('api_token'))->delete(env('API_URL').'users/'.$user_id);
+            }
+            $status = 200;
+        } catch (\Throwable $th) {
+            $status = 400;
+        } 
+
+        if (count($ids) == 0) $status = 400;
+
+        return response()->json(['ids' => $request->selectedIDs], $status);
     }
 }

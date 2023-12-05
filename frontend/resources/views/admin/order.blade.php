@@ -26,9 +26,6 @@
                         <th scope="col" class="px-6 py-3">
                             Nota
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Undangan
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,14 +59,7 @@
                                     <a href="{{ route('ordersDetail', $order->id) }}"
                                         class="font-medium text-brand-pink hover:underline">Details</a>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <a href="{{ route('client.invitation.edit', $order->id) }}"
-                                        class="font-medium text-brand-purple-500 hover:underline">Details</a>
-                                </td>
                             @else
-                                <td class="px-6 py-4">
-                                    -
-                                </td>
                                 <td class="px-6 py-4">
                                     -
                                 </td>

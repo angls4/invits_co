@@ -8,11 +8,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InvitationController;
-use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SocialLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,12 +51,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('check.token')->group(function (){
     Route::post('logout', [LoginController::class, 'destroy'])
                     ->name('logout');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
     
-    Route::prefix('client')->name('client.')->group(function () {
+    Route::middleware('role:user')->prefix('client')->name('client.')->group(function () {
         // Client Order
-        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-        Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
-        // Route::view('/bills', 'user/order/detail')->name('bills');
+        Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders');
 
         // Client Invitation
         Route::name('invitation.')->group(function(){
@@ -84,6 +85,34 @@ Route::middleware('check.token')->group(function (){
                 Route::get('/{id}/changePassword', [PasswordController::class, 'edit'])->name('edit');
                 Route::post('/{id}/changePassword', [PasswordController::class, 'update'])->name('update');
             });
+        });
+    });
+
+    Route::middleware('role:admin')->prefix('dashboard')->name('admin.')->group(function () {
+        Route::get('/', [PageController::class, 'dashboardIndex'])->name('index');
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+
+        Route::prefix('users')->name('users.')->group(function(){
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::post('/delete', [UserController::class, 'destroy'])->name('delete');
+        });
+
+        Route::prefix('packages')->name('packages.')->group(function(){
+            Route::get('/', [PackageController::class, 'index'])->name('index');
+            Route::get('/add', [PackageController::class, 'create'])->name('add');
+            Route::post('/store', [PackageController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [PackageController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [PackageController::class, 'update'])->name('update');
+            Route::post('/delete', [PackageController::class, 'destroy'])->name('delete');
+        });
+
+        Route::prefix('themes')->name('themes.')->group(function(){
+            Route::get('/', [ThemeController::class, 'index'])->name('index');
+            Route::get('/add', [ThemeController::class, 'create'])->name('add');
+            Route::post('/store', [ThemeController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [ThemeController::class, 'edit'])->name('edit');
+            Route::post('/{id}/update', [ThemeController::class, 'update'])->name('update');
+            Route::post('/delete', [ThemeController::class, 'destroy'])->name('delete');
         });
     });
 });

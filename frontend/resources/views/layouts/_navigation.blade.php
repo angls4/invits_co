@@ -51,7 +51,7 @@
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="relative ml-3" x-data="{ isUserMenuOpen: false }">
-                    <div class="flex flex-row gap-2">
+                    <div class="flex items-center flex-row gap-2">
                         <x-button-a href="{{ route('order.index') }}"
                             class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-brand-purple-500 group-[.nav-dark]:border border-white hover:bg-brand-yellow-500 hover:text-black md:visible">
                             <span class="mx-1">Pesan Sekarang</span>
@@ -59,10 +59,10 @@
                         @if(session()->has('api_token'))
                         <button @click="isUserMenuOpen = !isUserMenuOpen" @keydown.escape="isUserMenuOpen = false"
                             type="button"
-                            class="flex text-sm transition duration-300 ease-out bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-cyan-800 focus:ring-white"
+                            class="flex white w-10 h-10 text-sm transition duration-300 ease-out bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-cyan-800 focus:ring-white"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">{{ __('Open main menu') }}</span>
-                            <img class="w-10 h-10 border border-transparent rounded-full hover:border-cyan-600"
+                            <img class=" border border-transparent rounded-full hover:border-cyan-600"
                                 src="{{ asset(session('user.avatar') ?? 'img/default-avatar.jpg') }}" alt="User">
                         </button>
                         @else
@@ -81,17 +81,19 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                         class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                            @if(session('user.role') == 'user')
                             <a href="{{ route('client.orders') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
                                 role="menuitem">
                                 <i class="fas fa-user fa-fw"></i>&nbsp;Client Area
                             </a>
-                            {{-- <a href="{{ route('frontend.users.profile', encode_id(auth()->user()->id)) }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white" role="menuitem">
-                                <i class="fas fa-user fa-fw"></i>&nbsp;{{ Auth::user()->name }}
-                            </a> --}}
-                            {{-- <a href="{{ route('frontend.users.profileEdit', encode_id(auth()->user()->id)) }}" class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white" role="menuitem">
-                                <i class="fas fa-cogs fa-fw"></i>&nbsp;{{__('Settings')}}
-                            </a> --}}
+                            @elseif(session('user.role') == 'admin')
+                            <a href="{{ route('admin.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
+                                role="menuitem">
+                                <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Admin
+                            </a>
+                            @endif
                             <a href=""
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-brand-purple-500 hover:text-white"
@@ -132,8 +134,8 @@
                 Fitur
             </a>
     
-            @can('view_backend')
-                <a href=''
+            @if(session('user.role') == 'admin')
+                <a href='{{ route('admin.index') }}'
                     class="block px-3 py-2 text-base font-medium text-gray-500 border rounded-md" role="menuitem">
                     <i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;{{ __('Admin Dashboard') }}
                 </a>
