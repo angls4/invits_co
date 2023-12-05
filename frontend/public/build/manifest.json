@@ -1,0 +1,23 @@
+{
+  "public/img/bg/wedding-hero.jpg": {
+    "file": "assets/wedding-hero-b2d24e2a.jpg",
+    "src": "public/img/bg/wedding-hero.jpg"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-7f436a93.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-6c527891.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "css": [
+      "assets/app-6c527891.css"
+    ],
+    "file": "assets/app-c9d93408.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
