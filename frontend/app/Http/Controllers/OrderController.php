@@ -191,28 +191,25 @@ class OrderController extends Controller
 
         $theme_json = $theme_response->json();
         $theme = collect($theme_json['data']['theme']);
-
+        
         $package_response = Http::get(env('API_URL').'packages/'.$theme["package_id"]);
         if ($theme_response->failed()) {
             return back()->withErrors("Couldn't load package");
         }
-
+        
         $package_json = $package_response->json();
         $package = collect($package_json['data']['package']);
         
-        
-
-        $order_response = Http::acceptJson()->withToken(session('api_token'))->post(env('API_URL').'orders/', [
+        $order_response = Http::withToken(session('api_token'))->post(env('API_URL').'orders', [
             'user_id' => session('user.id'),
             'theme_id'  => $theme['id'],
         ]);
         
         if($order_response->failed()) {
-            if($order_response->status(401)) {// 401 if not logged in
+            if($order_response->status() == 401) {// 401 if not logged in
                 return redirect('login');
-                // TODO redirect to login
             } 
-            return back()->withErrors("Couldn't make order");;
+            return back()->withErrors("Couldn't make order");
         }
 
         $order_json = $order_response->json();
