@@ -34,7 +34,6 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/',  [OrderController::class, 'makeOrderSelectPackage'])->name('index');
     Route::get('/theme/{package_id}',  [OrderController::class, 'makeOrderSelectTheme'])->name('theme');
     Route::get('/summary/{theme_id}',  [OrderController::class, 'makeOrderSummary'])->name('summary');
-    Route::get('/checkout/{theme_id}',  [OrderController::class, 'makeOrder'])->name('checkout');
 });
 
 Route::middleware('guest')->group(function () {
@@ -51,9 +50,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('check.token')->group(function (){
     Route::post('logout', [LoginController::class, 'destroy'])
                     ->name('logout');
+    Route::get('/checkout/{theme_id}',  [OrderController::class, 'makeOrder'])->name('order.checkout');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name(('ordersDetail'));
-    
+
     Route::middleware('role:user')->prefix('client')->name('client.')->group(function () {
+
         // Client Order
         Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders');
 
