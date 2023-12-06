@@ -116,6 +116,7 @@ class OrderController extends Controller
             $data = [
                 "theme" => $theme,
                 "payment_midtrans" => $payment_midtrans,
+                "order" => $order
             ];
 
             return $this->jsonResponse($data, 'Order created successfully', [], true, 201);
