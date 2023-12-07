@@ -28,6 +28,11 @@ use App\Http\Controllers\Auth\SocialLoginController;
 */
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::prefix('help')->name('help.')->group(function () {
+    Route::view('/', 'user.help.index', ['title' => 'Help Center'])->name('index');
+    Route::view('/tac', 'user.help.tac', ['title' => 'Terms & Conditions'])->name('tac');
+    Route::view('/panduan-pemesanan', 'user.help.pemesanan', ['title' => 'Panduan Pemesanan'])->name('panduan-pemesanan');
+});
 
 Route::prefix('order')->name('order.')->group(function () {
     // Route::view('/', 'user/order/index')->name('index');
