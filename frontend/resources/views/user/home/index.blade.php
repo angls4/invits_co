@@ -42,7 +42,7 @@
                             </span>
                         </div>
                     </div>
-                    <x-button-a href="" class="w-full py-4 mt-5 text-white transition-colors duration-200 transform bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black xl:w-fit xl:mt-0">Buat Undangan Anda</x-button-a>
+                    <x-button-a href="{{ route('order.index') }}" class="w-full py-4 mt-5 text-white transition-colors duration-200 transform bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black xl:w-fit xl:mt-0">Buat Undangan Anda</x-button-a>
                 </div>
             </div>
             <div class="hidden w-full lg:block">
@@ -235,10 +235,10 @@
         <div class="container text-center">
             <h2 class="max-w-4xl mx-auto my-0 mb-5 text-4xl font-medium leading-tight ">Jadikan pernikahan Anda berharga dan semakin berkesan dengan layanan kami</h2>
             <div class="flex flex-col justify-center gap-2 sm:flex-row">
-                <x-button-a href="#" class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:max-w-[180px] ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
+                <x-button-a href="{{ route('help.index') }}" class="w-full py-3 tracking-wide capitalize transition-colors duration-200 transform bg-white sm:max-w-[180px] ring-1 ring-brand-purple-500 hover:ring-0 hover:text-black hover:bg-brand-yellow-500">
                     <span class="mx-1">Hubungi Tim Kami</span>
                 </x-button-a>
-                <x-button-a href="" class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:max-w-[180px] bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
+                <x-button-a href="{{ route('order.index') }}" class="w-full py-3 tracking-wide text-white capitalize transition-colors duration-200 transform sm:max-w-[180px] bg-brand-purple-500 hover:bg-brand-yellow-500 hover:text-black">
                     <span class="mx-1">Pesan Sekarang</span>
                 </x-button-a>
             </div>
