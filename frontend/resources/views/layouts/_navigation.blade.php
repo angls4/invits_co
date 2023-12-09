@@ -34,7 +34,7 @@
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Paket
                         </a>
-                        <a href="#portofolio"
+                        <a href="#portfolio"
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Portfolio
                         </a>
