@@ -30,19 +30,19 @@
                 </div>
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4 text-gray-600 group-[.nav-dark]:text-white">
-                        <a href=""
+                        <a href="#paket"
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Paket
                         </a>
-                        <a href=""
+                        <a href="#portofolio"
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Portfolio
                         </a>
-                        <a href=""
+                        <a href="#tema"
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Tema
                         </a>
-                        <a href=""
+                        <a href="#fitur"
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out border-b-2 border-transparent hover:border-brand-purple-500 group-[.nav-dark]:hover:border-white">
                             Fitur
                         </a>
