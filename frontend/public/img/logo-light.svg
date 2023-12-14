@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100%"
+   height="100%"
+   viewBox="0 0 237 174"
+   version="1.1"
+   xml:space="preserve"
+   style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+   id="svg16"
+   sodipodi:docname="logo-light.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"><metadata
+   id="metadata22"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs20" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="991"
+   id="namedview18"
+   showgrid="false"
+   inkscape:zoom="4.5499453"
+   inkscape:cx="118.5"
+   inkscape:cy="87"
+   inkscape:window-x="-9"
+   inkscape:window-y="-9"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="g14" />
+    <g
+   transform="matrix(1,0,0,1,-3361.28,-456.833)"
+   id="g14">
+        <g
+   transform="matrix(1,0,0,1,2023.73,0)"
+   id="g6"
+   style="fill:#e3bf2b;fill-opacity:1">
+            <g
+   transform="matrix(0.824421,0,0,0.824421,777.336,323.721)"
+   id="g4"
+   style="fill:#e3bf2b;fill-opacity:1">
+                <circle
+   cx="825.677"
+   cy="345.527"
+   r="26.589"
+   style="fill:#e3bf2b;fill-opacity:1"
+   id="circle2" />
+            </g>
+        </g>
+        <g
+   transform="matrix(1,0,0,1,2023.73,0)"
+   id="g12"
+   style="fill:#e3bf2b;fill-opacity:1">
+            <g
+   transform="matrix(1.86481,0,0,1.86481,-306.375,-213.446)"
+   id="g10"
+   style="fill:#e3bf2b;fill-opacity:1">
+                <path
+   d="M970.985,411.304L988.51,393.779C992.487,389.802 992.487,383.353 988.51,379.375C988.51,379.375 988.51,379.375 988.509,379.375C984.532,375.397 978.083,375.397 974.105,379.375L963.6,389.88L952.218,378.499L963.584,367.133C968.512,362.204 975.197,359.435 982.168,359.435C989.138,359.435 995.823,362.204 1000.75,367.133C1000.75,367.133 1000.75,367.133 1000.75,367.133C1011.01,377.397 1011.01,394.037 1000.75,404.301L971.171,434.279L915.895,379.375C911.917,375.397 905.468,375.397 901.491,379.375C901.49,379.375 901.49,379.375 901.49,379.375C897.513,383.353 897.513,389.802 901.49,393.779L919.015,411.304L926.239,404.08L937.633,415.475L918.829,434.279L907.434,422.884L907.633,422.685L889.249,404.301C878.985,394.037 878.985,377.397 889.249,367.133C889.249,367.133 889.249,367.133 889.249,367.133C894.177,362.204 900.862,359.435 907.832,359.435C914.803,359.435 921.488,362.204 926.416,367.133L970.985,411.304Z"
+   style="fill:#e3bf2b;fill-opacity:1"
+   id="path8" />
+            </g>
+        </g>
+    </g>
+</svg>
